@@ -647,7 +647,7 @@
                             // format: '<span style="font-size:10px;">{point.y:.3f}'+unitid+'</span>',
                             formatter: function() {
                                 if(sumOutcome == 0){
-                                    return '<span style="font-size:10px;">'+this.point.y.toFixed(3)+' '+unitid+'</span>';
+                                    return '<span style="font-size:10px;">'+this.point.y.toFixed(4)+' '+unitid+'</span>';
                                 }else{
                                     if (this.y == 0) {
                                         return '<span style="font-size:10px;"> ' + this.point.y + ' = Fail</span>';
@@ -665,7 +665,7 @@
 
                 tooltip: {
                     headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-                    pointFormat: '<span style="color:{point.color}">{point.category}</span>: <b>{point.y:,.3f}'+unitid+'</b><br/>',
+                    pointFormat: '<span style="color:{point.color}">{point.category}</span>: <b>{point.y:,.4f}'+unitid+'</b><br/>',
                     animation:true,
                 },
 

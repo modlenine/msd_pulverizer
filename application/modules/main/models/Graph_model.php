@@ -72,7 +72,7 @@ class Graph_model extends CI_Model {
                                 $valueReal[] = '';
                                 
                             }else{
-                                $valueReal[] = (float)$rs->TestResultValueReal;
+                                $valueReal[] = floatval($rs->TestResultValueReal);
                                 
                             }
     
@@ -92,8 +92,8 @@ class Graph_model extends CI_Model {
                             
                             $linenumQc[] = (int)$rs->QCSampleNum;
                             $unitId = $rs->TestUnitID;
-                            $lowerlimit = (float)$rs->LowerLimit;
-                            $upperlimit = (float)$rs->UpperLimit;
+                            $lowerlimit = floatval($rs->LowerLimit);
+                            $upperlimit = floatval($rs->UpperLimit);
         
                         }
                     
@@ -649,8 +649,8 @@ class Graph_model extends CI_Model {
                         
                         // $linenumQc[] = (int)$rs->QCSampleNum;
                         $unitId = $rs->TestUnitID;
-                        $lowerlimit = (float)$rs->LowerLimit;
-                        $upperlimit = (float)$rs->UpperLimit;
+                        $lowerlimit = $rs->LowerLimit;
+                        $upperlimit = $rs->UpperLimit;
 
                     }
 

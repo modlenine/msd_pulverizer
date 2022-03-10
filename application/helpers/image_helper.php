@@ -91,17 +91,29 @@ function uploadImageTemplate($fileInput)
     // Check folder ว่ามีอยู่หรือไม่
     $yearNow = date("Y");
     $dateNow = date("Y-m-d");
-    $paths = 'uploads\template_images';
     $date = date_create();
     $dateTimeStamp = date_timestamp_get($date);
 
-    if(!file_exists($paths."\\".$yearNow)){
-        mkdir($paths."\\".$yearNow , 0755 , true);
-    }
 
-    if(!file_exists($paths."\\".$yearNow."\\".$dateNow)){
-        mkdir($paths."\\".$yearNow."\\".$dateNow , 0755 , true);
+    $url = $_SERVER['HTTP_HOST'];
+    if($url == "localhost"){
+        $paths = 'uploads\template_images';
+        if(!file_exists($paths."\\".$yearNow)){
+            mkdir($paths."\\".$yearNow , 0755 , true);
+        }
+        if(!file_exists($paths."\\".$yearNow."\\".$dateNow)){
+            mkdir($paths."\\".$yearNow."\\".$dateNow , 0755 , true);
+        }
+    }else if($url == "intranet.saleecolour.com"){
+        $paths = 'uploads/template_images';
+        if(!file_exists($paths."/".$yearNow)){
+            mkdir($paths."/".$yearNow , 0755 , true);
+        }
+        if(!file_exists($paths."/".$yearNow."/".$dateNow)){
+            mkdir($paths."/".$yearNow."/".$dateNow , 0755 , true);
+        }
     }
+    
    
     $file_name = $_FILES[$fileInput]['name'];
     
