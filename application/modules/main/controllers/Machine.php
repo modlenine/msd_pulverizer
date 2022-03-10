@@ -113,6 +113,11 @@ class Machine extends MX_Controller {
          $this->machine->loadSumRun();
      }
 
+     public function saveRunscreenEdit()
+     {
+         $this->machine->saveRunscreenEdit();
+     }
+
 
 }/* End of file Machine.php */
 

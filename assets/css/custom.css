@@ -888,3 +888,7 @@ textarea.form-control{
 	color:#a10404;
 	font-size:18px;
 }
+
+.runSelectLeftLi_edit:hover{
+	cursor:pointer;
+}

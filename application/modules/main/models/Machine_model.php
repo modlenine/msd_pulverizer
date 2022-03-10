@@ -511,7 +511,8 @@ class machine_model extends CI_Model {
             template_details.detail_max,
             template_details.detail_spoint,
             template_details.detail_linenum,
-            template_details.detail_runautoid
+            template_details.detail_runautoid,
+            template_details.detail_autoid
             FROM
             template_details
             WHERE template_details.detail_mastercode = '$received_data->templateCode'
@@ -526,7 +527,8 @@ class machine_model extends CI_Model {
                     "detail_max" => $rsDetail->detail_max,
                     "detail_spoint" => $rsDetail->detail_spoint,
                     "detail_linenum" => $rsDetail->detail_linenum,
-                    "detail_runautoid" => $rsDetail->detail_runautoid
+                    "detail_runautoid" => $rsDetail->detail_runautoid,
+                    "detail_autoid" => $rsDetail->detail_autoid
                 );
 
                 $allDetail[] = $detailArray;
@@ -818,6 +820,33 @@ class machine_model extends CI_Model {
                 "sumrun" => null
             );
         }
+        echo json_encode($output);
+    }
+
+
+    public function saveRunscreenEdit()
+    {
+        $received_data = json_decode(file_get_contents("php://input"));
+        if($received_data->action == "saveRunscreenEdit"){
+            $arupdateRun = array(
+                "detail_min" => $received_data->min,
+                "detail_max" => $received_data->max,
+                "detail_spoint" => $received_data->spoint
+            );
+            $this->db->where("detail_autoid" , $received_data->autoid);
+            $this->db->update("template_details" , $arupdateRun);
+
+            $output = array(
+                "msg" => "อัพเดตข้อมูลสำเร็จ",
+                "status" => "Update Data Success"
+            );
+        }else{
+            $output = array(
+                "msg" => "อัพเดตข้อมูลไม่สำเร็จ",
+                "status" => "Update Data Not Success"
+            );
+        }
+
         echo json_encode($output);
     }
     

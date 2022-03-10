@@ -99,7 +99,7 @@
         </div>
     </div>
 
-    <!-- Edit Head Modal -->
+    <!-- Sum Run Screen Modal -->
     <div class="modal fade bs-example-modal-lg" id="sumRun_modal" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog modal-lg modal-dialog-scrollable">
@@ -130,7 +130,56 @@
 
         </div>
     </div>
-    <!-- Edit Head Modal -->
+    <!-- Sum Run Screen Modal -->
+
+
+    <!-- Sum Run Screen Modal -->
+    <div class="modal fade bs-example-modal-lg" id="editRunSelected_modal" tabindex="-1" role="dialog"
+        aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-md modal-dialog-scrollable modal-dialog-centered">
+
+            <div class="modal-content bg-light-gray">
+                <div class="modal-header">
+                    <div id=""><b>Run Screen : </b><span id="ers_title"></span></div>
+                    <div>
+                        <button type="button" class="close btn-closeSumRun" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                </div>
+
+                <div class="modal-header">
+                    
+                    <div>
+                        <button type="button" class="btn btn-success btn-saveRsEdit" id="btn-saveRsEdit"><i class="fi-save mr-2"></i>บันทึก</button>
+                        <button type="button" class="btn btn-danger btn-closeRsEdit" id="btn-closeRsEdit" data-dismiss="modal"><i class="fi-x mr-2"></i>ปิด</button>
+                    </div>
+                    <div>
+                    
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row form-group">
+                        <div class="col-md-12 form-group">
+                            <label for=""><b>Min</b></label>
+                            <input type="tel" name="rse_min" id="rse_min" class="form-control">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label for=""><b>Max</b></label>
+                            <input type="tel" name="rse_max" id="rse_max" class="form-control">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label for=""><b>SPoint</b></label>
+                            <input type="tel" name="rse_spoint" id="rse_spoint" class="form-control">
+                        </div>
+                        <input hidden type="text" name="res_autoid" id="res_autoid">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Sum Run Screen Modal -->
+
 
 </div>
 
@@ -171,6 +220,22 @@ let url = "<?php echo base_url(); ?>";
         $('#sumRun_modal').modal('hide');
         $('#edit_template_modal').modal('show');
     });
+
+    $(document).on('click' , '.runSelectLeftLi_edit' , function(){
+        const data_run_autoid = $(this).attr('data_run_autoid');
+        const data_run_name = $(this).attr('data_run_name');
+        const data_run_min = $(this).attr('data_run_min');
+        const data_run_max = $(this).attr('data_run_max');
+        const data_run_spoint = $(this).attr('data_run_spoint');
+
+        $('#editRunSelected_modal').modal('show');
+        $('#ers_title').html(data_run_name);
+        $('#rse_min').val(data_run_min);
+        $('#rse_max').val(data_run_max);
+        $('#rse_spoint').val(data_run_spoint);
+        $('#res_autoid').val(data_run_autoid);
+    });
+
 
 
 

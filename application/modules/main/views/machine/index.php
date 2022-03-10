@@ -178,6 +178,13 @@
 
 
 
+        $(document).on('click' , '#btn-saveRsEdit' ,function(){
+            let templatecode = $('#tempCode_edit').val();
+            saveRunscreenEdit(templatecode);
+        });
+
+
+
 
         let machine_page = new Vue({
             el:"#machine_page",
@@ -236,6 +243,39 @@
                 this.loadTemplateList();
             },
         }); //End vue cdn
+
+
+
+
+
+
+
+
+        function saveRunscreenEdit(templatecode)
+        {
+            axios.post(url+'main/machine/saveRunscreenEdit' , {
+                action:"saveRunscreenEdit",
+                min:$('#rse_min').val(),
+                max:$('#rse_max').val(),
+                spoint:$('#rse_spoint').val(),
+                autoid:$('#res_autoid').val()
+            }).then(res => {
+                console.log(res.data);
+                if(res.data.status == "Update Data Success"){
+                    runScreenSelected = [];
+                    swal({
+                        title: 'บันทึกข้อมูลสำเร็จ',
+                        type: 'success',
+                        showConfirmButton: false,
+                        timer:1000
+                    }).then(function(){
+                        $('#editRunSelected_modal').modal('hide');
+                        loaddataToEditModal(templatecode);
+                    });
+                    
+                }
+            });
+        }
 
 
 
@@ -309,7 +349,13 @@
             let outputHtml = `<ul class="list-group">`;
             for(let i = 0; i < runscreenSelectedArray.length; i++){
                 outputHtml += `
-                <li class="list-group-item list-group-item list-group-item-action runSelectLeftLi_edit">
+                <li class="list-group-item list-group-item list-group-item-action runSelectLeftLi_edit"
+                    data_run_autoid = "`+runscreenSelectedArray[i].detail_autoid+`"
+                    data_run_name = "`+runscreenSelectedArray[i].detail_column_name+`"
+                    data_run_min = "`+runscreenSelectedArray[i].detail_min+`"
+                    data_run_max = "`+runscreenSelectedArray[i].detail_max+`"
+                    data_run_spoint = "`+runscreenSelectedArray[i].detail_spoint+`"
+                >
                     <span>`+runscreenSelectedArray[i].detail_column_name+`</span><br>
                     <span><b>Min: </b>`+runscreenSelectedArray[i].detail_min+`</span>
                     <span><b>Max: </b>`+runscreenSelectedArray[i].detail_max+`</span><br>
