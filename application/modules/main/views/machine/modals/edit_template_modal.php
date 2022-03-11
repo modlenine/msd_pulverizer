@@ -221,7 +221,7 @@ let url = "<?php echo base_url(); ?>";
         $('#edit_template_modal').modal('show');
     });
 
-    $(document).on('click' , '.runSelectLeftLi_edit' , function(){
+    $(document).on('click' , '.runItem_edit' , function(){
         const data_run_autoid = $(this).attr('data_run_autoid');
         const data_run_name = $(this).attr('data_run_name');
         const data_run_min = $(this).attr('data_run_min');

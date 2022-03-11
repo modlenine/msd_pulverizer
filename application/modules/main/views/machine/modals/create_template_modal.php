@@ -358,6 +358,10 @@
                             timer:800
                         });
                     }else{
+                        $('#btn-saveNewTemplate').prop('disabled' , true);
+                        $('#create_template_modal').modal('hide');
+                        $('.loader').fadeIn(100); 
+
                         const form = $('#frm_saveTemplate')[0];
                         const data = new FormData(form);
 
@@ -376,6 +380,10 @@
                                 }).then(function(){
                                     location.reload();
                                 });
+                            }else{
+                                $('#btn-saveNewTemplate').prop('disabled' , false);
+                                $('#create_template_modal').modal('show');
+                                $('.loader').fadeOut(100);
                             }
                         }).catch(err=>{
                             console.error('Err' , err);

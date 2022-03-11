@@ -349,13 +349,7 @@
             let outputHtml = `<ul class="list-group">`;
             for(let i = 0; i < runscreenSelectedArray.length; i++){
                 outputHtml += `
-                <li class="list-group-item list-group-item list-group-item-action runSelectLeftLi_edit"
-                    data_run_autoid = "`+runscreenSelectedArray[i].detail_autoid+`"
-                    data_run_name = "`+runscreenSelectedArray[i].detail_column_name+`"
-                    data_run_min = "`+runscreenSelectedArray[i].detail_min+`"
-                    data_run_max = "`+runscreenSelectedArray[i].detail_max+`"
-                    data_run_spoint = "`+runscreenSelectedArray[i].detail_spoint+`"
-                >
+                <li class="list-group-item list-group-item list-group-item-action runSelectLeftLi_edit">
                     <span>`+runscreenSelectedArray[i].detail_column_name+`</span><br>
                     <span><b>Min: </b>`+runscreenSelectedArray[i].detail_min+`</span>
                     <span><b>Max: </b>`+runscreenSelectedArray[i].detail_max+`</span><br>
@@ -367,6 +361,13 @@
                     <input hidden type="text" id="select_run_autoid_edit" name="select_run_autoid_edit[]" value="`+runscreenSelectedArray[i].detail_runautoid+`">
                     <i class="fa fa-chevron-circle-left runSelectLeft_edit" aria-hidden="true"
                         data_run_autoid = "`+runscreenSelectedArray[i].detail_runautoid+`"
+                        data_run_name = "`+runscreenSelectedArray[i].detail_column_name+`"
+                        data_run_min = "`+runscreenSelectedArray[i].detail_min+`"
+                        data_run_max = "`+runscreenSelectedArray[i].detail_max+`"
+                        data_run_spoint = "`+runscreenSelectedArray[i].detail_spoint+`"
+                    ></i>
+                    <i class="fa fa-pencil-square runItem_edit" aria-hidden="true"
+                        data_run_autoid = "`+runscreenSelectedArray[i].detail_autoid+`"
                         data_run_name = "`+runscreenSelectedArray[i].detail_column_name+`"
                         data_run_min = "`+runscreenSelectedArray[i].detail_min+`"
                         data_run_max = "`+runscreenSelectedArray[i].detail_max+`"

@@ -436,6 +436,14 @@
 	transition:transform .2s;
 	color:#F0A500;
 }
+.runItem_edit{
+	position:absolute;
+	top:35px;
+	left:50px;
+	font-size:26px;
+	transition:transform .2s;
+	color:#F0A500;
+}
 .runSelectLeft_edit:hover{
 	transform:scale(1.1);
 	cursor:pointer;
