@@ -52,8 +52,8 @@
 										<th>Form No.</th>
 										<th>Machine Name</th>
 										<th>Item Number</th>
-										<th>Product No.</th>
-										<th>Batch No.</th>
+										<th>Product Number</th>
+										<th>Batch Number</th>
 										<th>Order</th>
 										<th>STD Output</th>
 										<th>Date</th>
@@ -110,6 +110,8 @@
 		});
 
 		$(document).on('click' , '#btn_clearSearchByDate' , function(){
+			let table = $('#dataMainList').DataTable();
+			table.state.clear();
 			location.reload();
 		});
 
@@ -118,7 +120,7 @@
             pair: $('#dateend')
         });
         $('#dateend').Zebra_DatePicker({
-            direction: 1
+            direction: true
         });
 
 
@@ -155,7 +157,6 @@
 				}
 				
 					var table = $('#dataMainList').removeAttr('width').DataTable({
-								"searching": false,
 								"scrollX": true,
 								"processing": true,
 								"serverSide": true,
@@ -181,7 +182,7 @@
 									{"width": "80","targets": 0},
 									{"width": "200","targets": 1},
 									{"width": "100","targets": 2},
-									{"width": "100","targets": 3},
+									{"width": "120","targets": 3},
 									{"width": "150","targets": 4},
 									{"width": "150","targets": 5},
 									{"width": "150","targets": 6},
@@ -238,7 +239,6 @@
 				}
 				
 					var table = $('#dataMainList').removeAttr('width').DataTable({
-								"searching": false,
 								"scrollX": true,
 								"processing": true,
 								"serverSide": true,
@@ -264,7 +264,7 @@
 									{"width": "80","targets": 0},
 									{"width": "200","targets": 1},
 									{"width": "100","targets": 2},
-									{"width": "100","targets": 3},
+									{"width": "120","targets": 3},
 									{"width": "150","targets": 4},
 									{"width": "150","targets": 5},
 									{"width": "150","targets": 6},

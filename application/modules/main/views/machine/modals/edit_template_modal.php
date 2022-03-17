@@ -237,6 +237,21 @@ let url = "<?php echo base_url(); ?>";
     });
 
 
+    $(document).on('keyup' , '#searchRunscreenSelected_edit' , function(){
+        const value = $(this).val().toLowerCase(); 
+        $('.runSelectLeftLi_edit').filter(function(){ 
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1) 
+        });
+    });
+
+    $(document).on('keyup' , '#searchRunscreenMain_edit' , function(){
+        const value = $(this).val().toLowerCase(); 
+        $('.runRightLi_edit').filter(function(){ 
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1) 
+        });
+    });
+
+
 
 
 // Vue Zone
