@@ -200,85 +200,130 @@
                     if(
                         $('#add_runscreen_name').val() != ""
                     ){
-                        if($('#btn_addRunscreen').text() == "บันทึก"){
-                            ///////////////////////
-                            // For save runscreen
-                            ///////////////////////
-                            // Check duplicate function
-                            axios.post(this.url+'main/machine/checkDuplicateRunscreen',{
-                                action:'checkDuplicateRunscreen',
-                                runscreen_name:$('#add_runscreen_name').val()
-                            }).then(res=>{
-                                console.log(res.data);
-                                if(res.data.status == "Not Found Duplicate Data"){
 
-                                    const form = $('#frm_saveRunscreen')[0];
-                                    const data = new FormData(form);
-                                    axios.post(this.url+'main/machine/saveRunscreen',data,{
-                                        
-                                    }).then(res=>{
-                                        console.log(res.data);
-                                        if(res.data.status == "Insert Data Success"){
-                                            swal({
-                                                title: 'บันทึกข้อมูลสำเร็จ',
-                                                type: 'success',
-                                                showConfirmButton: false,
-                                                timer:1000
-                                            }).then(function(){
-                                                $('#frm_saveRunscreen input').val('').removeClass('inputNull').removeClass('inputSuccess').removeClass('inputNullWarning');
-                                                $('#add_runscreen_modal').modal('hide');
-                                                $('#manage_runscreen_modal').modal('show');
-                                                manage_runscreenVue.getAllRunscreen();
-                                            });
-                                        }
-                                    }).catch(err=>{
-                                        console.error('Error' , err);
-                                    });
-                                }else{
-                                    swal({
-                                    title: 'พบข้อมูลซ้ำในระบบ',
+                        let checkPoint = 0;
+                        // Check Min Max Spoint
+                        if($('#add_max').val() != "" && $('#add_min').val() != "" && $('#add_spoint').val() != ""){
+                            // Check Min max diff
+                            if(parseFloat($('#add_max').val()) < parseFloat($('#add_min').val())){
+                                swal({
+                                    title: 'ค่า Max ต้องไม่น้อยกว่าค่า Min',
                                     type: 'error',
                                     showConfirmButton: false,
                                     timer:1000
-                                    });
-                                }
-                            }).catch(err=>{
-                                console.error('Error' , err);
-                            });
-                            ///////////////////////
-                            // For save runscreen
-                            ///////////////////////
-                        }else{
-
-                            ///////////////////////
-                            // For Edit runscreen
-                            ///////////////////////
-                            const form = $('#frm_saveRunscreen')[0];
-                            const data = new FormData(form);
-                            axios.post(this.url+'main/machine/saveEditRunscreen',data,{
-                                
-                            }).then(res=>{
-                                console.log(res.data);
-                                if(res.data.status == "Update Data Success"){
+                                });
+                                $('#add_max').removeClass('inputSuccess').addClass('inputNull');
+                            }else{
+                                // Check Spoint
+                                if(parseFloat($('#add_spoint').val()) > parseFloat($('#add_max').val())){
                                     swal({
-                                        title: 'แก้ไขข้อมูลสำเร็จ',
-                                        type: 'success',
+                                        title: 'ค่า Set Point ต้องไม่มากกว่าค่า Max',
+                                        type: 'error',
                                         showConfirmButton: false,
                                         timer:1000
-                                    }).then(function(){
-                                        $('#frm_saveRunscreen input').val('').removeClass('inputNull').removeClass('inputSuccess').removeClass('inputNullWarning');
-                                        $('#add_runscreen_modal').modal('hide');
-                                        $('#manage_runscreen_modal').modal('show');
-                                        manage_runscreenVue.getAllRunscreen();
                                     });
+                                    $('#add_spoint').removeClass('inputSuccess').addClass('inputNull');
+                                }else if(parseFloat($('#add_spoint').val()) < parseFloat($('#add_min').val())){
+                                    swal({
+                                        title: 'ค่า Set Point ต้องไม่น้อยกว่าค่า Min',
+                                        type: 'error',
+                                        showConfirmButton: false,
+                                        timer:1000
+                                    });
+                                    $('#add_spoint').removeClass('inputSuccess').addClass('inputNull');
+                                }else{
+                                    checkPoint = 1;
+                                    $('#add_spoint , #add_max , #add_min').removeClass('inputNull').addClass('inputSuccess');
                                 }
-                            }).catch(err=>{
-                                console.error('Error' , err);
-                            });
-                            ///////////////////////
-                            // For Edit runscreen
-                            ///////////////////////
+                            }
+                            console.log(checkPoint);
+                        }else{
+                            checkPoint = 1;
                         }
+
+                        if(checkPoint == 1){
+                            if($('#btn_addRunscreen').text() == "บันทึก"){
+                                ///////////////////////
+                                // For save runscreen
+                                ///////////////////////
+                                // Check duplicate function
+                                axios.post(this.url+'main/machine/checkDuplicateRunscreen',{
+                                    action:'checkDuplicateRunscreen',
+                                    runscreen_name:$('#add_runscreen_name').val()
+                                }).then(res=>{
+                                    console.log(res.data);
+                                    if(res.data.status == "Not Found Duplicate Data"){
+
+                                        const form = $('#frm_saveRunscreen')[0];
+                                        const data = new FormData(form);
+                                        axios.post(this.url+'main/machine/saveRunscreen',data,{
+                                            
+                                        }).then(res=>{
+                                            console.log(res.data);
+                                            if(res.data.status == "Insert Data Success"){
+                                                swal({
+                                                    title: 'บันทึกข้อมูลสำเร็จ',
+                                                    type: 'success',
+                                                    showConfirmButton: false,
+                                                    timer:1000
+                                                }).then(function(){
+                                                    $('#frm_saveRunscreen input').val('').removeClass('inputNull').removeClass('inputSuccess').removeClass('inputNullWarning');
+                                                    $('#add_runscreen_modal').modal('hide');
+                                                    $('#manage_runscreen_modal').modal('show');
+                                                    manage_runscreenVue.getAllRunscreen();
+                                                });
+                                            }
+                                        }).catch(err=>{
+                                            console.error('Error' , err);
+                                        });
+                                    }else{
+                                        swal({
+                                        title: 'พบข้อมูลซ้ำในระบบ',
+                                        type: 'error',
+                                        showConfirmButton: false,
+                                        timer:1000
+                                        });
+                                    }
+                                }).catch(err=>{
+                                    console.error('Error' , err);
+                                });
+                                ///////////////////////
+                                // For save runscreen
+                                ///////////////////////
+                            }else{
+
+                                ///////////////////////
+                                // For Edit runscreen
+                                ///////////////////////
+                                const form = $('#frm_saveRunscreen')[0];
+                                const data = new FormData(form);
+                                axios.post(this.url+'main/machine/saveEditRunscreen',data,{
+                                    
+                                }).then(res=>{
+                                    console.log(res.data);
+                                    if(res.data.status == "Update Data Success"){
+                                        swal({
+                                            title: 'แก้ไขข้อมูลสำเร็จ',
+                                            type: 'success',
+                                            showConfirmButton: false,
+                                            timer:1000
+                                        }).then(function(){
+                                            $('#frm_saveRunscreen input').val('').removeClass('inputNull').removeClass('inputSuccess').removeClass('inputNullWarning');
+                                            $('#add_runscreen_modal').modal('hide');
+                                            $('#manage_runscreen_modal').modal('show');
+                                            manage_runscreenVue.getAllRunscreen();
+                                        });
+                                    }
+                                }).catch(err=>{
+                                    console.error('Error' , err);
+                                });
+                                ///////////////////////
+                                // For Edit runscreen
+                                ///////////////////////
+                            }
+                        }
+
+                        
 
                     }else{
                         swal({
