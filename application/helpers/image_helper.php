@@ -165,16 +165,29 @@ function uploadImageSpoint($fileInput , $detailcode , $maincode)
     $yearNow = date("Y");
     $dateNow = date("Y-m-d");
     $imagePath = "uploads/images/".$yearNow."/".$dateNow."/";
-    $paths = 'uploads\images';
+    // $paths = 'uploads\images';
     $fileno = 1;
 
-    if(!file_exists($paths."\\".$yearNow)){
-        mkdir($paths."\\".$yearNow , 0755 , true);
+    $url = $_SERVER['HTTP_HOST'];
+    if($url == "localhost"){
+        $paths = 'uploads\images';
+        if(!file_exists($paths."\\".$yearNow)){
+            mkdir($paths."\\".$yearNow , 0755 , true);
+        }
+        if(!file_exists($paths."\\".$yearNow."\\".$dateNow)){
+            mkdir($paths."\\".$yearNow."\\".$dateNow , 0755 , true);
+        }
+    }else if($url == "intranet.saleecolour.com"){
+        $paths = 'uploads/images';
+        if(!file_exists($paths."/".$yearNow)){
+            mkdir($paths."/".$yearNow , 0755 , true);
+        }
+        if(!file_exists($paths."/".$yearNow."/".$dateNow)){
+            mkdir($paths."/".$yearNow."/".$dateNow , 0755 , true);
+        }
     }
 
-    if(!file_exists($paths."\\".$yearNow."\\".$dateNow)){
-        mkdir($paths."\\".$yearNow."\\".$dateNow , 0755 , true);
-    }
+
    
     $file_name = $_FILES[$fileInput]['name'];
 
@@ -241,16 +254,37 @@ function uploadImageRunDetail($fileInput , $detailcode , $maincode)
     $yearNow = date("Y");
     $dateNow = date("Y-m-d");
     $imagePath = "uploads/images/".$yearNow."/".$dateNow."/";
-    $paths = 'uploads\images';
+    // $paths = 'uploads\images';
     $fileno = 1;
 
-    if(!file_exists($paths."\\".$yearNow)){
-        mkdir($paths."\\".$yearNow , 0755 , true);
+    // if(!file_exists($paths."\\".$yearNow)){
+    //     mkdir($paths."\\".$yearNow , 0755 , true);
+    // }
+
+    // if(!file_exists($paths."\\".$yearNow."\\".$dateNow)){
+    //     mkdir($paths."\\".$yearNow."\\".$dateNow , 0755 , true);
+    // }
+
+
+    $url = $_SERVER['HTTP_HOST'];
+    if($url == "localhost"){
+        $paths = 'uploads\images';
+        if(!file_exists($paths."\\".$yearNow)){
+            mkdir($paths."\\".$yearNow , 0755 , true);
+        }
+        if(!file_exists($paths."\\".$yearNow."\\".$dateNow)){
+            mkdir($paths."\\".$yearNow."\\".$dateNow , 0755 , true);
+        }
+    }else if($url == "intranet.saleecolour.com"){
+        $paths = 'uploads/images';
+        if(!file_exists($paths."/".$yearNow)){
+            mkdir($paths."/".$yearNow , 0755 , true);
+        }
+        if(!file_exists($paths."/".$yearNow."/".$dateNow)){
+            mkdir($paths."/".$yearNow."/".$dateNow , 0755 , true);
+        }
     }
 
-    if(!file_exists($paths."\\".$yearNow."\\".$dateNow)){
-        mkdir($paths."\\".$yearNow."\\".$dateNow , 0755 , true);
-    }
    
     $file_name = $_FILES[$fileInput]['name'];
 
@@ -317,15 +351,26 @@ function uploadImageRunDetailEdit($fileInput , $detailcode , $maincode)
     $yearNow = date("Y");
     $dateNow = date("Y-m-d");
     $imagePath = "uploads/images/".$yearNow."/".$dateNow."/";
-    $paths = 'uploads\images';
+    // $paths = 'uploads\images';
     $fileno = 1;
 
-    if(!file_exists($paths."\\".$yearNow)){
-        mkdir($paths."\\".$yearNow , 0755 , true);
-    }
-
-    if(!file_exists($paths."\\".$yearNow."\\".$dateNow)){
-        mkdir($paths."\\".$yearNow."\\".$dateNow , 0755 , true);
+    $url = $_SERVER['HTTP_HOST'];
+    if($url == "localhost"){
+        $paths = 'uploads\images';
+        if(!file_exists($paths."\\".$yearNow)){
+            mkdir($paths."\\".$yearNow , 0755 , true);
+        }
+        if(!file_exists($paths."\\".$yearNow."\\".$dateNow)){
+            mkdir($paths."\\".$yearNow."\\".$dateNow , 0755 , true);
+        }
+    }else if($url == "intranet.saleecolour.com"){
+        $paths = 'uploads/images';
+        if(!file_exists($paths."/".$yearNow)){
+            mkdir($paths."/".$yearNow , 0755 , true);
+        }
+        if(!file_exists($paths."/".$yearNow."/".$dateNow)){
+            mkdir($paths."/".$yearNow."/".$dateNow , 0755 , true);
+        }
     }
    
     $file_name = $_FILES[$fileInput]['name'];
