@@ -18,7 +18,7 @@
                           <button type="submit" id="btn-saveEditTemplate" class="btn btn-success"><i class="fi-save mr-2"></i>บันทึก</button>
                           <button type="button" id="btn-deleteEditTemplate" class="btn btn-warning "><i aria-hidden="true" class="fa fa-trash mr-2"></i>ลบ</button>
                           <button type="button" id="btn-sumRun_createTemplate" class="btn btn-info sumRun_createTemplate"><i class="fa fa-file-text-o mr-2"></i>ดูภาพรวม</button>
-                          <button type="button" id="btn-calcelEditTemplate" class="btn btn-danger close_createTemplate" data-dismiss="modal"><i class="fi-x mr-2"></i>ปิด</button>
+                          <!-- <button type="button" id="btn-calcelEditTemplate" class="btn btn-danger close_createTemplate" data-dismiss="modal"><i class="fi-x mr-2"></i>ปิด</button> -->
                       </div>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                 <div class="modal-header">
                     
                     <div>
-                        <button type="button" class="btn btn-warning btn-closeSumRun" id="btn-closeSumRun" data-dismiss="modal"><i class="fi-x mr-2"></i>ปิด</button>
+                        <!-- <button type="button" class="btn btn-warning btn-closeSumRun" id="btn-closeSumRun" data-dismiss="modal"><i class="fi-x mr-2"></i>ปิด</button> -->
                     </div>
                     <div>
                     
@@ -150,7 +150,7 @@
                     
                     <div>
                         <button type="button" class="btn btn-success btn-saveRsEdit" id="btn-saveRsEdit"><i class="fi-save mr-2"></i>บันทึก</button>
-                        <button type="button" class="btn btn-danger btn-closeRsEdit" id="btn-closeRsEdit" data-dismiss="modal"><i class="fi-x mr-2"></i>ปิด</button>
+                        <!-- <button type="button" class="btn btn-danger btn-closeRsEdit" id="btn-closeRsEdit" data-dismiss="modal"><i class="fi-x mr-2"></i>ปิด</button> -->
                     </div>
                     <div>
                     
@@ -195,7 +195,8 @@ let url = "<?php echo base_url(); ?>";
                 showCancelButton: true,
                 confirmButtonClass: 'btn btn-success',
                 cancelButtonClass: 'btn btn-danger',
-                confirmButtonText: 'ลบเลย'
+                confirmButtonText: 'ลบเลย',
+                cancelButtonText:'ยกเลิก'
             }).then((result)=> {
                 if(result.value == true){
                     let templateCode = $('#tempCode_edit').val();

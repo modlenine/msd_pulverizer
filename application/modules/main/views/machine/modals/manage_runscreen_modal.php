@@ -12,9 +12,9 @@
                 <div class="modal-header">
                     <div>
                         <button type="button" class="btn btn-success newRunscreen"><i class="fi-plus mr-2"></i>เพิ่ม</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">
                             <i class="fi-x mr-2"></i>ปิด
-                        </button>
+                        </button> -->
                     </div>
                     <div></div>
                 </div>
@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger close-add_runscreen_modal" data-dismiss="modal"><i class="fi-x mr-2"></i>ปิด</button>
+                        <!-- <button type="button" class="btn btn-danger close-add_runscreen_modal" data-dismiss="modal"><i class="fi-x mr-2"></i>ปิด</button> -->
                         <button type="submit" id="btn_addRunscreen" class="btn btn-success"><i class="fi-save mr-2"></i>บันทึก</button>
                     </div>
                 </form>

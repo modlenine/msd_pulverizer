@@ -17,9 +17,9 @@
                         <button type="submit" class="btn btn-success" id="btn-saveMain">
                             <i class="fi-save mr-2"></i>บันทึก
                         </button>
-                        <button type="button" class="btn btn-danger" id="btn-closeMain" data-dismiss="modal">
+                        <!-- <button type="button" class="btn btn-danger" id="btn-closeMain" data-dismiss="modal">
                             <i class="fi-x mr-2"></i>ปิด
-                        </button>
+                        </button> -->
                     </div>
                     <div></div>
                 </div>

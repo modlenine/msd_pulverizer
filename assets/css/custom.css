@@ -894,19 +894,23 @@ textarea.form-control{
 
 .iNormal{
 	color:#28a745;
-	font-size:18px;
+	/* font-size:18px; */
+	font-weight: 500;
 }
 .iNotuse{
 	color:#2a88e6;
-	font-size:18px;
+	/* font-size:18px; */
+	font-weight: 500;
 }
 .iStop{
 	color:#a10404;
-	font-size:18px;
+	/* font-size:18px; */
+	font-weight: 500;
 }
 .iNotOk{
 	color:#a10404;
-	font-size:18px;
+	/* font-size:18px; */
+	font-weight: 500;
 }
 
 .runSelectLeftLi_edit:hover{

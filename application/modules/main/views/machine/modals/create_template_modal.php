@@ -29,7 +29,7 @@
                     <div class="row">
                       <div class="col-lg-12">
                           <button type="submit" id="btn-saveNewTemplate" class="btn btn-success"><i class="fi-save mr-2"></i>บันทึก</button>
-                          <button type="button" id="btn-calcelNewTemplate" class="btn btn-danger close_createTemplate" data-dismiss="modal"><i class="fi-x mr-2"></i>ปิด</button>
+                          <!-- <button type="button" id="btn-calcelNewTemplate" class="btn btn-danger close_createTemplate" data-dismiss="modal"><i class="fi-x mr-2"></i>ปิด</button> -->
                       </div>
                     </div>
                 </div>

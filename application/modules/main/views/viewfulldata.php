@@ -48,7 +48,7 @@
                         
                         <div>
                             <button type="button" class="btn btn-success" id="btn-saveSetpoint" name="btn-saveSetpoint" @click="saveSpoint"><i class="fi-save mr-2"></i>บันทึก</button>
-                            <button type="button" class="btn btn-danger" id="btn-closeSetpoint"><i class="fi-x mr-2"></i>ปิด</button>
+                            <!-- <button type="button" class="btn btn-danger" id="btn-closeSetpoint"><i class="fi-x mr-2"></i>ปิด</button> -->
                         </div>
                         <div>
 
@@ -58,7 +58,7 @@
                     <div class="modal-body">
                         <input hidden type="text" name="mdsp_m_code" id="mdsp_m_code">
                         <div class="col-lg-12 bottommargin">
-                            <label>ภาพก่อนการทำงาน</label><br>
+                            <label><b>ภาพก่อนการทำงาน</b></label><br>
                             <input id="mdsp_f_name" name="mdsp_f_name[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-show-preview="true">
                         </div>
 
@@ -89,7 +89,7 @@
                     <div class="modal-header">
                         <div>
                             <button type="submit" class="btn btn-success" id="btn-saveRunDetail" name="btn-saveRunDetail"><i class="fi-save mr-2"></i>บันทึก</button>
-                            <button type="button" class="btn btn-danger close_runDetail_modal" data-dismiss="modal" id="btn-closeRunDetail"><i class="fi-x mr-2"></i>ปิด</button>
+                            <!-- <button type="button" class="btn btn-danger close_runDetail_modal" data-dismiss="modal" id="btn-closeRunDetail"><i class="fi-x mr-2"></i>ปิด</button> -->
                         </div>
                         <div></div>
                     </div>
@@ -386,7 +386,7 @@
                         
                         <div>
                             <button type="submit" class="btn btn-success" id="btn-saveMachineCheck" name="btn-saveMachineCheck" @click=""><i class="fi-save mr-2"></i>บันทึก</button>
-                            <button type="button" class="btn btn-warning" id="btn-closeMachineCheck" data-dismiss="modal"><i class="fi-x mr-2"></i>ปิด</button>
+                            <!-- <button type="button" class="btn btn-warning" id="btn-closeMachineCheck" data-dismiss="modal"><i class="fi-x mr-2"></i>ปิด</button> -->
                         </div>
                         <div>
                             <input hidden type="text" name="mcmd_mcode" id="mcmd_mcode">
@@ -801,7 +801,8 @@ $(document).ready(function(){
                     showCancelButton: true,
                     confirmButtonClass: 'btn btn-success',
                     cancelButtonClass: 'btn btn-danger',
-                    confirmButtonText: 'ยืนยัน'
+                    confirmButtonText: 'ยืนยัน',
+                    cancelButtonText:'ยกเลิก'
                 }).then((result)=> {
                     if(result.value == true){
                         $('#cancelMemo_modal').modal('show');
@@ -858,7 +859,8 @@ $(document).ready(function(){
                     showCancelButton: true,
                     confirmButtonClass: 'btn btn-success',
                     cancelButtonClass: 'btn btn-danger',
-                    confirmButtonText: 'ยืนยัน'
+                    confirmButtonText: 'ยืนยัน',
+                    cancelButtonText:'ยกเลิก'
                 }).then((result)=> {
 
                     if(result.value == true){
@@ -1102,6 +1104,13 @@ $(document).ready(function(){
                             }).then(function(){
                                 location.reload();
                             });
+                        }else if(res.data.status == "Insert Data Not Success Found Duplicate Data"){
+                            swal({
+                                title: 'บันทึกข้อมูลไม่สำเร็จ พบข้อมูลซ้ำในระบบ',
+                                type: 'error',
+                                showConfirmButton: false,
+                                timer:1000
+                            });
                         }
                     });
                 }
@@ -1195,12 +1204,18 @@ $(document).ready(function(){
 
         $('#setpoint_modal').modal('show');
 
-        let spointTextTitle = `
-            <span><b>Machine Name : </b>`+data_m_template_name+`</span>&nbsp;&nbsp;
-            <span><b>Production No. : </b>`+data_m_product_number+`</span><br>
-            <span><b>Batch No. : </b>`+data_m_batch_number+`</span>
+        const productionNo = $('#m_product_number_v').val();
+        const itemNo = $('#m_item_number_v').val();
+        const machineName = $('#m_template_name_v').val();
+        const batchNo = $('#m_batch_number_v').val();
+
+        let title = '';
+        title +=`
+        <span><b>Machine Name. : </b>`+machineName+`</span>&nbsp;&nbsp;<span><b>Batch No. : </b>`+batchNo+`</span><br>
+        <span><b>Production No. : </b>`+productionNo+`</span>&nbsp;&nbsp;<span><b>Item No. : </b>`+itemNo+`</span>
         `;
-        $('#spointTitle').html(spointTextTitle);
+
+        $('#spointTitle').html(title);
         $('#mdsp_m_code').val(data_m_code);
         loadSpoint(data_m_template_code);
     });
@@ -1210,6 +1225,19 @@ $(document).ready(function(){
         $('#runDetail_modal').modal('show');
         $('#mdrd_m_code').val(data_m_code);
         loadSpointInMainData(data_m_code);
+
+        const productionNo = $('#m_product_number_v').val();
+        const itemNo = $('#m_item_number_v').val();
+        const machineName = $('#m_template_name_v').val();
+        const batchNo = $('#m_batch_number_v').val();
+
+        let title = '';
+        title +=`
+        <span><b>Machine Name. : </b>`+machineName+`</span>&nbsp;&nbsp;<span><b>Batch No. : </b>`+batchNo+`</span><br>
+        <span><b>Production No. : </b>`+productionNo+`</span>&nbsp;&nbsp;<span><b>Item No. : </b>`+itemNo+`</span>
+        `;
+
+        $('#runDetailTitle').html(title);
     });
 
     $(document).on('click' , '.runImageI' , function(){
@@ -1332,7 +1360,8 @@ $(document).ready(function(){
                 showCancelButton: true,
                 confirmButtonClass: 'btn btn-success',
                 cancelButtonClass: 'btn btn-danger',
-                confirmButtonText: 'ยืนยัน'
+                confirmButtonText: 'ยืนยัน',
+                cancelButtonText:'ยกเลิก'
                 }).then((result)=>{
                     if(result.value == true){
                         deleteFileEdit(data_m_code , data_d_code , data_f_name , data_f_path , data_f_autoid);
@@ -2815,6 +2844,7 @@ $(document).ready(function(){
                     </tr>`;
                     let no = 1;
                     let icon = '';
+                    let textStatus = '';
                     for(let i = 0; i < checktemplate.length; i++){
                         output +=`
                         <tr>
@@ -2825,16 +2855,20 @@ $(document).ready(function(){
 
                                     if(checkValue[j][i].mck_value == "ปกติ"){
                                         icon = '<i class="fa fa-check iNormal" aria-hidden="true"></i>';
+                                        textStatus = '<span class="iNormal">'+checkValue[j][i].mck_value+'</span>';
                                     }else if(checkValue[j][i].mck_value == "ไม่มีการใช้งาน"){
                                         icon = '<i class="fa fa-circle-o iNotuse" aria-hidden="true"></i>';
+                                        textStatus = '<span class="iNotuse">'+checkValue[j][i].mck_value+'</span>';
                                     }else if(checkValue[j][i].mck_value == "ผิดปกติ"){
                                         icon = '<i class="fa fa-close iNotOk" aria-hidden="true"></i>';
+                                        textStatus = '<span class="iNotOk">'+checkValue[j][i].mck_value+'</span>';
                                     }else if(checkValue[j][i].mck_value == "เครื่องจอด"){
                                         icon = '<i class="fa fa-minus iStop" aria-hidden="true"></i>';
+                                        textStatus = '<span class="iStop">'+checkValue[j][i].mck_value+'</span>';
                                     }
 
                                     output +=`
-                                    <td>`+icon+`</td>
+                                    <td>`+textStatus+`</td>
                                     `;
                                 }
                           

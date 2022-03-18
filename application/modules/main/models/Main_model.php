@@ -1946,45 +1946,73 @@ class Main_model extends CI_Model {
             $mckList = $this->input->post("mcklist");
             $m_code = $this->input->post("mcmd_mcode");
 
-            $checkLinenumGroup = $this->db->query("SELECT mck_linenumgroup FROM machine_check WHERE mck_m_code = '$m_code' group by mck_linenumgroup order by mck_linenumgroup desc ");
-            if($checkLinenumGroup->num_rows() != 0){
-                $linenumgroup = $checkLinenumGroup->row()->mck_linenumgroup;
-                $linenumgroup++;
-            }else{
-                $linenumgroup = 1;
-            }
+            $itemNumber = $this->input->post("mck_itemnumber");
+            $batchNumber = $this->input->post("mck_batchnumber");
 
-            foreach($mckList as $key => $value){
-                $arInsertMachineCheck = array(
-                    "mck_m_code" => $m_code,
-                    "mck_list" => $value,
-                    "mck_value" => $this->input->post("mckval")[$key],
-                    "mck_itemno" => $this->input->post("mck_itemnumber"),
-                    "mck_batchno" => $this->input->post("mck_batchnumber"),
-                    "mck_linenumgroup" => $linenumgroup,
-                    "mck_linenum" => $this->input->post("mcklinenum")[$key],
-                    "mck_user" => getUser()->Fname." ".getUser()->Lname,
-                    "mck_ecode" => getUser()->ecode,
-                    "mck_deptcode" => getUser()->DeptCode,
-                    "mck_datetime" => date("Y-m-d H:i:s")
+            // check Duplicate batch and item
+                $sqlCheckDup = $this->db->query("SELECT
+                machine_check.mck_autoid,
+                machine_check.mck_m_code,
+                machine_check.mck_itemno,
+                machine_check.mck_batchno,
+                machine_check.mck_user,
+                machine_check.mck_ecode,
+                machine_check.mck_deptcode,
+                machine_check.mck_datetime
+                FROM
+                machine_check
+                WHERE mck_itemno = '$itemNumber' AND mck_batchno = '$batchNumber' AND mck_m_code = '$m_code'
+                GROUP BY mck_batchno
+                ");
+            if($sqlCheckDup->num_rows() != 0){
+                $output = array(
+                    "msg" => "บันทึกข้อมูลไม่สำเร็จพบข้อมูลซ้ำในระบบ",
+                    "status" => "Insert Data Not Success Found Duplicate Data"
                 );
-                $this->db->insert("machine_check" , $arInsertMachineCheck);
+            }else{
+                $checkLinenumGroup = $this->db->query("SELECT mck_linenumgroup FROM machine_check WHERE mck_m_code = '$m_code' group by mck_linenumgroup order by mck_linenumgroup desc ");
+                if($checkLinenumGroup->num_rows() != 0){
+                    $linenumgroup = $checkLinenumGroup->row()->mck_linenumgroup;
+                    $linenumgroup++;
+                }else{
+                    $linenumgroup = 1;
+                }
+    
+                foreach($mckList as $key => $value){
+                    $arInsertMachineCheck = array(
+                        "mck_m_code" => $m_code,
+                        "mck_list" => $value,
+                        "mck_value" => $this->input->post("mckval")[$key],
+                        "mck_itemno" => $this->input->post("mck_itemnumber"),
+                        "mck_batchno" => $this->input->post("mck_batchnumber"),
+                        "mck_linenumgroup" => $linenumgroup,
+                        "mck_linenum" => $this->input->post("mcklinenum")[$key],
+                        "mck_user" => getUser()->Fname." ".getUser()->Lname,
+                        "mck_ecode" => getUser()->ecode,
+                        "mck_deptcode" => getUser()->DeptCode,
+                        "mck_datetime" => date("Y-m-d H:i:s")
+                    );
+                    $this->db->insert("machine_check" , $arInsertMachineCheck);
+                }
+    
+                $m_formno = getMainFormno($m_code);
+                $action = "บันทึกผลการตรวจสอบเครื่องจักรของเอกสารเลขที่ : $m_formno สำเร็จ";
+                saveActivity(
+                    $action,
+                    getActivityData($m_code)->m_product_number,
+                    getActivityData($m_code)->m_batch_number,
+                    getActivityData($m_code)->m_item_number,
+                    getActivityData($m_code)->m_dataareaid
+                );
+    
+                $output = array(
+                    "msg" => "บันทึกข้อมูลสำเร็จ",
+                    "status" => "Insert Data Success"
+                );
             }
+            // check Duplicate batch and item
 
-            $m_formno = getMainFormno($m_code);
-            $action = "บันทึกผลการตรวจสอบเครื่องจักรของเอกสารเลขที่ : $m_formno สำเร็จ";
-            saveActivity(
-                $action,
-                getActivityData($m_code)->m_product_number,
-                getActivityData($m_code)->m_batch_number,
-                getActivityData($m_code)->m_item_number,
-                getActivityData($m_code)->m_dataareaid
-            );
 
-            $output = array(
-                "msg" => "บันทึกข้อมูลสำเร็จ",
-                "status" => "Insert Data Success"
-            );
         }else{
             $output = array(
                 "msg" => "บันทึกข้อมูลไม่สำเร็จ",
