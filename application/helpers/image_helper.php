@@ -204,9 +204,9 @@ function uploadImageSpoint($fileInput , $detailcode , $maincode)
                 $filename_type = $path_parts['extension'];
             }
             
-            $file_name_date = substr_replace($value,  $detailcode . "-" . $fileno .".". $filename_type, 0);
+            $file_name_date = substr_replace($value,  $detailcode.getRuningCode(7) . "-" . $fileno .".". $filename_type, 0);
 
-            $file_name_s = substr_replace($value,  $detailcode . "-" . $fileno , 0);
+            $file_name_s = substr_replace($value,  $detailcode.getRuningCode(7) . "-" . $fileno , 0);
             // Upload file
             $file_tmp = $_FILES[$fileInput]['tmp_name'][$key];
 
@@ -301,9 +301,9 @@ function uploadImageRunDetail($fileInput , $detailcode , $maincode)
                 $filename_type = $path_parts['extension'];
             }
             
-            $file_name_date = substr_replace($value,  $detailcode . "-run-" . $fileno .".". $filename_type, 0);
+            $file_name_date = substr_replace($value,  $detailcode.getRuningCode(7) . "-run-" . $fileno .".". $filename_type, 0);
 
-            $file_name_s = substr_replace($value,  $detailcode . "-run-" . $fileno , 0);
+            $file_name_s = substr_replace($value,  $detailcode.getRuningCode(7) . "-run-" . $fileno , 0);
             // Upload file
             $file_tmp = $_FILES[$fileInput]['tmp_name'][$key];
 
@@ -388,9 +388,9 @@ function uploadImageRunDetailEdit($fileInput , $detailcode , $maincode)
                 $filename_type = $path_parts['extension'];
             }
             
-            $file_name_date = substr_replace($value,  $detailcode . "-runE-" . $fileno .".". $filename_type, 0);
+            $file_name_date = substr_replace($value,  $detailcode.getRuningCode(7) . "-runE-" . $fileno .".". $filename_type, 0);
 
-            $file_name_s = substr_replace($value,  $detailcode . "-runE-" . $fileno , 0);
+            $file_name_s = substr_replace($value,  $detailcode.getRuningCode(7) . "-runE-" . $fileno , 0);
             // Upload file
             $file_tmp = $_FILES[$fileInput]['tmp_name'][$key];
 

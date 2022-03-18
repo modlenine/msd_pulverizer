@@ -269,7 +269,7 @@
                 <form id="frm_saveRunDetailEdit" autocomplete="off" style="width:100%;">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <div id="runDetailImageTitle"></div>
+                        <div id="runDetailEditTitle"></div>
                         <div>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
@@ -278,9 +278,9 @@
                     <div class="modal-header">
                         
                         <div>
-                            <button type="button" class="btn btn-success" id="btn-saveRunDetail_edit" name="btn-saveRunDetail" @click="saveRunDetailEdit"><i class="fi-save mr-2"></i>บันทึก การแก้ไข</button>
+                            <button type="button" class="btn btn-success" id="btn-saveRunDetail_edit" name="btn-saveRunDetail_edit" @click="saveRunDetailEdit"><i class="fi-save mr-2"></i>บันทึก การแก้ไข</button>
                             <button type="button" class="btn btn-danger" id="btn-deleteRunDetail" @click="deleteRunDetail"><i class="fa fa-trash mr-2" aria-hidden="true"></i>ลบรายการ</button>
-                            <button type="button" class="btn btn-warning" id="btn-closeRunDetail" data-dismiss="modal"><i class="fi-x mr-2"></i>ปิด</button>
+                            <!-- <button type="button" class="btn btn-warning" id="btn-closeRunDetail" data-dismiss="modal"><i class="fi-x mr-2"></i>ปิด</button> -->
                         </div>
                         <div>
 
@@ -292,6 +292,17 @@
 
                         <div id="showRunGroupList"></div>
                         <div class="dropdown-divider"></div>
+
+                        <div class="editSpointSection row form-group" style="display:none;">
+                            <div class="col-lg-12 form-group">
+                                <div id="edit_showSpointImage"></div>
+                            </div>
+
+                            <div class="col-lg-12 bottommargin">
+                                <label>ภาพก่อนการทำงาน</label><br>
+                                <input id="mdrdsp_f_name" name="mdrdsp_f_name[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-show-preview="true">
+                            </div>
+                        </div>
                         
                         <div class="row form-group detailEditSection" style="display:none;">
                             <div class="col-lg-12 bottommargin">
@@ -994,38 +1005,46 @@ $(document).ready(function(){
             {
                 if($('#listOfRunGroup').val() != ""){
 
-                    swal({
-                    title: 'ต้องการลบรายการนี้ ใช่หรือไม่',
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonClass: 'btn btn-success',
-                    cancelButtonClass: 'btn btn-danger',
-                    confirmButtonText: 'ยืนยัน'
-                }).then((result)=> {
-                    if(result.value == true){
-                        const form = $('#frm_saveRunDetailEdit')[0];
-                        const data = new FormData(form);
+                    if($('#listOfRunGroup').val() == "Spoint"){
+                        swal({
+                            title: 'รายการ Set Point ไม่สามารถลบได้',
+                            type: 'error',
+                            showConfirmButton: false,
+                            timer:800
+                        });
+                    }else{
+                        swal({
+                            title: 'ต้องการลบรายการนี้ ใช่หรือไม่',
+                            type: 'warning',
+                            showCancelButton: true,
+                            confirmButtonClass: 'btn btn-success',
+                            cancelButtonClass: 'btn btn-danger',
+                            confirmButtonText: 'ยืนยัน'
+                        }).then((result)=> {
+                            if(result.value == true){
+                                const form = $('#frm_saveRunDetailEdit')[0];
+                                const data = new FormData(form);
 
-                        axios.post(url+'main/deleteRunDetail' , data , {
-                            header:{
-                                'Content-Type' : 'multipart/form-data'
-                            },
-                        }).then(res => {
-                            console.log(res.data);
-                            if(res.data.status == "Delete Data Success"){
-                                swal({
-                                    title: 'ลบข้อมูลสำเร็จ',
-                                    type: 'success',
-                                    showConfirmButton: false,
-                                    timer:800
-                                }).then(function(){
-                                    location.reload();
+                                axios.post(url+'main/deleteRunDetail' , data , {
+                                    header:{
+                                        'Content-Type' : 'multipart/form-data'
+                                    },
+                                }).then(res => {
+                                    console.log(res.data);
+                                    if(res.data.status == "Delete Data Success"){
+                                        swal({
+                                            title: 'ลบข้อมูลสำเร็จ',
+                                            type: 'success',
+                                            showConfirmButton: false,
+                                            timer:800
+                                        }).then(function(){
+                                            location.reload();
+                                        });
+                                    }
                                 });
                             }
                         });
                     }
-                });
-
                     
                 }else{
                     swal({
@@ -1267,7 +1286,20 @@ $(document).ready(function(){
         $('#editRunDetail_modal').modal('show');
         loadRunGroupList(m_code);
         $('.detailEditSection').css('display' , 'none');
+        $('.editSpointSection').css('display' , 'none');
         $('#showGroupDetailEdit').html('');
+
+        const machineName = $('#m_template_name_v').val();
+        const batchNumber = $('#m_batch_number_v').val();
+        const productNumber = $('#m_product_number_v').val();
+        const itemNumber = $('#m_item_number_v').val();
+
+        let title = '';
+        title +=`
+        <span><b>Machine Name : </b>`+machineName+`</span>&nbsp;&nbsp;<span><b>Batch Number : </b>`+batchNumber+`</span><br>
+        <span><b>Production Number : </b>`+productNumber+`</span>&nbsp;&nbsp;<span><b>Item Number : </b>`+itemNumber+`</span>
+        `;
+        $('#runDetailEditTitle').html(title);
     });
 
 
@@ -1275,8 +1307,15 @@ $(document).ready(function(){
         const d_code = $(this).val();
         const m_code = $('#getMaincode').val();
 
-        loadDataForEdit(m_code , d_code);
-        $('.detailEditSection').css('display' , '');
+        if($(this).val() == "Spoint")
+        {
+            loadSpointForEdit(m_code);
+            $('.editSpointSection').css('display' , '');
+        }else{
+            loadDataForEdit(m_code , d_code);
+            $('.detailEditSection').css('display' , '');
+        }
+
     });
 
 
@@ -1297,6 +1336,28 @@ $(document).ready(function(){
                 }).then((result)=>{
                     if(result.value == true){
                         deleteFileEdit(data_m_code , data_d_code , data_f_name , data_f_path , data_f_autoid);
+                    }
+                });
+    });
+
+
+    $(document).on('click' , '.imageDelSpointEdit' , function(){
+        const data_m_code = $(this).attr("data_m_code");
+        const data_f_name = $(this).attr("data_f_name");
+        const data_f_path = $(this).attr("data_f_path");
+        const data_f_autoid = $(this).attr("data_f_autoid");
+
+            swal({
+                title: 'ต้องการลบรูปนี้ใช่หรือไม่',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                confirmButtonText: 'ยืนยัน',
+                cancelButtonText:'ยกเลิก'
+                }).then((result)=>{
+                    if(result.value == true){
+                        deleteFileSpointEdit(data_m_code , data_f_name , data_f_path , data_f_autoid);
                     }
                 });
     });
@@ -1661,6 +1722,77 @@ $(document).ready(function(){
         }
     }
 
+
+    function loadSpointForEdit(m_code)
+    {
+        if(m_code != ""){
+            axios.post(url+'main/loadSpointForEdit',{
+                action:"loadSpointForEdit",
+                m_code:m_code
+            }).then(res=>{
+                console.log(res.data);
+                let spointMainData = res.data.spointMainData;
+                let spointImage = res.data.spointImage;
+                let output = '';
+
+                output +=`
+                    <h3>Run Screen</h3>
+                    <div class="dropdown-divider"></div>
+                    `;
+                for(let i = 0; i < spointMainData.length; i++){
+                    output +=`
+                        <div class="row form-group flex-container">
+                            <div class="col-md-6" style="align-self: center">
+                                <span><b>`+spointMainData[i].d_run_name+`</b></span>
+                                <input hidden type="text" id="mdrde_d_run_name" name="mdrde_d_run_name[]" value="`+spointMainData[i].d_run_name+`">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="tel" id="mdrde_d_run_value" name ="mdrde_d_run_value[]" class="form-control mdrde_d_run_value" value="`+spointMainData[i].d_run_value+`">
+                                <input hidden type="text" id="mdrde_d_autoid" name="mdrde_d_autoid[]" value="`+spointMainData[i].d_autoid+`"> 
+                            </div>
+                        </div>
+                    `;
+                }
+                $('#showGroupDetailEdit').html(output);
+
+                // Get Image Zone
+                let imageSpointImageHtml = '';
+
+                imageSpointImageHtml +=`
+                <span><b>รูปก่อนการทำงาน</b></span>
+                <div class="row form-group">`;
+                    if(spointImage != null){
+                        for(let i = 0; i < spointImage.length; i++){
+                            imageSpointImageHtml +=`
+                                <div class="col-md-4 col-lg-3 col-6 divImage mt-2">
+                                    <img class="runImageView" src="`+url+spointImage[i].f_path+spointImage[i].f_name+`">
+                                    <div class="iconZone">
+                                        <i class="fa fa-trash imageDelSpointEdit" aria-hidden="true"
+                                            data_m_code="`+m_code+`"
+                                            data_f_name="`+spointImage[i].f_name+`"
+                                            data_f_path="`+spointImage[i].f_path+`"
+                                            data_f_autoid="`+spointImage[i].f_autoid+`"
+                                        ></i>
+                                    </div>
+                                </div>
+                                `;
+                        }
+                    }else{
+                        imageSpointImageHtml +=`
+                            <div class="col-md-12">
+                                <span>ไม่พบรูปภาพ</span>
+                            </div>
+                            `;
+                    }
+                    imageSpointImageHtml +=`
+                </div>
+                `;
+                $('#edit_showSpointImage').html(imageSpointImageHtml);
+            });
+        }
+    }
+
+
     function loadImageRunDetailForShow(m_code,d_code)
     {
         if(m_code != "" && d_code != ""){
@@ -1727,11 +1859,13 @@ $(document).ready(function(){
             if(res.data.status == "Select Data Success"){
                 let output =`
                 <div class="row form-group">
+                    <input hidden type="text" id="spointDCode" name="spointDCode" value="`+res.data.runSpointDCode.d_detailcode+`">
                     <div class="col-md-12">
                 `;
                 output +=`
                 <select name="listOfRunGroup" id="listOfRunGroup" class="form-control selectDetailEdit">
                 <option value="">กรุณาเลือกรายการที่ต้องการแก้ไข</option>
+                <option value="Spoint">Set Point</option>
                 `;
                 let runGroupLists = res.data.runGroupList;
                     for(let i = 0; i < runGroupLists.length; i++){
@@ -1865,6 +1999,43 @@ $(document).ready(function(){
     }
 
 
+    function deleteFileSpointEdit(m_code , f_name , f_path , f_autoid)
+    {
+        if(m_code != "" &&
+        f_name != "" &&
+        f_path != "" &&
+        f_autoid != "")
+        {
+            axios.post(url+'main/deleteFileSpointEdit' , {
+                action:"deleteFileSpointEdit",
+                m_code:m_code,
+                f_name:f_name,
+                f_path:f_path,
+                f_autoid:f_autoid
+            }).then(res=>{
+                console.log(res.data);
+                if(res.data.status == "Delete Data Success"){
+                    swal({
+                        title: 'ลบข้อมูลสำเร็จ',
+                        type: 'success',
+                        showConfirmButton: false,
+                        timer:800
+                    }).then(function(){
+                        loadSpointForEdit(m_code);
+                    });
+                }else{
+                    swal({
+                        title: 'ลบข้อมูลไม่สำเร็จ',
+                        type: 'error',
+                        showConfirmButton: false,
+                        timer:800
+                    })
+                }
+            });
+        }
+    }
+
+
     function dataGroupSelected(linenum_group)
     {
         // console.log(linenum_group);
@@ -1941,6 +2112,7 @@ $(document).ready(function(){
 
                     $('.startButtonZone').css('display' , '');
                     $('.spointzone').css('display' , 'none');
+                    createDataPage(m_code);
 
                 }else if(res.data.form_status == "Open"){
 

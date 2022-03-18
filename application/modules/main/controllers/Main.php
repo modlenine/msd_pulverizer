@@ -73,6 +73,8 @@ class Main extends MX_Controller {
         $this->main->loadSpoint();
     }
 
+
+
     public function saveSpoint()
     {
         $this->main->saveSpoint();
@@ -106,6 +108,11 @@ class Main extends MX_Controller {
     public function loadSpointInMainData()
     {
         $this->main->loadSpointInMainData();
+    }
+
+    public function loadSpointForEdit()
+    {
+        $this->main->loadSpointForEdit();
     }
 
     public function saveRunDetail()
@@ -151,6 +158,11 @@ class Main extends MX_Controller {
     public function deleteFileEdit()
     {
         $this->main->deleteFileEdit();
+    }
+
+    public function deleteFileSpointEdit()
+    {
+        $this->main->deleteFileSpointEdit();
     }
 
     public function deleteRunDetail()

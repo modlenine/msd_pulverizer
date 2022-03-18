@@ -1023,6 +1023,50 @@ class Main_model extends CI_Model {
         echo json_encode($output);
     }
 
+    public function loadSpointForEdit()
+    {
+        $received_data = json_decode(file_get_contents("php://input"));
+        if($received_data->action == "loadSpointForEdit"){
+            $sql = $this->db->query("SELECT
+            details.d_autoid,
+            details.d_maincode,
+            details.d_detailcode,
+            details.d_templatecode,
+            details.d_worktime,
+            details.d_action,
+            details.d_run_name,
+            details.d_run_min,
+            details.d_run_max,
+            details.d_run_value,
+            details.d_linenum
+            FROM
+            details
+            WHERE d_maincode = '$received_data->m_code' AND d_action = 'Spoint'
+            ORDER BY d_linenum ASC
+            ");
+
+            // Get Image Spoint For Edit
+            $sqlGetImageSpoint = $this->db->query("SELECT * FROM files WHERE f_maincode = '$received_data->m_code' AND f_type = 'Before Start' ORDER BY f_autoid ASC ");
+            // Get Image Spoint For Edit
+
+            $output = array(
+                "msg" => "ดึงข้อมูล สำเร็จ",
+                "status" => "Select Data Success",
+                "spointMainData" => $sql->result(),
+                "spointImage" => $sqlGetImageSpoint->result()
+            );
+        }else{
+            $output = array(
+                "msg" => "ดึงข้อมูล ไม่สำเร็จ",
+                "status" => "Select Data Not Success",
+                "spointMainData" => null,
+                "spointImage" => null
+            );
+        }
+
+        echo json_encode($output);
+    }
+
     public function saveRunDetail()
     {
         if($this->input->post("mdrd_chooseTime") != ""){
@@ -1184,16 +1228,20 @@ class Main_model extends CI_Model {
             ORDER BY d_linenum_group ASC
             ");
 
+            $sqlSpoint = $this->db->query("SELECT d_detailcode FROM details WHERE d_maincode = '$received_data->m_code' AND d_action = 'Spoint' GROUP BY d_action");
+
             $output = array(
                 "msg" => "ดึงข้อมูลสำเร็จ",
                 "status" => "Select Data Success",
-                "runGroupList" => $sql->result()
+                "runGroupList" => $sql->result(),
+                "runSpointDCode" => $sqlSpoint->row()
             );
         }else{
             $output = array(
                 "msg" => "ดึงข้อมูลไม่สำเร็จ",
                 "status" => "Select Data Not Success",
-                "runGroupList" => null
+                "runGroupList" => null,
+                "runSpointDCode" => null
             );
         }
 
@@ -1290,9 +1338,44 @@ class Main_model extends CI_Model {
             $detailcode = $this->input->post("listOfRunGroup");
             $maincode = $this->input->post("mdrde_m_code");
 
-            // Upload Image And Save File Data
-            $fileInput = "mdrde_f_name";
-            uploadImageRunDetailEdit($fileInput , $detailcode , $maincode);
+            if($detailcode == "Spoint"){
+                // อัพโหลดรูปภาพ ก่อนเริ่มทำงาน
+                $spointDetailCode = $this->input->post("spointDCode");
+                $fileInput = "mdrdsp_f_name";
+                uploadImageSpoint($fileInput , $spointDetailCode , $maincode);
+                // อัพโหลดรูปภาพ ก่อนเริ่มทำงาน
+            }else{
+                // Upload Image And Save File Data
+                $fileInput = "mdrde_f_name";
+                uploadImageRunDetailEdit($fileInput , $detailcode , $maincode);
+
+                // Update Memo
+                // Check memo Data
+                $sqlCheckMemo = $this->db->query("SELECT me_memo FROM memo WHERE me_maincode = '$maincode' AND me_detailcode = '$detailcode' ");
+
+                if($sqlCheckMemo->num_rows() != 0){
+                    $arupDatememo = array(
+                        "me_memo" => $this->input->post("mdrde_d_run_memo")
+                    );
+
+                    $this->db->where("me_maincode" , $maincode);
+                    $this->db->where("me_detailcode" , $detailcode);
+                    $this->db->update("memo" , $arupDatememo);
+                }else{
+                    $arInsertMemo = array(
+                        "me_memo" => $this->input->post("mdrde_d_run_memo"),
+                        "me_maincode" => $maincode,
+                        "me_detailcode" => $detailcode,
+                        "me_user" => getUser()->Fname." ".getUser()->Lname,
+                        "me_ecode" => getUser()->ecode,
+                        "me_deptcode" => getUser()->DeptCode,
+                        "me_datetime" => date("Y-m-d H:i:s")
+                    );
+                    $this->db->insert("memo" , $arInsertMemo);
+                }
+            }//End Condition
+
+
 
             // Update Detail value
             $d_autoid = $this->input->post("mdrde_d_autoid");
@@ -1306,32 +1389,6 @@ class Main_model extends CI_Model {
             // Update Detail value
 
 
-
-            // Update Memo
-            
-            // Check memo Data
-            $sqlCheckMemo = $this->db->query("SELECT me_memo FROM memo WHERE me_maincode = '$maincode' AND me_detailcode = '$detailcode' ");
-
-            if($sqlCheckMemo->num_rows() != 0){
-                $arupDatememo = array(
-                    "me_memo" => $this->input->post("mdrde_d_run_memo")
-                );
-
-                $this->db->where("me_maincode" , $maincode);
-                $this->db->where("me_detailcode" , $detailcode);
-                $this->db->update("memo" , $arupDatememo);
-            }else{
-                $arInsertMemo = array(
-                    "me_memo" => $this->input->post("mdrde_d_run_memo"),
-                    "me_maincode" => $maincode,
-                    "me_detailcode" => $detailcode,
-                    "me_user" => getUser()->Fname." ".getUser()->Lname,
-                    "me_ecode" => getUser()->ecode,
-                    "me_deptcode" => getUser()->DeptCode,
-                    "me_datetime" => date("Y-m-d H:i:s")
-                );
-                $this->db->insert("memo" , $arInsertMemo);
-            }
 
             $action = "แก้ไขข้อมูล Run Screen เอกสารเลขที่ ".$detailcode." สำเร็จ (เอกสารหลัก $maincode)";
             saveActivity(
@@ -1429,6 +1486,33 @@ class Main_model extends CI_Model {
     {
         $received_data = json_decode(file_get_contents("php://input"));
         if($received_data->action == "deleteFileEdit"){
+            $path = $_SERVER['DOCUMENT_ROOT']."/intsys/msd_pulverizer/".$received_data->f_path.$received_data->f_name;
+            unlink($path);
+
+            // Delete From Table
+            $this->db->where("f_autoid" , $received_data->f_autoid);
+            $this->db->delete("files");
+            
+
+            $output = array(
+                "msg" => "ลบรูปภาพสำเร็จ",
+                "status" => "Delete Data Success"
+            );
+        }else{
+            $output = array(
+                "msg" => "ลบรูปภาพไม่สำเร็จ",
+                "status" => "Delete Data Not Success"
+            );
+        }
+
+        echo json_encode($output);
+    }
+
+
+    public function deleteFileSpointEdit()
+    {
+        $received_data = json_decode(file_get_contents("php://input"));
+        if($received_data->action == "deleteFileSpointEdit"){
             $path = $_SERVER['DOCUMENT_ROOT']."/intsys/msd_pulverizer/".$received_data->f_path.$received_data->f_name;
             unlink($path);
 

@@ -646,6 +646,15 @@ textarea.form-control{
 	cursor: pointer;
 	transform:scale(1.2);
 }
+.imageDelSpointEdit{
+	color:#a10404;
+	font-size:20px;
+	transition:transform .2s;
+}
+.imageDelSpointEdit:hover{
+	cursor: pointer;
+	transform:scale(1.2);
+}
 .runMemo{
 	color:#2589e7;
 	font-size:24px;
