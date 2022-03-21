@@ -1546,7 +1546,8 @@ $(document).ready(function(){
     $(document).on('keyup' , '.ehmd_typeofbag' , function(){
         if($(this).val() != ""){
             //Query
-            eh_searchBag($(this).val());
+            let m_areaid = $('#m_dataareaid_v').val();
+            eh_searchBag($(this).val() , m_areaid);
         }else{
             $('#eh_showBagCode').html('');
         }
@@ -2815,12 +2816,13 @@ $(document).ready(function(){
         }
     }
 
-    function eh_searchBag(bagCode)
+    function eh_searchBag(bagCode , m_areaid)
     {
         if(bagCode != ""){
             axios.post(url+'main/searchBag' , {
                 action:"searchBag",
-                bagCode:bagCode
+                bagCode:bagCode,
+                m_areaid:m_areaid
             }).then(res => {
                 // console.log(res.data);
                 if(res.data.status == "Select Data Success"){

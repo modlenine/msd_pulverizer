@@ -222,7 +222,8 @@
             $(document).on('keyup' , '#m_typeofbag' , function(){
                 if($(this).val() != ""){
                     //Query
-                    searchBag($(this).val());
+                    let m_areaid = $('#m_areaid').val();
+                    searchBag($(this).val() , m_areaid);
                 }else{
                     $('#showBagCode').html('');
                 }
@@ -291,12 +292,13 @@
 
 
 
-            function searchBag(bagCode)
+            function searchBag(bagCode , m_areaid)
             {
                 if(bagCode != ""){
                     axios.post(url+'main/searchBag' , {
                         action:"searchBag",
-                        bagCode:bagCode
+                        bagCode:bagCode,
+                        m_areaid:m_areaid
                     }).then(res => {
                         // console.log(res.data);
                         if(res.data.status == "Select Data Success"){

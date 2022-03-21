@@ -404,6 +404,8 @@ class Main_model extends CI_Model {
         $received_data = json_decode(file_get_contents("php://input"));
         if($received_data->action == "searchBag"){
 
+            $m_areaid = $received_data->m_areaid;
+
             $searchText = $received_data->bagCode; 
             $idArr = explode(" ", $searchText); 
             $context = " CONCAT(packageid,' ', 
@@ -415,7 +417,9 @@ class Main_model extends CI_Model {
             packagetxt,
             containweight
             FROM slc_packagespc
-            WHERE $condition
+            WHERE $condition AND
+            PACKAGEID IN ('BO15PABRLA14','BA15WOGYLA32','BA15WOGYLA35','BA15WOWHNL32','BA15LDWHLA27','BA15LDWHNL27','TA15PLBLNL50') AND
+            DATAAREAID LIKE '%$m_areaid%'
             ORDER BY packageid ASC
             ");
 
