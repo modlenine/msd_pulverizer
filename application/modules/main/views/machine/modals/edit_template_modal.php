@@ -168,7 +168,7 @@
                             <input type="tel" name="rse_max" id="rse_max" class="form-control">
                         </div>
                         <div class="col-md-12 form-group">
-                            <label for=""><b>SPoint</b></label>
+                            <label for=""><b>S/POINT</b></label>
                             <input type="tel" name="rse_spoint" id="rse_spoint" class="form-control">
                         </div>
                         <input hidden type="text" name="res_autoid" id="res_autoid">
@@ -416,7 +416,7 @@ let url = "<?php echo base_url(); ?>";
                             <th>Run Screen</th>
                             <th>Min</th>
                             <th>Max</th>
-                            <th>SPoint</th>
+                            <th>S/POINT</th>
                         </tr>`;
 
                         for(let i = 0; i < rsSumRun.length; i++){

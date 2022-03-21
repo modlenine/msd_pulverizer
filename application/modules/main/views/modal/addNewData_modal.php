@@ -28,7 +28,7 @@
                     
                     <div class="row">
                         <div class="col-lg-6 form-group">
-                            <label for="">กรุณาเลือกบริษัท <span class="textRequest">*</span></label>
+                            <label for=""><b>กรุณาเลือกบริษัท </b><span class="textRequest">*</span></label>
                             <select name="m_areaid" id="m_areaid" class="form-control" required>
                                 <option value="">เลือกบริษัท</option>
                                 <option value="sln">Salee Colour Public Company Limited.</option>
@@ -37,48 +37,48 @@
                             </select>
                         </div>
                         <div class="col-lg-6 form-group">
-                            <label for="">Product No. <span class="textRequest">*</span></label>
+                            <label for=""><b>Product Number </b><span class="textRequest">*</span></label>
                             <input type="text" name="m_product_number" id="m_product_number" class="form-control" @keyup="searchProductNo" @click="productno_null" required>
                             <div id="m_showpd"></div>
                         </div>
                         <div class="col-lg-6 form-group">
-                            <label for="">เลือกเครื่องจักร <span class="textRequest">*</span></label>
+                            <label for=""><b>เลือกเครื่องจักร </b><span class="textRequest">*</span></label>
                             <input type="text" name="m_template_name" id="m_template_name" class="form-control" @keyup="searchTemplate" required>
                             <div id="m_showTemplate"></div>
                             <input hidden type="text" name="m_template_code" id="m_template_code" class="form-control">
                         </div>
                         <div class="col-lg-6 form-group">
-                            <label for="">Order (kg.) <span class="textRequest">*</span></label>
+                            <label for=""><b>Order (kg.) </b><span class="textRequest">*</span></label>
                             <input type="text" name="m_order" id="m_order" class="form-control" required>
                         </div>
                         <div class="col-lg-6 form-group">
-                            <label for="">Type of bag <span class="textRequest">*</span></label>
+                            <label for=""><b>Type of bag </b><span class="textRequest">*</span></label>
                             <input type="text" name="m_typeofbag" id="m_typeofbag" class="form-control" required>
                             <input hidden type="text" name="m_typeofbagtxt" id="m_typeofbagtxt">
                             <div id="showBagCode"></div>
                         </div>
                         <div class="col-lg-6 form-group">
-                            <label for="">STD Output (kg./hr) <span class="textRequest">*</span></label>
+                            <label for=""><b>STD Output (kg./hr) </b><span class="textRequest">*</span></label>
                             <input type="text" name="m_std_output" id="m_std_output" class="form-control" readonly>
                         </div>
                         <div class="col-lg-6 form-group">
-                            <label for="">Max Amp. (%) <span class="textRequest">*</span></label>
+                            <label for=""><b>Max Amp. (%) </b><span class="textRequest">*</span></label>
                             <input type="text" name="m_maxamp" id="m_maxamp" class="form-control" readonly>
                         </div>
                         <div class="col-lg-6 form-group">
-                            <label for="">Packing (kg/bag) <span class="textRequest">*</span></label>
+                            <label for=""><b>Packing (kg/bag) </b><span class="textRequest">*</span></label>
                             <input type="text" name="m_packing" id="m_packing" class="form-control" readonly>
                         </div>
                         <div class="col-lg-6 form-group">
-                            <label for="">Item No.</label>
+                            <label for=""><b>Item Number</b></label>
                             <input type="text" name="m_item_number" id="m_item_number" class="form-control" readonly>
                         </div>
                         <div class="col-lg-6 form-group">
-                            <label for="">Batch No.</label>
+                            <label for=""><b>Batch Number</b></label>
                             <input type="text" name="m_batch_number" id="m_batch_number" class="form-control" readonly>
                         </div>
                         <div class="col-lg-6 form-group">
-                            <label for="">Date</label>
+                            <label for=""><b>Date</b></label>
                             <input type="text" name="m_datetime" id="m_datetime" class="form-control" value="<?=date("d/m/Y")?>" readonly>
                         </div>
                     </div>

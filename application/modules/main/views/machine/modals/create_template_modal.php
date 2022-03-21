@@ -412,7 +412,7 @@
                     <span>`+runscreenMainArray[i].run_name+`</span><br>
                     <span><b>Min: </b>`+runscreenMainArray[i].run_min+`</span>
                     <span><b>Max: </b>`+runscreenMainArray[i].run_max+`</span><br>
-                    <span><b>SPoint: </b>`+runscreenMainArray[i].run_spoint+`</span>
+                    <span><b>S/POINT: </b>`+runscreenMainArray[i].run_spoint+`</span>
                     <i class="fa fa-chevron-circle-right runRight" aria-hidden="true"
                         data_run_autoid = "`+runscreenMainArray[i].run_autoid+`"
                         data_run_name = "`+runscreenMainArray[i].run_name+`"
@@ -437,7 +437,7 @@
                     <span>`+runscreenSelectedArray[i].run_name+`</span><br>
                     <span><b>Min: </b>`+runscreenSelectedArray[i].run_min+`</span>
                     <span><b>Max: </b>`+runscreenSelectedArray[i].run_max+`</span><br>
-                    <span><b>SPoint: </b>`+runscreenSelectedArray[i].run_spoint+`</span><br>
+                    <span><b>S/POINT: </b>`+runscreenSelectedArray[i].run_spoint+`</span><br>
                     <input hidden type="text" id="select_run_name" name="select_run_name[]" value="`+runscreenSelectedArray[i].run_name+`">
                     <input hidden type="text" id="select_run_min" name="select_run_min[]" value="`+runscreenSelectedArray[i].run_min+`">
                     <input hidden type="text" id="select_run_max" name="select_run_max[]" value="`+runscreenSelectedArray[i].run_max+`">

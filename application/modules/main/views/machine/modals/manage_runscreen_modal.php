@@ -51,19 +51,19 @@
                         
                             <div class="row">
                                 <div class="col-lg-12 form-group">
-                                    <label for="">Runscreen Name <span class="textRequest">*</span></label>
+                                    <label for=""><b>Runscreen Name </b><span class="textRequest">*</span></label>
                                     <input type="tel" name="add_runscreen_name" id="add_runscreen_name" class="form-control">
                                 </div>
                                 <div class="col-lg-12 form-group">
-                                    <label for="">Set Point</label>
+                                    <label for=""><b>S/POINT</b></label>
                                     <input type="tel" name="add_spoint" id="add_spoint" class="form-control">
                                 </div>
                                 <div class="col-lg-12 form-group">
-                                    <label for="">Min</label>
+                                    <label for=""><b>Min</b></label>
                                     <input type="tel" name="add_min" id="add_min" class="form-control">
                                 </div>
                                 <div class="col-lg-12 form-group">
-                                    <label for="">Max</label>
+                                    <label for=""><b>Max</b></label>
                                     <input type="tel" name="add_max" id="add_max" class="form-control">
                                 </div>
                                 <input hidden type="text" name="add_autoid" id="add_autoid">
@@ -217,7 +217,7 @@
                                 // Check Spoint
                                 if(parseFloat($('#add_spoint').val()) > parseFloat($('#add_max').val())){
                                     swal({
-                                        title: 'ค่า Set Point ต้องไม่มากกว่าค่า Max',
+                                        title: 'ค่า S/POINT ต้องไม่มากกว่าค่า Max',
                                         type: 'error',
                                         showConfirmButton: false,
                                         timer:1000
@@ -225,7 +225,7 @@
                                     $('#add_spoint').removeClass('inputSuccess').addClass('inputNull');
                                 }else if(parseFloat($('#add_spoint').val()) < parseFloat($('#add_min').val())){
                                     swal({
-                                        title: 'ค่า Set Point ต้องไม่น้อยกว่าค่า Min',
+                                        title: 'ค่า S/POINT ต้องไม่น้อยกว่าค่า Min',
                                         type: 'error',
                                         showConfirmButton: false,
                                         timer:1000

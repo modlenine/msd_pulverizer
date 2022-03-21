@@ -214,7 +214,7 @@
                     <div class="modal-header">
                         <div>
                             <button type="button" class="btn btn-success" id="btn-saveMainMemo" name="btn-saveMainMemo" @click="saveMemoStop"><i class="fi-save mr-2"></i>บันทึก</button>
-                            <button type="button" class="btn btn-danger close_mainMemo_modal" data-dismiss="modal" id="btn-closeMainMemo"><i class="fi-x mr-2"></i>ปิด</button>
+                            <!-- <button type="button" class="btn btn-danger close_mainMemo_modal" data-dismiss="modal" id="btn-closeMainMemo"><i class="fi-x mr-2"></i>ปิด</button> -->
                         </div>
                         <div></div>
                     </div>
@@ -251,7 +251,7 @@
                     <div class="modal-header">
                         <div>
                             <button type="button" class="btn btn-success" id="btn-saveMainMemo" name="btn-saveMainMemo" @click="saveMemoCancel"><i class="fi-save mr-2"></i>บันทึก</button>
-                            <button type="button" class="btn btn-danger close_cancelMemo_modal" data-dismiss="modal" id="btn-closeMainMemo"><i class="fi-x mr-2"></i>ปิด</button>
+                            <!-- <button type="button" class="btn btn-danger close_cancelMemo_modal" data-dismiss="modal" id="btn-closeMainMemo"><i class="fi-x mr-2"></i>ปิด</button> -->
                         </div>
                         <div></div>
                     </div>
@@ -365,7 +365,7 @@
 
                             <div class="col-md-6 form-group">
                                 <label for="">Type of bag</label>
-                                <input type="text" name="ehmd_typeofbag" id="ehmd_typeofbag" class="form-control ehmd_typeofbag">
+                                <input type="text" name="ehmd_typeofbag" id="ehmd_typeofbag" class="form-control ehmd_typeofbag" autocomplete="off">
                                 <input hidden type="text" name="ehmd_typeofbagtxt" id="ehmd_typeofbagtxt">
                                 <div id="eh_showBagCode"></div>
                             </div>
@@ -626,7 +626,7 @@
                                                             data_m_template_name="<?=getviewfulldata(getMaincode($mainformno))->m_template_name?>"
                                                             data_m_template_code="<?=getviewfulldata(getMaincode($mainformno))->m_template_code?>"
                                                             data_m_code="<?=getMaincode($mainformno)?>"
-                                                        ><i class="fi-save mr-2"></i>บันทึก Set Point</button>
+                                                        ><i class="fi-save mr-2"></i>บันทึก S/POINT</button>
                                                     </div>
                                                 </div>
                                                 <!-- Spoint Zone -->
@@ -1020,7 +1020,7 @@ $(document).ready(function(){
 
                     if($('#listOfRunGroup').val() == "Spoint"){
                         swal({
-                            title: 'รายการ Set Point ไม่สามารถลบได้',
+                            title: 'รายการ S/POINT ไม่สามารถลบได้',
                             type: 'error',
                             showConfirmButton: false,
                             timer:800
@@ -1948,7 +1948,7 @@ $(document).ready(function(){
                 output +=`
                 <select name="listOfRunGroup" id="listOfRunGroup" class="form-control selectDetailEdit">
                 <option value="">กรุณาเลือกรายการที่ต้องการแก้ไข</option>
-                <option value="Spoint">Set Point</option>
+                <option value="Spoint">S/POINT</option>
                 `;
                 let runGroupLists = res.data.runGroupList;
                     for(let i = 0; i < runGroupLists.length; i++){
@@ -2299,7 +2299,7 @@ $(document).ready(function(){
             output +=`</tr>`;
 
             output +=`<tr>`;
-            output +=`<td><b>Spoint</b></td>
+            output +=`<td><b>S/POINT</b></td>
             <td></td>
             <td>`+iconBeforeImage+`</td>
             `;
