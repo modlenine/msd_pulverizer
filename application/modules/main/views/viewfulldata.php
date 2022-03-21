@@ -100,14 +100,25 @@
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="">กรุณาเลือกเวลา</label>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <div class="input-group text-start inputTime flex-container" data-target-input="nearest" data-target=".datetimepicker1">
                                         <input type="text" id="mdrd_chooseTime" name="mdrd_chooseTime" class="form-control datetimepicker-input datetimepicker1" data-target=".datetimepicker1" placeholder="กรุณาเลือกเวลา" required/>
                                         <div class="input-group-text clockIcondiv" style="align-self: center" data-target=".datetimepicker1" data-toggle="datetimepicker"><i class="fa fa-clock-o"></i></div>
                                     </div>
+                                </div> -->
+
+                                <div class="form-group">
+                                    <div class="input-group text-left" data-target-input="nearest" data-target=".datetimepicker1">
+                                        <input type="text" id="mdrd_chooseTime" name="mdrd_chooseTime" class="form-control datetimepicker-input datetimepicker1" data-target=".datetimepicker1" />
+                                        <div class="input-group-append" data-target=".datetimepicker1" data-toggle="datetimepicker">
+                                            <div class="input-group-text bgClock"><i class="icon-clock"></i></div>
+                                        </div>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
+                        
 
                         <div class="row form-group">
                             <div class="col-lg-12 bottommargin">
@@ -328,7 +339,7 @@
 
                 <div class="modal-content">
                     <div class="modal-header">
-                        <div id="">แก้ไขข้อมูลหลัก : <span id="ehTitle"></span></div>
+                        <div id="ehTitle"></div>
                         <div>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
@@ -338,10 +349,10 @@
                         
                         <div>
                             <button type="button" class="btn btn-success" id="btn-saveHead_edit" name="btn-saveHead_edit" @click="saveEditHead"><i class="fi-save mr-2"></i>บันทึก การแก้ไข</button>
-                            <button type="button" class="btn btn-warning" id="btn-closeHead" data-dismiss="modal"><i class="fi-x mr-2"></i>ปิด</button>
+                            <!-- <button type="button" class="btn btn-warning" id="btn-closeHead" data-dismiss="modal"><i class="fi-x mr-2"></i>ปิด</button> -->
                         </div>
                         <div>
-                            <input type="text" name="ehmd_mcode" id="ehmd_mcode">
+                            <input hidden type="text" name="ehmd_mcode" id="ehmd_mcode">
                         </div>
                     </div>
 
@@ -376,7 +387,7 @@
             <form id="frm_saveMachineCheck" autocomplete="off" style="width:100%;" @submit.prevent="saveMachineCheck">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <div id="">รายการตรวจสอบเครื่องจักร : <span id="mcmdTitle"></span></div>
+                        <div id="mcmdTitle"></div>
                         <div>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
@@ -434,7 +445,7 @@
             <form id="frm_saveMachineCheckEdit" autocomplete="off" style="width:100%;" @submit.prevent="saveEditMachineCheck">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <div id="">แก้ไขรายการตรวจสอบเครื่องจักร : <span id="mcmdTitleEdit"></span></div>
+                        <div id="mcmdTitleEdit"></div>
                         <div>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
@@ -445,7 +456,7 @@
                         <div>
                             <button type="submit" class="btn btn-success" id="btn-saveMachineCheckEdit" name="btn-saveMachineCheckEdit"><i class="fi-save mr-2"></i>บันทึกการแก้ไข</button>
                             <button type="button" class="btn btn-danger" id="btn-delMachineCheckEdit" @click="deleteMachineCheck"><i aria-hidden="true" class="fa fa-trash mr-2"></i>ลบ</button>
-                            <button type="button" class="btn btn-warning" id="btn-closeMachineCheckEdit" data-dismiss="modal"><i class="fi-x mr-2"></i>ปิด</button>
+                            <!-- <button type="button" class="btn btn-warning" id="btn-closeMachineCheckEdit" data-dismiss="modal"><i class="fi-x mr-2"></i>ปิด</button> -->
                         </div>
                         <div>
                             <input hidden type="text" name="mcmd_mcodeEdit" id="mcmd_mcodeEdit">
@@ -1211,8 +1222,8 @@ $(document).ready(function(){
 
         let title = '';
         title +=`
-        <span><b>Machine Name. : </b>`+machineName+`</span>&nbsp;&nbsp;<span><b>Batch No. : </b>`+batchNo+`</span><br>
-        <span><b>Production No. : </b>`+productionNo+`</span>&nbsp;&nbsp;<span><b>Item No. : </b>`+itemNo+`</span>
+        <span><b>Machine Name. : </b>`+machineName+`</span>&nbsp;&nbsp;<span><b>Batch Number : </b>`+batchNo+`</span><br>
+        <span><b>Production Number : </b>`+productionNo+`</span>&nbsp;&nbsp;<span><b>Item Number : </b>`+itemNo+`</span>
         `;
 
         $('#spointTitle').html(title);
@@ -1233,8 +1244,8 @@ $(document).ready(function(){
 
         let title = '';
         title +=`
-        <span><b>Machine Name. : </b>`+machineName+`</span>&nbsp;&nbsp;<span><b>Batch No. : </b>`+batchNo+`</span><br>
-        <span><b>Production No. : </b>`+productionNo+`</span>&nbsp;&nbsp;<span><b>Item No. : </b>`+itemNo+`</span>
+        <span><b>Machine Name. : </b>`+machineName+`</span>&nbsp;&nbsp;<span><b>Batch Number : </b>`+batchNo+`</span><br>
+        <span><b>Production Number : </b>`+productionNo+`</span>&nbsp;&nbsp;<span><b>Item Number : </b>`+itemNo+`</span>
         `;
 
         $('#runDetailTitle').html(title);
@@ -1252,8 +1263,8 @@ $(document).ready(function(){
 
         title +=`
         <span><b>รูปภาพ</b></span><br>
-        <span><b>Machine Name. : </b>`+machineName+`</span>&nbsp;&nbsp;<span><b>Batch No. : </b>`+batchNo+`</span><br>
-        <span><b>Production No. : </b>`+productionNo+`</span>&nbsp;&nbsp;<span><b>Item No. : </b>`+itemNo+`</span>
+        <span><b>Machine Name. : </b>`+machineName+`</span>&nbsp;&nbsp;<span><b>Batch Number : </b>`+batchNo+`</span><br>
+        <span><b>Production Number : </b>`+productionNo+`</span>&nbsp;&nbsp;<span><b>Item Number : </b>`+itemNo+`</span>
         `;
         $('#runDetailImageTitle').html(title);
 
@@ -1273,8 +1284,8 @@ $(document).ready(function(){
 
         title +=`
         <span><b>รูปภาพก่อนเดินเครื่อง</b></span><br>
-        <span><b>Machine Name. : </b>`+machineName+`</span>&nbsp;&nbsp;<span><b>Batch No. : </b>`+batchNo+`</span><br>
-        <span><b>Production No. : </b>`+productionNo+`</span>&nbsp;&nbsp;<span><b>Item No. : </b>`+itemNo+`</span>
+        <span><b>Machine Name. : </b>`+machineName+`</span>&nbsp;&nbsp;<span><b>Batch Number : </b>`+batchNo+`</span><br>
+        <span><b>Production Number : </b>`+productionNo+`</span>&nbsp;&nbsp;<span><b>Item Number : </b>`+itemNo+`</span>
         `;
         $('#runDetailImageTitle').html(title);
 
@@ -1295,8 +1306,8 @@ $(document).ready(function(){
 
         title +=`
         <span><b>หมายเหตุ</b></span><br>
-        <span><b>Machine Name. : </b>`+machineName+`</span>&nbsp;&nbsp;<span><b>Batch No. : </b>`+batchNo+`</span><br>
-        <span><b>Production No. : </b>`+productionNo+`</span>&nbsp;&nbsp;<span><b>Item No. : </b>`+itemNo+`</span>
+        <span><b>Machine Name. : </b>`+machineName+`</span>&nbsp;&nbsp;<span><b>Batch Number : </b>`+batchNo+`</span><br>
+        <span><b>Production Number : </b>`+productionNo+`</span>&nbsp;&nbsp;<span><b>Item Number : </b>`+itemNo+`</span>
         `;
         $('#runDetailMemoTitle').html(title);
 
@@ -1510,9 +1521,23 @@ $(document).ready(function(){
         const data_m_typeofbag = $(this).attr("data_m_typeofbag");
         const data_m_typeofbagtxt = $(this).attr("data_m_typeofbagtxt");
 
+
+        const machineName = $('#m_template_name_v').val();
+        const batchNumber = $('#m_batch_number_v').val();
+        const productNumber = $('#m_product_number_v').val();
+        const itemNumber = $('#m_item_number_v').val();
+
+        let title = '';
+        title +=`
+        <span><b>แก้ไขข้อมูลหลัก</b></span><br>
+        <span><b>Machine Name : </b>`+machineName+`</span>&nbsp;&nbsp;<span><b>Batch Number : </b>`+batchNumber+`</span><br>
+        <span><b>Production Number : </b>`+productNumber+`</span>&nbsp;&nbsp;<span><b>Item Number : </b>`+itemNumber+`</span>
+        `;
+
+
         $('#editHead_modal').modal('show');
         $('#ehmd_mcode').val(data_m_code);
-        $('#ehTitle').html(data_m_formno);
+        $('#ehTitle').html(title);
         $('#ehmd_order').val(data_m_order);
         $('#ehmd_typeofbag').val(data_m_typeofbag);
         $('#ehmd_typeofbagtxt').val(data_m_typeofbagtxt);
@@ -1551,8 +1576,22 @@ $(document).ready(function(){
         const item_number = $(this).attr('data_item_number');
         const batch_number = $(this).attr('data_batch_number');
 
+
+        const machineName = $('#m_template_name_v').val();
+        const batchNumber = $('#m_batch_number_v').val();
+        const productNumber = $('#m_product_number_v').val();
+        const itemNumber = $('#m_item_number_v').val();
+
+        let title = '';
+        title +=`
+        <span><b>รายการตรวจสอบเครื่องจักร</b></span><br>
+        <span><b>Machine Name : </b>`+machineName+`</span>&nbsp;&nbsp;<span><b>Batch Number : </b>`+batchNumber+`</span><br>
+        <span><b>Production Number : </b>`+productNumber+`</span>&nbsp;&nbsp;<span><b>Item Number : </b>`+itemNumber+`</span>
+        `;
+
+
         $('#machineCheck_modal').modal('show');
-        $('#mcmdTitle').html(machine_name);
+        $('#mcmdTitle').html(title);
         $('#mck_machinename').val(machine_name);
         $('#mck_datetime').val(datetime);
         $('#mck_itemnumber').val(item_number);
@@ -1564,10 +1603,24 @@ $(document).ready(function(){
     $(document).on('click' , '.editMachineCheck' , function(){
         const data_m_code = $(this).attr('data_m_code');
         const data_machine_name = $(this).attr('data_machine_name');
+
+
+
+        const machineName = $('#m_template_name_v').val();
+        const batchNumber = $('#m_batch_number_v').val();
+        const productNumber = $('#m_product_number_v').val();
+        const itemNumber = $('#m_item_number_v').val();
+
+        let title = '';
+        title +=`
+        <span><b>แก้ไขรายการตรวจสอบเครื่องจักร</b></span><br>
+        <span><b>Machine Name : </b>`+machineName+`</span>&nbsp;&nbsp;<span><b>Batch Number : </b>`+batchNumber+`</span><br>
+        <span><b>Production Number : </b>`+productNumber+`</span>&nbsp;&nbsp;<span><b>Item Number : </b>`+itemNumber+`</span>
+        `;
       
 
         $('#machineCheckEdit_modal').modal('show');
-        $('#mcmdTitleEdit').html(data_machine_name);
+        $('#mcmdTitleEdit').html(title);
         $('#mcmd_mcodeEdit').val(data_m_code);
         $('#mck_machinenameEdit').val(data_machine_name);
         

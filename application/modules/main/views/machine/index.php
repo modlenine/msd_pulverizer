@@ -253,28 +253,75 @@
 
         function saveRunscreenEdit(templatecode)
         {
-            axios.post(url+'main/machine/saveRunscreenEdit' , {
-                action:"saveRunscreenEdit",
-                min:$('#rse_min').val(),
-                max:$('#rse_max').val(),
-                spoint:$('#rse_spoint').val(),
-                autoid:$('#res_autoid').val()
-            }).then(res => {
-                console.log(res.data);
-                if(res.data.status == "Update Data Success"){
-                    runScreenSelected = [];
+
+            let checkPoint = 0;
+            // Check Min Max Spoint
+            if($('#rse_max').val() != "" && $('#rse_min').val() != "" && $('#rse_spoint').val() != ""){
+                // Check Min max diff
+                if(parseFloat($('#rse_max').val()) < parseFloat($('#rse_min').val())){
                     swal({
-                        title: 'บันทึกข้อมูลสำเร็จ',
-                        type: 'success',
+                        title: 'ค่า Max ต้องไม่น้อยกว่าค่า Min',
+                        type: 'error',
                         showConfirmButton: false,
                         timer:1000
-                    }).then(function(){
-                        $('#editRunSelected_modal').modal('hide');
-                        loaddataToEditModal(templatecode);
                     });
-                    
+                    $('#rse_max').removeClass('inputSuccess').addClass('inputNull');
+                }else{
+                    // Check Spoint
+                    if(parseFloat($('#rse_spoint').val()) > parseFloat($('#rse_max').val())){
+                        swal({
+                            title: 'ค่า Set Point ต้องไม่มากกว่าค่า Max',
+                            type: 'error',
+                            showConfirmButton: false,
+                            timer:1000
+                        });
+                        $('#rse_spoint').removeClass('inputSuccess').addClass('inputNull');
+                    }else if(parseFloat($('#rse_spoint').val()) < parseFloat($('#rse_min').val())){
+                        swal({
+                            title: 'ค่า Set Point ต้องไม่น้อยกว่าค่า Min',
+                            type: 'error',
+                            showConfirmButton: false,
+                            timer:1000
+                        });
+                        $('#rse_spoint').removeClass('inputSuccess').addClass('inputNull');
+                    }else{
+                        checkPoint = 1;
+                        $('#rse_spoint , #rse_max , #rse_min').removeClass('inputNull').addClass('inputSuccess');
+                    }
                 }
-            });
+                console.log(checkPoint);
+            }else{
+                checkPoint = 1;
+            }
+
+
+            if(checkPoint == 1){
+                axios.post(url+'main/machine/saveRunscreenEdit' , {
+                    action:"saveRunscreenEdit",
+                    min:$('#rse_min').val(),
+                    max:$('#rse_max').val(),
+                    spoint:$('#rse_spoint').val(),
+                    autoid:$('#res_autoid').val()
+                }).then(res => {
+                    console.log(res.data);
+                    if(res.data.status == "Update Data Success"){
+                        runScreenSelected = [];
+                        swal({
+                            title: 'บันทึกข้อมูลสำเร็จ',
+                            type: 'success',
+                            showConfirmButton: false,
+                            timer:1000
+                        }).then(function(){
+                            $('#editRunSelected_modal').modal('hide');
+                            loaddataToEditModal(templatecode);
+                        });
+                        
+                    }
+                });
+            }
+
+
+            
         }
 
 

@@ -595,6 +595,9 @@
 .clockIcondiv > i{
 	font-size:28px;
 }
+.bgClock{
+	background-color: #ccc;
+}
 
 
 
@@ -920,3 +923,5 @@ textarea.form-control{
 #dataMainList_filter{
 	display:none !important;
 }
+
+
