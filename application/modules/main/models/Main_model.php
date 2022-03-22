@@ -329,6 +329,7 @@ class Main_model extends CI_Model {
             $dataareaid = $received_data->m_areaid;
             $searchProdid = $received_data->m_product_number;
 
+
             $output = '';
 
             $sql = $this->db3->query("SELECT TOP 50
@@ -337,7 +338,8 @@ class Main_model extends CI_Model {
                 prodtable.prodid,
                 prodtable.inventdimid,
                 inventdim.inventbatchid,
-                prodtable.slc_orgreference
+                prodtable.slc_orgreference,
+                prodtable.slc_packageid
                 FROM
                 prodtable
                 LEFT JOIN inventdim ON inventdim.inventdimid = prodtable.inventdimid AND inventdim.dataareaid = prodtable.dataareaid
@@ -346,6 +348,8 @@ class Main_model extends CI_Model {
 
             $output = '<ul class="list-group lgprodid">';
             foreach ($sql->result() as $rs) {
+
+                $getBag = $this->getBagFormPD($rs->slc_packageid , $rs->dataareaid);
 
                 if(substr($rs->slc_orgreference , 0 , 2) == "PD"){
                     $wipProdid = $this->checkPDWip($searchProdid , $dataareaid);
@@ -372,6 +376,8 @@ class Main_model extends CI_Model {
                         data_inventbatchid = "' . $rss->inventbatchid . '"
                         data_dataareaid = "' . $rss->dataareaid . '"
                         data_slc_orgreference = "'.substr($rss->slc_orgreference , 0 , 2).'"
+                        data_typeofbag = "'.$getBag->packageid.'"
+                        data_typeofbagtxt = "'.$getBag->packagetxt.'"
                         ><li class="list-group-item">' . $rs->prodid . '</li></a>
                         ';
                     }
@@ -385,6 +391,8 @@ class Main_model extends CI_Model {
                     data_inventbatchid = "' . $rs->inventbatchid . '"
                     data_dataareaid = "' . $rs->dataareaid . '"
                     data_slc_orgreference = "'.substr($rs->slc_orgreference , 0 , 2).'"
+                    data_typeofbag = "'.$getBag->packageid.'"
+                    data_typeofbagtxt = "'.$getBag->packagetxt.'"
                     ><li class="list-group-item">' . $rs->prodid . '</li></a>
                     ';
                 }
@@ -395,6 +403,20 @@ class Main_model extends CI_Model {
             $output .= '</ul>';
             echo $output;
 
+        }
+    }
+
+    private function getBagFormPD($bagid , $dataareaid)
+    {
+        if($bagid != "" && $dataareaid != ""){
+            $sql = $this->db3->query("SELECT
+            slc_packagespc.packageid,
+            slc_packagespc.packagetxt
+            FROM slc_packagespc
+            WHERE slc_packagespc.packageid = '$bagid' AND slc_packagespc.dataareaid = '$dataareaid'
+            ");
+
+            return $sql->row();
         }
     }
 

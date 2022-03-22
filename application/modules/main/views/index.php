@@ -52,7 +52,7 @@
 										<th>Form No.</th>
 										<th>Machine Name</th>
 										<th>Item Number</th>
-										<th>Product Number</th>
+										<th>Production Number</th>
 										<th>Batch Number</th>
 										<th>Order</th>
 										<th>STD Output</th>
@@ -182,7 +182,7 @@
 									{"width": "80","targets": 0},
 									{"width": "200","targets": 1},
 									{"width": "100","targets": 2},
-									{"width": "120","targets": 3},
+									{"width": "150","targets": 3},
 									{"width": "150","targets": 4},
 									{"width": "150","targets": 5},
 									{"width": "150","targets": 6},

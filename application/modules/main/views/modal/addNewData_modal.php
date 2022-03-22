@@ -37,7 +37,7 @@
                             </select>
                         </div>
                         <div class="col-lg-6 form-group">
-                            <label for=""><b>Product Number </b><span class="textRequest">*</span></label>
+                            <label for=""><b>Production Number </b><span class="textRequest">*</span></label>
                             <input type="text" name="m_product_number" id="m_product_number" class="form-control" @keyup="searchProductNo" @click="productno_null" required>
                             <div id="m_showpd"></div>
                         </div>
@@ -53,9 +53,11 @@
                         </div>
                         <div class="col-lg-6 form-group">
                             <label for=""><b>Type of bag </b><span class="textRequest">*</span></label>
-                            <input type="text" name="m_typeofbag" id="m_typeofbag" class="form-control" required>
-                            <input hidden type="text" name="m_typeofbagtxt" id="m_typeofbagtxt">
-                            <div id="showBagCode"></div>
+                            <input type="text" name="m_typeofbag" id="m_typeofbag" class="form-control" readonly>
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for=""><b>Bag Text </b><span class="textRequest">*</span></label>
+                            <input type="text" name="m_typeofbagtxt" id="m_typeofbagtxt" class="form-control" readonly>
                         </div>
                         <div class="col-lg-6 form-group">
                             <label for=""><b>STD Output (kg./hr) </b><span class="textRequest">*</span></label>
@@ -219,15 +221,15 @@
             // Vue Zone
 
 
-            $(document).on('keyup' , '#m_typeofbag' , function(){
-                if($(this).val() != ""){
-                    //Query
-                    let m_areaid = $('#m_areaid').val();
-                    searchBag($(this).val() , m_areaid);
-                }else{
-                    $('#showBagCode').html('');
-                }
-            });
+            // $(document).on('keyup' , '#m_typeofbag' , function(){
+            //     if($(this).val() != ""){
+            //         //Query
+            //         let m_areaid = $('#m_areaid').val();
+            //         searchBag($(this).val() , m_areaid);
+            //     }else{
+            //         $('#showBagCode').html('');
+            //     }
+            // });
 
 
             $(document).on('change' , '#m_areaid' , function(){
@@ -269,58 +271,62 @@
                 const data_inventbatchid = $(this).attr("data_inventbatchid");
                 const data_dataareaid = $(this).attr("data_dataareaid");
                 const data_slc_orgreference = $(this).attr("data_slc_orgreference");
+                const data_typeofbag = $(this).attr("data_typeofbag");
+                const data_typeofbagtxt = $(this).attr("data_typeofbagtxt");
 
                 $('#m_item_number').val(data_itemid);
                 $('#m_batch_number').val(data_inventbatchid);
                 $('#m_product_number').val(data_prodid);
                 $('#m_showpd').html('');
+                $('#m_typeofbag').val(data_typeofbag);
+                $('#m_typeofbagtxt').val(data_typeofbagtxt);
 
                 searchTemplate(data_itemid);
 
             });
 
 
-            $(document).on('click' , '.searchBagLi' , function(){
-                const data_m_typeofbag = $(this).attr("data_m_typeofbag");
-                const data_m_typeofbagtxt = $(this).attr("data_m_typeofbagtxt");
+            // $(document).on('click' , '.searchBagLi' , function(){
+            //     const data_m_typeofbag = $(this).attr("data_m_typeofbag");
+            //     const data_m_typeofbagtxt = $(this).attr("data_m_typeofbagtxt");
 
-                $('#m_typeofbagtxt').val(data_m_typeofbagtxt);
-                $('#m_typeofbag').val(data_m_typeofbag);
-                $('#showBagCode').html('');
+            //     $('#m_typeofbagtxt').val(data_m_typeofbagtxt);
+            //     $('#m_typeofbag').val(data_m_typeofbag);
+            //     $('#showBagCode').html('');
 
-            });
+            // });
 
 
 
-            function searchBag(bagCode , m_areaid)
-            {
-                if(bagCode != ""){
-                    axios.post(url+'main/searchBag' , {
-                        action:"searchBag",
-                        bagCode:bagCode,
-                        m_areaid:m_areaid
-                    }).then(res => {
-                        // console.log(res.data);
-                        if(res.data.status == "Select Data Success"){
-                            let resultOfBagData = res.data.resultBag;
-                            let outputHtml = `<ul class="list-group mt-2 searchBagUl">`;
-                            for(let i = 0; i < resultOfBagData.length; i++){
-                                outputHtml += `
-                                <li class="list-group-item list-group-item list-group-item-action searchBagLi"
-                                    data_m_typeofbag="`+resultOfBagData[i].packageid+`"
-                                    data_m_typeofbagtxt="`+resultOfBagData[i].packagetxt+`"
-                                >
-                                    <span><b>`+resultOfBagData[i].packageid+`</b></span><br>
-                                    <span>`+resultOfBagData[i].packagetxt+`</span>
-                                </li>
-                                `;
-                            }
-                            outputHtml += `</ul>`;
-                            $('#showBagCode').html(outputHtml);
-                        }
-                    });
-                }
-            }
+            // function searchBag(bagCode , m_areaid)
+            // {
+            //     if(bagCode != ""){
+            //         axios.post(url+'main/searchBag' , {
+            //             action:"searchBag",
+            //             bagCode:bagCode,
+            //             m_areaid:m_areaid
+            //         }).then(res => {
+            //             // console.log(res.data);
+            //             if(res.data.status == "Select Data Success"){
+            //                 let resultOfBagData = res.data.resultBag;
+            //                 let outputHtml = `<ul class="list-group mt-2 searchBagUl">`;
+            //                 for(let i = 0; i < resultOfBagData.length; i++){
+            //                     outputHtml += `
+            //                     <li class="list-group-item list-group-item list-group-item-action searchBagLi"
+            //                         data_m_typeofbag="`+resultOfBagData[i].packageid+`"
+            //                         data_m_typeofbagtxt="`+resultOfBagData[i].packagetxt+`"
+            //                     >
+            //                         <span><b>`+resultOfBagData[i].packageid+`</b></span><br>
+            //                         <span>`+resultOfBagData[i].packagetxt+`</span>
+            //                     </li>
+            //                     `;
+            //                 }
+            //                 outputHtml += `</ul>`;
+            //                 $('#showBagCode').html(outputHtml);
+            //             }
+            //         });
+            //     }
+            // }
 
 
 

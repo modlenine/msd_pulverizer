@@ -567,6 +567,10 @@
                                 <input type="text" name="m_typeofbag_v" id="m_typeofbag_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_typeofbag?>">
                             </div>
                             <div class="col-md-4 form-group">
+                                <label for="">Bag text</label>
+                                <input type="text" name="m_typeofbag_v" id="m_typeofbag_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_typeofbagtxt?>">
+                            </div>
+                            <div class="col-md-4 form-group">
                                 <label for="">Date</label>
                                 <input type="text" name="m_datetime_v" id="m_datetime_v" class="form-control" readonly value="<?=conDateFromDb(getviewfulldata(getMaincode($mainformno))->m_datetime)?>">
                             </div>
@@ -1032,7 +1036,8 @@ $(document).ready(function(){
                             showCancelButton: true,
                             confirmButtonClass: 'btn btn-success',
                             cancelButtonClass: 'btn btn-danger',
-                            confirmButtonText: 'ยืนยัน'
+                            confirmButtonText: 'ยืนยัน',
+                            cancelButtonText:'ยกเลิก'
                         }).then((result)=> {
                             if(result.value == true){
                                 const form = $('#frm_saveRunDetailEdit')[0];
@@ -1161,7 +1166,8 @@ $(document).ready(function(){
                 showCancelButton: true,
                 confirmButtonClass: 'btn btn-success',
                 cancelButtonClass: 'btn btn-danger',
-                confirmButtonText: 'ยืนยัน'
+                confirmButtonText: 'ยืนยัน',
+                cancelButtonText:'ยกเลิก'
                 }).then((result)=>{
                     if(result.value == true){
                         let lineGroupForEdit = $('.lineGroupForEdit').val();

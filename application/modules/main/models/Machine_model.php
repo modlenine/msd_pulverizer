@@ -103,7 +103,7 @@ class machine_model extends CI_Model {
                                 <th class="runname">Run Screen</th>
                                 <th class="runmin">Min</th>
                                 <th class="runmax">Max</th>
-                                <th class="runspoint">S Point</th>
+                                <th class="runspoint">S/POINT</th>
                                 <th class="runBtn">#</th>
                             </tr>
                         </thead>
