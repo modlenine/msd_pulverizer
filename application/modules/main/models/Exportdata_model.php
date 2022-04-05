@@ -72,16 +72,28 @@ class Exportdata_model extends CI_Model {
 
             $objPHPExcel->setActiveSheetIndex(0);
             //กำหนดส่วนหัวเป็น Column แบบ Fix ไม่มีการเปลี่ยนแปลงใดๆ
-            $objPHPExcel->getActiveSheet()->setCellValue('a1', 'Run Screen');
+
+            $machinenameEx = "Machine Name : ".getviewfulldata($m_code)->m_template_name;
+            $batchnumberEx = "Batch Number : ".getviewfulldata($m_code)->m_batch_number;
+            $productionnumberEx = "Production Number : ".getviewfulldata($m_code)->m_product_number;
+            $itemnumberEx = "Item Number : ".getviewfulldata($m_code)->m_item_number;
+
+            $objPHPExcel->getActiveSheet()->setCellValue('a1', $machinenameEx);
+            $objPHPExcel->getActiveSheet()->setCellValue('e1', $batchnumberEx);
+            $objPHPExcel->getActiveSheet()->setCellValue('a2', $productionnumberEx);
+            $objPHPExcel->getActiveSheet()->setCellValue('e2', $itemnumberEx);
+
+
+            $objPHPExcel->getActiveSheet()->setCellValue('a4', 'Run Screen');
             $runCha = "b";
             foreach(getRunScreen_exportData($m_code)->result() as $rs1){
-                $objPHPExcel->getActiveSheet()->setCellValue($runCha.'1', $rs1->d_run_name);
+                $objPHPExcel->getActiveSheet()->setCellValue($runCha.'4', $rs1->d_run_name);
                 $objPHPExcel->getActiveSheet()->getColumnDimension($runCha)->setAutoSize(true);
                 ++$runCha;
             }
 
             // Loop Time
-            $t1 = 2;
+            $t1 = 5;
             foreach(getRunScreenTime_exportData($m_code)->result() as $rs2){
                 $objPHPExcel->getActiveSheet()->setCellValue('a'.$t1, $rs2->d_worktime);
 

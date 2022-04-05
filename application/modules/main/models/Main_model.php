@@ -1306,6 +1306,14 @@ class Main_model extends CI_Model {
             ");
             // Get Run Detail
 
+            // Get worktime
+            $worktime = '';
+            if($sql->num_rows() != 0){
+                $worktime = $sql->row()->d_worktime;
+            }else{
+                $worktime = null;
+            }
+
             // Get memo
             $sqlmemo = $this->db->query("SELECT
             me_memo
@@ -1346,7 +1354,8 @@ class Main_model extends CI_Model {
                 "status" => "Select Data Success",
                 "memo" => $rsmemo,
                 "runImage" => $rsImage,
-                "runDetailForEdit" => $sql->result()
+                "runDetailForEdit" => $sql->result(),
+                "worktime" => $worktime
             );
         }else{
             $output = array(
@@ -1410,7 +1419,8 @@ class Main_model extends CI_Model {
             $d_autoid = $this->input->post("mdrde_d_autoid");
             foreach($d_autoid as $key => $d_autoids){
                 $arUpdateRun = array(
-                    "d_run_value" => $this->input->post("mdrde_d_run_value")[$key]
+                    "d_run_value" => $this->input->post("mdrde_d_run_value")[$key],
+                    "d_worktime" => $this->input->post("mdrd_chooseTime_edit")
                 );
                 $this->db->where("d_autoid" , $d_autoids);
                 $this->db->update("details" , $arUpdateRun);

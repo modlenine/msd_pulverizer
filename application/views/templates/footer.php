@@ -39,6 +39,11 @@
 			showClose: true
     	});
 
+		$('.datetimepicker1_edit').datetimepicker({
+			format: "HH:mm",
+			showClose: true
+    	});
+
 		$(document).on('click', '[data-toggle="lightbox"]', function(event) {
 			event.preventDefault();
 			$(this).ekkoLightbox({

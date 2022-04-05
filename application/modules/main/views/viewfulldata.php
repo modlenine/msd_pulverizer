@@ -316,6 +316,17 @@
                         </div>
                         
                         <div class="row form-group detailEditSection" style="display:none;">
+                            <div class="col-lg-12">
+                                <label for="">แก้ไขเวลาเดินงาน</label>
+                                <div class="form-group">
+                                    <div class="input-group text-left" data-target-input="nearest" data-target=".datetimepicker1_edit">
+                                        <input type="text" id="mdrd_chooseTime_edit" name="mdrd_chooseTime_edit" class="form-control datetimepicker-input datetimepicker1_edit" data-target=".datetimepicker1_edit" />
+                                        <div class="input-group-append" data-target=".datetimepicker1_edit" data-toggle="datetimepicker">
+                                            <div class="input-group-text bgClock"><i class="icon-clock"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-lg-12 bottommargin">
                                 <label>อัพโหลดรูปภาพ , เอกสารที่เกี่ยวข้อง</label><br>
                                 <input id="mdrde_f_name" name="mdrde_f_name[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-show-preview="true" accept="image/*">
@@ -2049,6 +2060,8 @@ $(document).ready(function(){
                 let runDetailEdit = res.data.runDetailForEdit;
                 let output = '';
                 let runImages = res.data.runImage;
+                let worktime = res.data.worktime;
+                $('#mdrd_chooseTime_edit').val(worktime);
                 output +=`
                         <label><b>รูปภาพ , เอกสารที่เกี่ยวข้อง</b></label>
                         <div class="row form-group">
