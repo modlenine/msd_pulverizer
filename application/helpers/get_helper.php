@@ -106,7 +106,10 @@ function getviewfulldata($maincode)
         main.m_ecode_stop,
         main.m_user_modify,
         main.m_ecode_modify,
-        main.m_datetime_modify
+        main.m_datetime_modify,
+        main.m_bladeType,
+        main.m_screenMesh,
+        main.m_gap
         FROM
         main
         WHERE m_code = '$maincode'

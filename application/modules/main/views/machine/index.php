@@ -398,9 +398,9 @@
                 outputHtml += `
                 <li class="list-group-item list-group-item list-group-item-action runSelectLeftLi_edit">
                     <span>`+runscreenSelectedArray[i].detail_column_name+`</span><br>
-                    <span><b>Min: </b>`+runscreenSelectedArray[i].detail_min+`</span>
-                    <span><b>Max: </b>`+runscreenSelectedArray[i].detail_max+`</span><br>
-                    <span><b>S/POINT: </b>`+runscreenSelectedArray[i].detail_spoint+`</span><br>
+                    <span><b>Min: </b>`+parseFloat(runscreenSelectedArray[i].detail_min)+`</span>
+                    <span><b>Max: </b>`+parseFloat(runscreenSelectedArray[i].detail_max)+`</span><br>
+                    <span><b>S/POINT: </b>`+parseFloat(runscreenSelectedArray[i].detail_spoint)+`</span><br>
                     <input hidden type="text" id="select_run_name_edit" name="select_run_name_edit[]" value="`+runscreenSelectedArray[i].detail_column_name+`">
                     <input hidden type="text" id="select_run_min_edit" name="select_run_min_edit[]" value="`+runscreenSelectedArray[i].detail_min+`">
                     <input hidden type="text" id="select_run_max_edit" name="select_run_max_edit[]" value="`+runscreenSelectedArray[i].detail_max+`">
@@ -439,9 +439,9 @@
                 outputHtml += `
                 <li class="list-group-item list-group-item list-group-item-action runRightLi_edit">
                     <span>`+runscreenMainArray[i].run_name+`</span><br>
-                    <span><b>Min: </b>`+runscreenMainArray[i].run_min+`</span>
-                    <span><b>Max: </b>`+runscreenMainArray[i].run_max+`</span><br>
-                    <span><b>S/POINT: </b>`+runscreenMainArray[i].run_spoint+`</span>
+                    <span><b>Min: </b>`+parseFloat(runscreenMainArray[i].run_min)+`</span>
+                    <span><b>Max: </b>`+parseFloat(runscreenMainArray[i].run_max)+`</span><br>
+                    <span><b>S/POINT: </b>`+parseFloat(runscreenMainArray[i].run_spoint)+`</span>
                     <i class="fa fa-chevron-circle-right runRight_edit" aria-hidden="true"
                         data_run_autoid = "`+runscreenMainArray[i].run_autoid+`"
                         data_run_name = "`+runscreenMainArray[i].run_name+`"

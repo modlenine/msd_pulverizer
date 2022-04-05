@@ -60,17 +60,17 @@
                             <input type="text" name="m_typeofbagtxt" id="m_typeofbagtxt" class="form-control" readonly>
                         </div>
                         <div class="col-lg-6 form-group">
-                            <label for=""><b>STD Output (kg./hr) </b><span class="textRequest">*</span></label>
-                            <input type="text" name="m_std_output" id="m_std_output" class="form-control" readonly>
+                            <label for=""><b>Output (kg./hr) </b><span class="textRequest">*</span></label>
+                            <input type="text" name="m_std_output" id="m_std_output" class="form-control">
                         </div>
                         <div class="col-lg-6 form-group">
                             <label for=""><b>Max Amp. (%) </b><span class="textRequest">*</span></label>
                             <input type="text" name="m_maxamp" id="m_maxamp" class="form-control" readonly>
                         </div>
-                        <div class="col-lg-6 form-group">
+                        <!-- <div class="col-lg-6 form-group">
                             <label for=""><b>Packing (kg/bag) </b><span class="textRequest">*</span></label>
                             <input type="text" name="m_packing" id="m_packing" class="form-control" readonly>
-                        </div>
+                        </div> -->
                         <div class="col-lg-6 form-group">
                             <label for=""><b>Item Number</b></label>
                             <input type="text" name="m_item_number" id="m_item_number" class="form-control" readonly>
@@ -78,6 +78,18 @@
                         <div class="col-lg-6 form-group">
                             <label for=""><b>Batch Number</b></label>
                             <input type="text" name="m_batch_number" id="m_batch_number" class="form-control" readonly>
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for=""><b>Blade Type</b> <span class="textRequest">*</span></label>
+                            <input type="text" name="m_bladeType" id="m_bladeType" class="form-control" required>
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for=""><b>Screen (Mesh)</b></label>
+                            <input type="text" name="m_screenMesh" id="m_screenMesh" class="form-control" >
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for=""><b>Gap</b> <span class="textRequest">*</span></label>
+                            <input type="text" name="m_gap" id="m_gap" class="form-control" required>
                         </div>
                         <div class="col-lg-6 form-group">
                             <label for=""><b>Date</b></label>
@@ -123,9 +135,7 @@
                                     <li class="list-group-item list-group-item list-group-item-action m_selectTemplate"
                                         data_master_name="`+templatedataAr[i].master_name+`"
                                         data_master_temcode="`+templatedataAr[i].master_temcode+`"
-                                        data_master_stdoutput="`+templatedataAr[i].master_stdoutput+`"
                                         data_master_maxamp="`+templatedataAr[i].master_maxamp+`"
-                                        data_master_packing="`+templatedataAr[i].master_packing+`"
                                     >
                                         <span>`+templatedataAr[i].master_name+`</span>
                                     </li>
@@ -250,15 +260,11 @@
             $(document).on('click' , '.m_selectTemplate' , function(){
                 const data_master_name = $(this).attr("data_master_name");
                 const data_master_temcode = $(this).attr("data_master_temcode");
-                const data_master_stdoutput = $(this).attr("data_master_stdoutput");
                 const data_master_maxamp = $(this).attr("data_master_maxamp");
-                const data_master_packing = $(this).attr("data_master_packing");
 
                 $('#m_template_name').val(data_master_name);
                 $('#m_template_code').val(data_master_temcode);
-                $('#m_std_output').val(data_master_stdoutput);
                 $('#m_maxamp').val(data_master_maxamp);
-                $('#m_packing').val(data_master_packing);
                 $('#m_showTemplate').html('');
 
             });
@@ -273,6 +279,7 @@
                 const data_slc_orgreference = $(this).attr("data_slc_orgreference");
                 const data_typeofbag = $(this).attr("data_typeofbag");
                 const data_typeofbagtxt = $(this).attr("data_typeofbagtxt");
+                const data_qtysched = $(this).attr("data_qtysched");
 
                 $('#m_item_number').val(data_itemid);
                 $('#m_batch_number').val(data_inventbatchid);
@@ -280,6 +287,7 @@
                 $('#m_showpd').html('');
                 $('#m_typeofbag').val(data_typeofbag);
                 $('#m_typeofbagtxt').val(data_typeofbagtxt);
+                $('#m_order').val(parseFloat(data_qtysched));
 
                 searchTemplate(data_itemid);
 
@@ -345,9 +353,7 @@
                             <li class="list-group-item list-group-item list-group-item-action m_selectTemplate"
                                 data_master_name="`+templatedataAr[i].master_name+`"
                                 data_master_temcode="`+templatedataAr[i].master_temcode+`"
-                                data_master_stdoutput="`+templatedataAr[i].master_stdoutput+`"
                                 data_master_maxamp="`+templatedataAr[i].master_maxamp+`"
-                                data_master_packing="`+templatedataAr[i].master_packing+`"
                             >
                                 <span>`+templatedataAr[i].master_name+`</span>
                             </li>

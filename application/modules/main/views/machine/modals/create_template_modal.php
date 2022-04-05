@@ -68,18 +68,18 @@
                                     <input type="text" name="itemNumber" id="itemNumber" class="form-control">
                                     <div id="showItemidList"></div>
                                 </div>
-                                <div class="col-md-12 form-group">
+                                <!-- <div class="col-md-12 form-group">
                                     <label for=""><b>STD Output (kg./hr)</b>&nbsp;<span class="textRequest">*</span></label>
                                     <input type="text" name="stdoutput" id="stdoutput" class="form-control" required>
-                                </div>
+                                </div> -->
                                 <div class="col-md-12 form-group">
                                     <label for=""><b>Max Amp</b>&nbsp;<span class="textRequest">*</span></label>
                                     <input type="text" name="maxamp" id="maxamp" class="form-control" required>
                                 </div>
-                                <div class="col-md-12 form-group">
+                                <!-- <div class="col-md-12 form-group">
                                     <label for=""><b>Packing (kg./bag)</b>&nbsp;<span class="textRequest">*</span></label>
                                     <input type="text" name="packing" id="packing" class="form-control" required>
-                                </div>
+                                </div> -->
                                 <div class="col-md-12 form-group">
                                     <label for=""><b>Upload Template Picture</b></label>
                                     <input type="file" name="templatePicture" id="templatePicture" class="form-control" onchange="loadimageTemplate(event)">
@@ -410,9 +410,9 @@
                 outputHtml += `
                 <li class="list-group-item list-group-item list-group-item-action runRightLi">
                     <span>`+runscreenMainArray[i].run_name+`</span><br>
-                    <span><b>Min: </b>`+runscreenMainArray[i].run_min+`</span>
-                    <span><b>Max: </b>`+runscreenMainArray[i].run_max+`</span><br>
-                    <span><b>S/POINT: </b>`+runscreenMainArray[i].run_spoint+`</span>
+                    <span><b>Min: </b>`+parseFloat(runscreenMainArray[i].run_min)+`</span>
+                    <span><b>Max: </b>`+parseFloat(runscreenMainArray[i].run_max)+`</span><br>
+                    <span><b>S/POINT: </b>`+parseFloat(runscreenMainArray[i].run_spoint)+`</span>
                     <i class="fa fa-chevron-circle-right runRight" aria-hidden="true"
                         data_run_autoid = "`+runscreenMainArray[i].run_autoid+`"
                         data_run_name = "`+runscreenMainArray[i].run_name+`"
@@ -435,9 +435,9 @@
                 outputHtml += `
                 <li class="list-group-item list-group-item list-group-item-action runSelectLeftLi">
                     <span>`+runscreenSelectedArray[i].run_name+`</span><br>
-                    <span><b>Min: </b>`+runscreenSelectedArray[i].run_min+`</span>
-                    <span><b>Max: </b>`+runscreenSelectedArray[i].run_max+`</span><br>
-                    <span><b>S/POINT: </b>`+runscreenSelectedArray[i].run_spoint+`</span><br>
+                    <span><b>Min: </b>`+parseFloat(runscreenSelectedArray[i].run_min)+`</span>
+                    <span><b>Max: </b>`+parseFloat(runscreenSelectedArray[i].run_max)+`</span><br>
+                    <span><b>S/POINT: </b>`+parseFloat(runscreenSelectedArray[i].run_spoint)+`</span><br>
                     <input hidden type="text" id="select_run_name" name="select_run_name[]" value="`+runscreenSelectedArray[i].run_name+`">
                     <input hidden type="text" id="select_run_min" name="select_run_min[]" value="`+runscreenSelectedArray[i].run_min+`">
                     <input hidden type="text" id="select_run_max" name="select_run_max[]" value="`+runscreenSelectedArray[i].run_max+`">

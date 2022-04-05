@@ -55,7 +55,10 @@
 										<th>Production Number</th>
 										<th>Batch Number</th>
 										<th>Order</th>
-										<th>STD Output</th>
+										<th>Output</th>
+										<th>Blade Type</th>
+										<th>Gap</th>
+										<th>Screen (Mesh)</th>
 										<th>Date</th>
 										<th>Status</th>
 										<th>Memo</th>
@@ -186,9 +189,12 @@
 									{"width": "150","targets": 4},
 									{"width": "150","targets": 5},
 									{"width": "150","targets": 6},
-									{"width": "100","targets": 7},
-									{"width": "100","targets": 8},
-									{"width": "150","targets": 9}
+									{"width": "150","targets": 7},
+									{"width": "150","targets": 8},
+									{"width": "150","targets": 9},
+									{"width": "100","targets": 10},
+									{"width": "100","targets": 11},
+									{"width": "150","targets": 12}
 								],
 								});
 
@@ -202,7 +208,7 @@
 					});
 				});
 
-				$('#mainlist_8').prop('readonly' , true).css({
+				$('#mainlist_11').prop('readonly' , true).css({
 					'background-color':'#F5F5F5',
 					'cursor':'no-drop'
 				});
@@ -268,9 +274,12 @@
 									{"width": "150","targets": 4},
 									{"width": "150","targets": 5},
 									{"width": "150","targets": 6},
-									{"width": "100","targets": 7},
-									{"width": "100","targets": 8},
-									{"width": "150","targets": 9}
+									{"width": "150","targets": 7},
+									{"width": "150","targets": 8},
+									{"width": "150","targets": 9},
+									{"width": "100","targets": 10},
+									{"width": "100","targets": 11},
+									{"width": "150","targets": 12}
 								],
 								});
 
@@ -295,7 +304,7 @@
 			const deptcode = "<?php echo getUser()->DeptCode; ?>";
 			const ecode = "<?php echo getUser()->ecode; ?>";
 			if(deptcode != "1007"){
-				if(ecode == "M1809"){
+				if(ecode == "M1809" || ecode == "M0282"){
 					$('#btn-addMachineData').css('display' , '');
 				}else{
 					$('#btn-addMachineData').css('display' , 'none');

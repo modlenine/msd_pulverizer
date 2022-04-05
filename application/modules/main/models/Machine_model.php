@@ -308,9 +308,7 @@ class machine_model extends CI_Model {
     public function saveTemplate()
     {
         if($this->input->post("templateName") != "" &&
-        $this->input->post("stdoutput") != "" &&
-        $this->input->post("maxamp") != "" &&
-        $this->input->post("packing") != ""
+        $this->input->post("maxamp") != ""
         ){
             // Save Detail Table
             $date = date_create();
@@ -392,9 +390,7 @@ class machine_model extends CI_Model {
                 "master_temcode" => $dateTimeStamp,
                 "master_name" => $this->input->post("templateName"),
                 "master_itemnumber" => $this->input->post("itemNumber"),
-                "master_stdoutput" => $this->input->post("stdoutput"),
                 "master_maxamp" => $this->input->post("maxamp"),
-                "master_packing" => $this->input->post("packing"),
                 "master_image" => $rsImageFile,
                 "master_imagePath" => $rsImagePath,
                 "master_imagestatus" => $imageStatus,
@@ -623,9 +619,7 @@ class machine_model extends CI_Model {
                 "master_image" => $imageFile,
                 "master_imagePath" => $imagePath,
                 "master_imagestatus" => $imageStatus,
-                "master_stdoutput" => $this->input->post("stdoutput_edit"),
                 "master_maxamp" => $this->input->post("maxamp_edit"),
-                "master_packing" => $this->input->post("packing_edit"),
                 "master_user_modify" => getUser()->Fname." ".getUser()->Lname,
                 "master_ecode_modify" => getUser()->ecode,
                 "master_deptcode_modify" => getUser()->DeptCode,

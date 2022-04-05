@@ -43,18 +43,18 @@
                                     <input type="text" name="itemNumber_edit" id="itemNumber_edit" class="form-control">
                                     <div id="showItemidList_edit"></div>
                                 </div>
-                                <div class="col-md-12 form-group">
+                                <!-- <div class="col-md-12 form-group">
                                     <label for=""><b>STD Output (kg./hr)</b>&nbsp;<span class="textRequest">*</span></label>
                                     <input type="text" name="stdoutput_edit" id="stdoutput_edit" class="form-control" required>
-                                </div>
+                                </div> -->
                                 <div class="col-md-12 form-group">
                                     <label for=""><b>Max Amp</b>&nbsp;<span class="textRequest">*</span></label>
                                     <input type="text" name="maxamp_edit" id="maxamp_edit" class="form-control" required>
                                 </div>
-                                <div class="col-md-12 form-group">
+                                <!-- <div class="col-md-12 form-group">
                                     <label for=""><b>Packing (kg./bag)</b>&nbsp;<span class="textRequest">*</span></label>
                                     <input type="text" name="packing_edit" id="packing_edit" class="form-control" required>
-                                </div>
+                                </div> -->
                                 <div class="col-md-12 form-group">
                                     <label for=""><b>Upload Template Picture</b></label>
                                     <input type="file" name="templatePicture_edit" id="templatePicture_edit" class="form-control" onchange="loadimageTemplate_edit(event)">
@@ -423,9 +423,9 @@ let url = "<?php echo base_url(); ?>";
                             output +=`
                             <tr>
                                 <td>`+rsSumRun[i].detail_column_name+`</td>
-                                <td>`+rsSumRun[i].detail_min+`</td>
-                                <td>`+rsSumRun[i].detail_max+`</td>
-                                <td>`+rsSumRun[i].detail_spoint+`</td>
+                                <td>`+parseFloat(rsSumRun[i].detail_min)+`</td>
+                                <td>`+parseFloat(rsSumRun[i].detail_max)+`</td>
+                                <td>`+parseFloat(rsSumRun[i].detail_spoint)+`</td>
                             </tr>
                             `
                         }

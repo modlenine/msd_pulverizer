@@ -149,7 +149,7 @@
 				<div class="dropdown">
 					<a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
 						<span class="user-icon">
-							<img src="<?=getUserImage()?>" alt="">
+							<img class="imageProfile" src="<?=getUserImage()?>" alt="">
 						</span>
 						<span class="user-name"><?=getUser()->Fname." ".getUser()->Lname?></span>
 					</a>
@@ -292,7 +292,8 @@
 			ecode == "M1413" ||
 			ecode == "M0506" ||
 			ecode == "D2022" ||
-			ecode == "M2067"){
+			ecode == "M2067" ||
+			ecode == "M0282"){
 				$('#settingMenuLi').css('display' , '');
 			}else{
 				$('#settingMenuLi').css('display' , 'none');
@@ -336,7 +337,8 @@
                 showCancelButton: true,
                 confirmButtonClass: 'btn btn-success',
                 cancelButtonClass: 'btn btn-danger',
-                confirmButtonText: 'ยืนยัน'
+                confirmButtonText: 'ยืนยัน',
+				cancelButtonText:'ยกเลิก'
             }).then((result)=> {
                 if(result.value == true){
                     location.href = url+'login/logout';

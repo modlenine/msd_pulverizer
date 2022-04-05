@@ -42,14 +42,17 @@ class Main_model extends CI_Model {
             array('db' => 'm_batch_number', 'dt' => 4),
             array('db' => 'm_order', 'dt' => 5),
             array('db' => 'm_std_output', 'dt' => 6),
+            array('db' => 'm_bladeType', 'dt' => 7),
+            array('db' => 'm_screenMesh', 'dt' => 8),
+            array('db' => 'm_gap', 'dt' => 9),
             array(
-                'db' => 'm_datetime', 'dt' => 7,
+                'db' => 'm_datetime', 'dt' => 10,
                 'formatter' => function($d , $row){
                     return conDateTimeFromDb($d);
                 }
             ),
             array(
-                'db' => 'm_status', 'dt' => 8,
+                'db' => 'm_status', 'dt' => 11,
                 'formatter' => function($d , $row){
                     $output = '';
                     if($d == "Start"){
@@ -77,7 +80,7 @@ class Main_model extends CI_Model {
                 }
             ),
             array(
-                'db' => 'm_memo', 'dt' => 9,)
+                'db' => 'm_memo', 'dt' => 12,)
         );
 
         // SQL server connection information
@@ -148,14 +151,17 @@ class Main_model extends CI_Model {
             array('db' => 'm_batch_number', 'dt' => 4),
             array('db' => 'm_order', 'dt' => 5),
             array('db' => 'm_std_output', 'dt' => 6),
+            array('db' => 'm_bladeType', 'dt' => 7),
+            array('db' => 'm_screenMesh', 'dt' => 8),
+            array('db' => 'm_gap', 'dt' => 9),
             array(
-                'db' => 'm_datetime', 'dt' => 7,
+                'db' => 'm_datetime', 'dt' => 10,
                 'formatter' => function($d , $row){
                     return conDateTimeFromDb($d);
                 }
             ),
             array(
-                'db' => 'm_status', 'dt' => 8,
+                'db' => 'm_status', 'dt' => 11,
                 'formatter' => function($d , $row){
                     $output = '';
                     if($d == "Start"){
@@ -183,7 +189,7 @@ class Main_model extends CI_Model {
                 }
             ),
             array(
-                'db' => 'm_memo', 'dt' => 9,)
+                'db' => 'm_memo', 'dt' => 12,)
         );
 
         // SQL server connection information
@@ -236,9 +242,7 @@ class Main_model extends CI_Model {
             template_master.master_itemnumber,
             template_master.master_image,
             template_master.master_imagePath,
-            template_master.master_stdoutput,
-            template_master.master_maxamp,
-            template_master.master_packing
+            template_master.master_maxamp
             FROM
             template_master
             WHERE template_master.master_name LIKE '%$received_data->templatename%'
@@ -251,9 +255,7 @@ class Main_model extends CI_Model {
                 $resultArray = array(
                     "master_name" => $rs->master_name,
                     "master_temcode" => $rs->master_temcode,
-                    "master_stdoutput" => $rs->master_stdoutput,
                     "master_maxamp" => $rs->master_maxamp,
-                    "master_packing" => $rs->master_packing
                 );
                 $result[] = $resultArray;
             }
@@ -284,9 +286,7 @@ class Main_model extends CI_Model {
             template_master.master_itemnumber,
             template_master.master_image,
             template_master.master_imagePath,
-            template_master.master_stdoutput,
-            template_master.master_maxamp,
-            template_master.master_packing
+            template_master.master_maxamp
             FROM
             template_master
             WHERE template_master.master_itemnumber LIKE '%$received_data->itemnumber%'
@@ -299,9 +299,7 @@ class Main_model extends CI_Model {
                 $resultArray = array(
                     "master_name" => $rs->master_name,
                     "master_temcode" => $rs->master_temcode,
-                    "master_stdoutput" => $rs->master_stdoutput,
                     "master_maxamp" => $rs->master_maxamp,
-                    "master_packing" => $rs->master_packing
                 );
                 $result[] = $resultArray;
             }
@@ -339,7 +337,8 @@ class Main_model extends CI_Model {
                 prodtable.inventdimid,
                 inventdim.inventbatchid,
                 prodtable.slc_orgreference,
-                prodtable.slc_packageid
+                prodtable.slc_packageid,
+                prodtable.qtysched
                 FROM
                 prodtable
                 LEFT JOIN inventdim ON inventdim.inventdimid = prodtable.inventdimid AND inventdim.dataareaid = prodtable.dataareaid
@@ -360,7 +359,8 @@ class Main_model extends CI_Model {
                         prodtable.prodid,
                         prodtable.inventdimid,
                         inventdim.inventbatchid,
-                        prodtable.slc_orgreference
+                        prodtable.slc_orgreference,
+                        prodtable.qtysched
                         FROM
                         prodtable
                         LEFT JOIN inventdim ON inventdim.inventdimid = prodtable.inventdimid AND inventdim.dataareaid = prodtable.dataareaid
@@ -378,6 +378,7 @@ class Main_model extends CI_Model {
                         data_slc_orgreference = "'.substr($rss->slc_orgreference , 0 , 2).'"
                         data_typeofbag = "'.$getBag->packageid.'"
                         data_typeofbagtxt = "'.$getBag->packagetxt.'"
+                        data_qtysched = "'.$rss->qtysched.'"
                         ><li class="list-group-item">' . $rs->prodid . '</li></a>
                         ';
                     }
@@ -393,6 +394,7 @@ class Main_model extends CI_Model {
                     data_slc_orgreference = "'.substr($rs->slc_orgreference , 0 , 2).'"
                     data_typeofbag = "'.$getBag->packageid.'"
                     data_typeofbagtxt = "'.$getBag->packagetxt.'"
+                    data_qtysched = "'.$rs->qtysched.'"
                     ><li class="list-group-item">' . $rs->prodid . '</li></a>
                     ';
                 }
@@ -496,7 +498,6 @@ class Main_model extends CI_Model {
             $this->input->post("m_std_output") != "" &&
             $this->input->post("m_maxamp") != "" &&
             $this->input->post("m_item_number") != "" &&
-            $this->input->post("m_packing") != "" &&
             $this->input->post("m_typeofbag") != "" &&
             $this->input->post("m_batch_number") != "" &&
             $this->input->post("m_typeofbag") != ""
@@ -520,9 +521,11 @@ class Main_model extends CI_Model {
                 "m_deptcode" => getUser()->DeptCode,
                 "m_datetime" => date("Y-m-d H:i:s"),
                 "m_status" => "Open",
-                "m_packing" => $this->input->post("m_packing"),
                 "m_typeofbag" => $this->input->post("m_typeofbag"),
                 "m_typeofbagtxt" => $this->input->post("m_typeofbagtxt"),
+                "m_bladeType" => $this->input->post("m_bladeType"),
+                "m_screenMesh" => $this->input->post("m_screenMesh"),
+                "m_gap" => $this->input->post("m_gap"),
                 "m_dataareaid" => $this->input->post("m_areaid")
             );
             $this->db->insert("main" , $arSaveData);
@@ -1861,8 +1864,10 @@ class Main_model extends CI_Model {
         if($received_data->action == "saveEditHead"){
             $arUpdateHead = array(
                 "m_order" => $received_data->m_order,
-                "m_typeofbag" => $received_data->m_typeofbag,
-                "m_typeofbagtxt" => $received_data->m_typeofbagtxt
+                "m_std_output" => $received_data->m_std_output,
+                "m_bladeType" => $received_data->m_bladeType,
+                "m_screenMesh" => $received_data->m_screenMesh,
+                "m_gap" => $received_data->m_gap
             );
             $this->db->where("m_code" , $received_data->m_code);
             $this->db->update("main" , $arUpdateHead);

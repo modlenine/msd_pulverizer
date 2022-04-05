@@ -205,7 +205,7 @@
 
                 <div class="modal-content">
                     <div class="modal-header">
-                        <div id="runDetailMemoTitle"></div>
+                        <div id="mainMemoTitle"></div>
                         <div>
                             <button type="button" class="close close_mainMemo_modal" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
@@ -359,16 +359,32 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <label for="">Order (kg.)</label>
+                                <label for=""><b>Order (kg.)</b></label>
                                 <input type="text" name="ehmd_order" id="ehmd_order" class="form-control">
                             </div>
-
                             <div class="col-md-6 form-group">
+                                <label for=""><b>Output (kg./hr)</b></label>
+                                <input type="text" name="ehmd_output" id="ehmd_output" class="form-control">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for=""><b>Blade Type</b></label>
+                                <input type="text" name="ehmd_bladetype" id="ehmd_bladetype" class="form-control">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for=""><b>Screen (Mesh)</b></label>
+                                <input type="text" name="ehmd_screenMesh" id="ehmd_screenMesh" class="form-control">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for=""><b>Gap</b></label>
+                                <input type="text" name="ehmd_gap" id="ehmd_gap" class="form-control">
+                            </div>
+
+                            <!-- <div class="col-md-6 form-group">
                                 <label for="">Type of bag</label>
                                 <input type="text" name="ehmd_typeofbag" id="ehmd_typeofbag" class="form-control ehmd_typeofbag" autocomplete="off">
                                 <input hidden type="text" name="ehmd_typeofbagtxt" id="ehmd_typeofbagtxt">
                                 <div id="eh_showBagCode"></div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -526,52 +542,64 @@
                             data_m_order="<?=getviewfulldata(getMaincode($mainformno))->m_order?>"
                             data_m_typeofbag="<?=getviewfulldata(getMaincode($mainformno))->m_typeofbag?>"
                             data_m_typeofbagtxt="<?=getviewfulldata(getMaincode($mainformno))->m_typeofbagtxt?>"
+                            data_m_output="<?=getviewfulldata(getMaincode($mainformno))->m_std_output?>"
+                            data_m_bladetype="<?=getviewfulldata(getMaincode($mainformno))->m_bladeType?>"
+                            data_m_screenMesh="<?=getviewfulldata(getMaincode($mainformno))->m_screenMesh?>"
+                            data_m_gap="<?=getviewfulldata(getMaincode($mainformno))->m_gap?>"
                         >
                             <i class="fa fa-edit mr-2 editHeadData" aria-hidden="true"></i>
                         </a>
                         <!-- Edit Button -->
                             <div class="col-md-4 form-group">
-                                <label for="">Machine Name</label>
+                                <label for=""><b>Machine Name</b></label>
                                 <input type="text" name="m_template_name_v" id="m_template_name_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_template_name?>">
                             </div>
                             <div class="col-md-4 form-group">
-                                <label for="">Product No.</label>
+                                <label for=""><b>Production Number</b></label>
                                 <input type="text" name="m_product_number_v" id="m_product_number_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_product_number?>">
                             </div>
                             <div class="col-md-4 form-group">
-                                <label for="">Item No.</label>
+                                <label for=""><b>Item Number</b></label>
                                 <input type="text" name="m_item_number_v" id="m_item_number_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_item_number?>">
                             </div>
                             <div class="col-md-4 form-group">
-                                <label for="">Batch No.</label>
+                                <label for=""><b>Batch Number</b></label>
                                 <input type="text" name="m_batch_number_v" id="m_batch_number_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_batch_number?>">
                             </div>
                             <div class="col-md-4 form-group">
-                                <label for="">Order (kg.)</label>
+                                <label for=""><b>Order (kg.)</b></label>
                                 <input type="text" name="m_order_v" id="m_order_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_order?>">
                             </div>
                             <div class="col-md-4 form-group">
-                                <label for="">STD Output (kg./hr)</label>
+                                <label for=""><b>Output (kg./hr)</b></label>
                                 <input type="text" name="m_std_output_v" id="m_std_output_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_std_output?>">
                             </div>
                             <div class="col-md-4 form-group">
-                                <label for="">Max Amp. (%)</label>
+                                <label for=""><b>Max Amp. (%)</b></label>
                                 <input type="text" name="m_maxamp_v" id="m_maxamp_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_maxamp?>">
                             </div>
                             <div class="col-md-4 form-group">
-                                <label for="">Packing (kg/bag)</label>
-                                <input type="text" name="m_packing_v" id="m_packing_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_packing?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label for="">Type of bag</label>
+                                <label for=""><b>Type of bag</b></label>
                                 <input type="text" name="m_typeofbag_v" id="m_typeofbag_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_typeofbag?>">
                             </div>
                             <div class="col-md-4 form-group">
-                                <label for="">Bag text</label>
+                                <label for=""><b>Bag text</b></label>
                                 <input type="text" name="m_typeofbag_v" id="m_typeofbag_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_typeofbagtxt?>">
                             </div>
                             <div class="col-md-4 form-group">
-                                <label for="">Date</label>
+                                <label for=""><b>Blade Type</b></label>
+                                <input type="text" name="m_bladeType_v" id="m_bladeType_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_bladeType?>">
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for=""><b>Screen (Mesh)</b></label>
+                                <input type="text" name="m_screenMesh_v" id="m_screenMesh_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_screenMesh?>">
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for=""><b>Gap</b></label>
+                                <input type="text" name="m_gap_v" id="m_gap_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_gap?>">
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for=""><b>Date</b></label>
                                 <input type="text" name="m_datetime_v" id="m_datetime_v" class="form-control" readonly value="<?=conDateFromDb(getviewfulldata(getMaincode($mainformno))->m_datetime)?>">
                             </div>
 
@@ -868,21 +896,47 @@ $(document).ready(function(){
 
             saveStop()
             {
-                swal({
-                    title: 'ต้องการ Stop เอกสารนี้ ใช่หรือไม่',
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonClass: 'btn btn-success',
-                    cancelButtonClass: 'btn btn-danger',
-                    confirmButtonText: 'ยืนยัน',
-                    cancelButtonText:'ยกเลิก'
-                }).then((result)=> {
 
-                    if(result.value == true){
-                        $('#mainMemo_modal').modal('show');
-                    }
+                let ecode = "<?php echo getUser()->ecode; ?>";
+                let posi = "<?php echo getUser()->posi; ?>";
+                let deptcode = "<?php echo getUser()->DeptCode; ?>";
+                // Check sup up
+                if(posi < 55){
+                    swal({
+                        title: 'ท่านไม่สามารถกด Stop ได้กรุณาติดต่อหัวหน้างาน',
+                        type: 'error',
+                        showConfirmButton: false,
+                        timer:1200
+                    });
+                }else{
+                    swal({
+                        title: 'ต้องการ Stop เอกสารนี้ ใช่หรือไม่',
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonClass: 'btn btn-success',
+                        cancelButtonClass: 'btn btn-danger',
+                        confirmButtonText: 'ยืนยัน',
+                        cancelButtonText:'ยกเลิก'
+                    }).then((result)=> {
+                        if(result.value == true){
+                            $('#mainMemo_modal').modal('show');
 
-                });
+                            let title = '';
+
+                            const productionNo = $('#m_product_number_v').val();
+                            const itemNo = $('#m_item_number_v').val();
+                            const machineName = $('#m_template_name_v').val();
+                            const batchNo = $('#m_batch_number_v').val();
+
+                            title +=`
+                            <span><b>หมายเหตุ</b></span><br>
+                            <span><b>Machine Name. : </b>`+machineName+`</span>&nbsp;&nbsp;<span><b>Batch Number : </b>`+batchNo+`</span><br>
+                            <span><b>Production Number : </b>`+productionNo+`</span>&nbsp;&nbsp;<span><b>Item Number : </b>`+itemNo+`</span>
+                            `;
+                            $('#mainMemoTitle').html(title);
+                        }
+                    });
+                }
 
             },
 
@@ -1081,9 +1135,11 @@ $(document).ready(function(){
                 axios.post(url+'main/saveEditHead' ,{
                     action:"saveEditHead",
                     m_order:$('#ehmd_order').val(),
-                    m_typeofbag:$('#ehmd_typeofbag').val(),
-                    m_typeofbagtxt:$('#ehmd_typeofbagtxt').val(),
-                    m_code:$('#ehmd_mcode').val()
+                    m_code:$('#ehmd_mcode').val(),
+                    m_std_output:$('#ehmd_order').val(),
+                    m_bladeType:$('#ehmd_bladetype').val(),
+                    m_screenMesh:$('#ehmd_screenMesh').val(),
+                    m_gap:$('#ehmd_gap').val()
                 }).then(res=>{
                     console.log(res.data);
                     if(res.data.status == "Update Data Success"){
@@ -1527,6 +1583,11 @@ $(document).ready(function(){
         const data_m_typeofbag = $(this).attr("data_m_typeofbag");
         const data_m_typeofbagtxt = $(this).attr("data_m_typeofbagtxt");
 
+        const data_m_output= $(this).attr("data_m_output");
+        const data_m_bladetype= $(this).attr("data_m_bladetype");
+        const data_m_screenMesh= $(this).attr("data_m_screenMesh");
+        const data_m_gap= $(this).attr("data_m_gap");
+
 
         const machineName = $('#m_template_name_v').val();
         const batchNumber = $('#m_batch_number_v').val();
@@ -1547,6 +1608,11 @@ $(document).ready(function(){
         $('#ehmd_order').val(data_m_order);
         $('#ehmd_typeofbag').val(data_m_typeofbag);
         $('#ehmd_typeofbagtxt').val(data_m_typeofbagtxt);
+
+        $('#ehmd_output').val(data_m_output);
+        $('#ehmd_bladetype').val(data_m_bladetype);
+        $('#ehmd_screenMesh').val(data_m_screenMesh);
+        $('#ehmd_gap').val(data_m_gap);
     });
 
     $(document).on('keyup' , '.ehmd_typeofbag' , function(){
@@ -1763,7 +1829,7 @@ $(document).ready(function(){
                                 <input hidden type="text" id="mdsp_d_run_name" name="mdsp_d_run_name[]" value="`+spointData[i].detail_column_name+`">
                             </div>
                             <div class="col-md-6">
-                                <input type="tel" id="mdsp_d_run_value" name ="mdsp_d_run_value[]" class="form-control mdsp_d_run_value" value="`+spointData[i].detail_spoint+`">
+                                <input type="tel" id="mdsp_d_run_value" name ="mdsp_d_run_value[]" class="form-control mdsp_d_run_value" value="`+parseFloat(spointData[i].detail_spoint)+`">
                                 <input hidden type="text" id="mdsp_d_run_min" name ="mdsp_d_run_min[]" value="`+spointData[i].detail_min+`">
                                 <input hidden type="text" id="mdsp_d_run_max" name ="mdsp_d_run_max[]" value="`+spointData[i].detail_max+`">
                                 <input hidden type="text" id="mdsp_d_linenum" name ="mdsp_d_linenum[]" value="`+spointData[i].detail_linenum+`">
@@ -2197,43 +2263,60 @@ $(document).ready(function(){
         }).then(res=>{
             // console.log(res);
             if(res.data.status == "Select Data Success"){
-                if(res.data.form_status == "Wait Start"){
 
-                    $('.startButtonZone').css('display' , '');
-                    $('.spointzone').css('display' , 'none');
-                    createDataPage(m_code);
+                let deptcode = "<?php echo getUser()->DeptCode; ?>";
+                let ecode = "<?php echo getUser()->ecode; ?>";
+                // check PD Dept
 
-                }else if(res.data.form_status == "Open"){
+                if(deptcode == "1007" || deptcode == "1002"){
+                    if(res.data.form_status == "Wait Start"){
 
-                    $('.spointzone').css('display' , '');
-                    $('.startButtonZone').css('display' , 'none');
-                    $('.cancelButtonZone').css('display' , '');
-                    $('#checkPageMenu').css('display' , '');
+                        $('.startButtonZone').css('display' , '');
+                        $('.spointzone').css('display' , 'none');
+                        createDataPage(m_code);
 
-                }else if(res.data.form_status == "Start"){
+                    }else if(res.data.form_status == "Open"){
 
-                    $('.startButtonZone').css('display' , 'none');
-                    $('.spointzone').css('display' , 'none');
-                    $('.stopButtonZone').css('display' , '');
-                    $('.cancelButtonZone').css('display' , 'none');
-                    // console.log(spointData);
-                    createDataPage(m_code);
+                        $('.spointzone').css('display' , '');
+                        $('.startButtonZone').css('display' , 'none');
+                        $('.cancelButtonZone').css('display' , '');
+                        $('#checkPageMenu').css('display' , '');
 
-                    $('.btnGroup , .add-detail , .edit-detail , .export-detail').css('display' , '');
-                    $('#checkPageMenu').css('display' , '');
+                    }else if(res.data.form_status == "Start"){
 
-                }else if(res.data.form_status == "Cancel"){
+                        $('.startButtonZone').css('display' , 'none');
+                        $('.spointzone').css('display' , 'none');
+                        $('.stopButtonZone').css('display' , '');
+                        $('.cancelButtonZone').css('display' , 'none');
+                        // console.log(spointData);
+                        createDataPage(m_code);
 
-                    $('.cancelButtonZone').css('display' , 'none');
-                    $('.spointzone').css('display' , 'none');
-                    $('.startButtonZone').css('display' , 'none');
-                    $('.stopButtonZone').css('display' , 'none');
+                        $('.btnGroup , .add-detail , .edit-detail , .export-detail').css('display' , '');
+                        $('#checkPageMenu').css('display' , '');
 
-                    $('.btnGroup , .add-detail , .edit-detail , .export-detail').css('display' , 'none');
-                    $('#checkPageMenu').css('display' , 'none');
+                    }else if(res.data.form_status == "Cancel"){
 
-                }else if(res.data.form_status == "Stop"){
+                        $('.cancelButtonZone').css('display' , 'none');
+                        $('.spointzone').css('display' , 'none');
+                        $('.startButtonZone').css('display' , 'none');
+                        $('.stopButtonZone').css('display' , 'none');
 
+                        $('.btnGroup , .add-detail , .edit-detail , .export-detail').css('display' , 'none');
+                        $('#checkPageMenu').css('display' , 'none');
+
+                    }else if(res.data.form_status == "Stop"){
+
+                        $('.cancelButtonZone').css('display' , 'none');
+                        $('.spointzone').css('display' , 'none');
+                        $('.startButtonZone').css('display' , 'none');
+                        $('.stopButtonZone').css('display' , 'none');
+
+                        $('.btnGroup , .add-detail , .edit-detail').css('display' , 'none');
+                        $('#checkPageMenu').css('display' , 'none');
+
+                        createDataPage(m_code);
+                    }
+                }else{
                     $('.cancelButtonZone').css('display' , 'none');
                     $('.spointzone').css('display' , 'none');
                     $('.startButtonZone').css('display' , 'none');
@@ -2244,6 +2327,10 @@ $(document).ready(function(){
 
                     createDataPage(m_code);
                 }
+
+
+
+                
             }
         });
     }
@@ -2282,8 +2369,7 @@ $(document).ready(function(){
                     <table id="tb_detail_main" class="table table-bordered table-striped">`;
             output +=`<tr>`;
                 output +=`<th class="tb_runscreenName">Run Screen</th>
-                <th>Memo</th>
-                <th>Image , Document</th>
+                <th class="tb_image">Image , Document</th>
                 `;
                 let iconBeforeImage = '';
                     for(let i = 0; i < spointData.length; i++){
@@ -2302,19 +2388,22 @@ $(document).ready(function(){
                         <th class="tb_runscreenName">`+spointData[i].d_run_name+`</th>
                         `;
                     }  
-            output +=`</tr>`;
+            output +=`
+                <th class="tb_memoM">Memo</th>
+            </tr>`;
 
             output +=`<tr>`;
             output +=`<td><b>S/POINT</b></td>
-            <td></td>
             <td>`+iconBeforeImage+`</td>
             `;
                     for(let i = 0; i < spointData.length; i++){
                         output +=`
-                        <td class="">`+spointData[i].d_run_value+`</td>
+                        <td class="tb_runscreenName">`+parseFloat(spointData[i].d_run_value)+`</td>
                         `;
                     }
-            output +=`</tr>`;
+            output +=`
+            <td></td>
+            </tr>`;
 
             if(runData != null){
                 let iconImageRun = "";
@@ -2329,14 +2418,22 @@ $(document).ready(function(){
                         iconImageRun = '';
                     }
 
-                    if(runData[i].memo != ""){
-                        iconMemoRun = `<i class="fa fa-sticky-note runMemo" aria-hidden="true"
+                    let memoCount = runData[i].memo.length;
+                    let resultMemocut = '';
+
+                    if(memoCount > 60){
+                        resultMemocut = runData[i].memo.slice(0,50)+`
+                        <br>
+                        <a href="javascript:void(0)" class="runMemo"
                             data_maincode="`+runData[i].imageRun+`"
                             data_detailcode="`+runData[i].detailcode+`"
                             data_memo="`+runData[i].memo+`"
-                        ></i>`;
+                        >
+                            <span>[ อ่านเพิ่มเติม ]</span>
+                        </a>
+                        `;
                     }else{
-                        iconMemoRun = '';
+                        resultMemocut = runData[i].memo;
                     }
 
                     output +=`
@@ -2345,15 +2442,26 @@ $(document).ready(function(){
                         <input type="radio" id="selectTime_`+runData[i].d_linenum_group+`" name="selectTime" class="areaD" data_linenum_group="`+runData[i].d_linenum_group+`"
                         >
                         </td>
-                        <td>`+iconMemoRun+`</td>
+                        
                         <td>`+iconImageRun+`</td>
                         `;
                     for(let j = 0; j < runData[i].runByGroup.length; j++){
+
+                        // Check Color min and max
+                        let colorText = '';
+                        if(parseFloat(runData[i].runByGroup[j].d_run_value) > parseFloat(runData[i].runByGroup[j].d_run_max)){
+                            colorText = 'style="color:#CC0000;"';
+                        }else if(parseFloat(runData[i].runByGroup[j].d_run_value) < parseFloat(runData[i].runByGroup[j].d_run_min)){
+                            colorText = 'style="color:#CC0000;"';
+                        }else{
+                            colorText = 'style="color:#28a745;"';
+                        }
                         output +=`
-                        <td>`+runData[i].runByGroup[j].d_run_value+`</td>
+                        <td `+colorText+`>`+parseFloat(runData[i].runByGroup[j].d_run_value)+`</td>
                         `;
                     }
                     output +=`
+                    <td class="tb_memoM"><span>`+resultMemocut+`</span></td>
                     </tr>
                     `;
                 }
@@ -2808,7 +2916,7 @@ $(document).ready(function(){
         const deptcode = "<?php echo getUser()->DeptCode; ?>";
         const ecode = "<?php echo getUser()->ecode; ?>";
         if(deptcode != "1007"){
-            if(ecode == "M1809"){
+            if(ecode == "M1809" || ecode == "M0282"){
                 $('#forPd_v , #forPd_v2').css('display' , '');
                 $('#line_forPd_v').css('display' , '');
             }else{
