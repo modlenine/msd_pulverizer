@@ -331,39 +331,53 @@ class Main_model extends CI_Model {
             $output = '';
 
             $sql = $this->db3->query("SELECT TOP 50
-                prodtable.itemid,
-                prodtable.dataareaid,
-                prodtable.prodid,
-                prodtable.inventdimid,
-                inventdim.inventbatchid,
-                prodtable.slc_orgreference,
-                prodtable.slc_packageid,
-                prodtable.qtysched
-                FROM
-                prodtable
-                LEFT JOIN inventdim ON inventdim.inventdimid = prodtable.inventdimid AND inventdim.dataareaid = prodtable.dataareaid
+            prodtable.itemid,
+            prodtable.dataareaid,
+            prodtable.prodid,
+            prodtable.inventdimid,
+            inventdim.inventbatchid,
+            prodtable.slc_orgreference,
+            prodtable.slc_packageid,
+            prodtable.qtysched,
+            slc_packagespc.packageid,
+            slc_packagespc.packagetxt
+            FROM
+            prodtable
+            LEFT JOIN inventdim ON inventdim.inventdimid = prodtable.inventdimid AND inventdim.dataareaid = prodtable.dataareaid
+            LEFT JOIN slc_packagespc ON slc_packagespc.packageid = prodtable.slc_packageid AND slc_packagespc.dataareaid = prodtable.dataareaid
                 WHERE prodtable.dataareaid = '$dataareaid' AND prodtable.prodid like '%$searchProdid%' AND prodtable.prodstatus NOT IN (7, 8)
                 ");
 
             $output = '<ul class="list-group lgprodid">';
             foreach ($sql->result() as $rs) {
 
-                $getBag = $this->getBagFormPD($rs->slc_packageid , $rs->dataareaid);
+                // $getBag = $this->getBagFormPD($rs->slc_packageid , $rs->dataareaid);
+                // if($getBag->num_rows() != 0){
+                //     $getBag_packid = $getBag->row()->packageid;
+                //     $getBag_packtxt = $getBag->row()->packagetxt;
+                // }else{
+                //     $getBag_packid = null;
+                //     $getBag_packtxt = null;
+                // }
 
                 if(substr($rs->slc_orgreference , 0 , 2) == "PD"){
                     $wipProdid = $this->checkPDWip($searchProdid , $dataareaid);
 
                     $sql2 = $this->db3->query("SELECT TOP 50
-                        prodtable.itemid,
-                        prodtable.dataareaid,
-                        prodtable.prodid,
-                        prodtable.inventdimid,
-                        inventdim.inventbatchid,
-                        prodtable.slc_orgreference,
-                        prodtable.qtysched
-                        FROM
-                        prodtable
-                        LEFT JOIN inventdim ON inventdim.inventdimid = prodtable.inventdimid AND inventdim.dataareaid = prodtable.dataareaid
+                    prodtable.itemid,
+                    prodtable.dataareaid,
+                    prodtable.prodid,
+                    prodtable.inventdimid,
+                    inventdim.inventbatchid,
+                    prodtable.slc_orgreference,
+                    prodtable.slc_packageid,
+                    prodtable.qtysched,
+                    slc_packagespc.packageid,
+                    slc_packagespc.packagetxt
+                    FROM
+                    prodtable
+                    LEFT JOIN inventdim ON inventdim.inventdimid = prodtable.inventdimid AND inventdim.dataareaid = prodtable.dataareaid
+                    LEFT JOIN slc_packagespc ON slc_packagespc.packageid = prodtable.slc_packageid AND slc_packagespc.dataareaid = prodtable.dataareaid
                         WHERE prodtable.dataareaid = '$dataareaid' AND prodtable.prodid = '$wipProdid'
                         ");
 
@@ -376,8 +390,8 @@ class Main_model extends CI_Model {
                         data_inventbatchid = "' . $rss->inventbatchid . '"
                         data_dataareaid = "' . $rss->dataareaid . '"
                         data_slc_orgreference = "'.substr($rss->slc_orgreference , 0 , 2).'"
-                        data_typeofbag = "'.$getBag->packageid.'"
-                        data_typeofbagtxt = "'.$getBag->packagetxt.'"
+                        data_typeofbag = "'.$rss->packageid.'"
+                        data_typeofbagtxt = "'.$rss->packagetxt.'"
                         data_qtysched = "'.$rss->qtysched.'"
                         ><li class="list-group-item">' . $rs->prodid . '</li></a>
                         ';
@@ -392,8 +406,8 @@ class Main_model extends CI_Model {
                     data_inventbatchid = "' . $rs->inventbatchid . '"
                     data_dataareaid = "' . $rs->dataareaid . '"
                     data_slc_orgreference = "'.substr($rs->slc_orgreference , 0 , 2).'"
-                    data_typeofbag = "'.$getBag->packageid.'"
-                    data_typeofbagtxt = "'.$getBag->packagetxt.'"
+                    data_typeofbag = "'.$rs->packageid.'"
+                    data_typeofbagtxt = "'.$rs->packagetxt.'"
                     data_qtysched = "'.$rs->qtysched.'"
                     ><li class="list-group-item">' . $rs->prodid . '</li></a>
                     ';
@@ -418,7 +432,7 @@ class Main_model extends CI_Model {
             WHERE slc_packagespc.packageid = '$bagid' AND slc_packagespc.dataareaid = '$dataareaid'
             ");
 
-            return $sql->row();
+            return $sql;
         }
     }
 

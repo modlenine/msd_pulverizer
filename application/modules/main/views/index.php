@@ -57,8 +57,8 @@
 										<th>Order</th>
 										<th>Output</th>
 										<th>Blade Type</th>
-										<th>Gap</th>
 										<th>Screen (Mesh)</th>
+										<th>Gap</th>
 										<th>Date</th>
 										<th>Status</th>
 										<th>Memo</th>
