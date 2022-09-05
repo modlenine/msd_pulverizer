@@ -177,7 +177,7 @@ class Main extends MX_Controller {
 
     public function testcode()
     {
-        $this->load->view("testdate");
+        echo phpinfo();
     }
 
 
