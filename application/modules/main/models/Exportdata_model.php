@@ -96,7 +96,8 @@ class Exportdata_model extends CI_Model {
 
 
             $objPHPExcel->getActiveSheet()->setCellValue('a6', 'Run Screen');
-            $runCha = "b";
+            $objPHPExcel->getActiveSheet()->setCellValue('b6', 'Date');
+            $runCha = "c";
             $check_runCha = 1;
             $total_runCha = getRunScreen_exportData($m_code)->num_rows();
             foreach(getRunScreen_exportData($m_code)->result() as $rs1){
@@ -118,9 +119,10 @@ class Exportdata_model extends CI_Model {
             $t1 = 7;
             foreach(getRunScreenTime_exportData($m_code)->result() as $rs2){
                 $objPHPExcel->getActiveSheet()->setCellValue('a'.$t1, $rs2->d_worktime);
+                $objPHPExcel->getActiveSheet()->setCellValue('b'.$t1, conDateFromDb($rs2->d_workdate));
 
                     // Loop Run Value
-                    $runvalCha = "b";
+                    $runvalCha = "c";
                     $check_valcha = 1;
                     $total_valcha = getRunScreenValue_export($m_code , $rs2->d_detailcode)->num_rows();
                     $memo = "";

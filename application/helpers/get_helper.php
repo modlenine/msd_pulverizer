@@ -219,6 +219,7 @@ function getRunScreenTime_exportData($m_code)
     $sql = gfn()->db->query("SELECT
     details.d_templatecode,
     details.d_worktime,
+    details.d_workdate,
     details.d_action,
     details.d_linenum,
     details.d_linenum_group,
