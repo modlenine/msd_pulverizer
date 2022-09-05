@@ -23,9 +23,11 @@
 	<!-- Date & Time Picker JS -->
 	<script src="<?=base_url('assets/')?>timepicker/js/components/moment.js"></script>
 	<script src="<?=base_url('assets/')?>timepicker/js/components/timepicker.js"></script>
-	<script src="<?=base_url('assets/')?>timepicker/js/components/datepicker.js"></script>
-	<!-- Include Date Range Picker -->
+	<!-- <script src="<?=base_url('assets/')?>timepicker/js/components/datepicker.js"></script> -->
 	<script src="<?=base_url('assets/')?>timepicker/js/components/daterangepicker.js"></script>
+
+
+	
 	<!-- Date & Time Picker JS -->
 	<script src="<?=base_url()?>assets/dist/zebra_datepicker.min.js"></script>
 	<script src="<?=base_url()?>assets/ekko_lightbox/ekko-lightbox.min.js"></script>
@@ -43,6 +45,12 @@
 			format: "HH:mm",
 			showClose: true
     	});
+
+		$('.datepicker1').datetimepicker({
+			format: "HH:mm",
+			showClose: true
+    	});
+
 
 		$(document).on('click', '[data-toggle="lightbox"]', function(event) {
 			event.preventDefault();

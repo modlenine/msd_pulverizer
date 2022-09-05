@@ -177,10 +177,7 @@ class Main extends MX_Controller {
 
     public function testcode()
     {
-        // $this->load->view("testpage");
-        $url = $_SERVER['HTTP_HOST'];
-
-        echo $url;
+        $this->load->view("testdate");
     }
 
 

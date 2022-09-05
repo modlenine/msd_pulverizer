@@ -807,7 +807,7 @@ class Main_model extends CI_Model {
         if($received_data->action == "loadRunDetailData"){
 
             $sqlRunGroup = $this->db->query("SELECT 
-            d_linenum_group , d_worktime , d_detailcode
+            d_linenum_group , d_worktime , d_detailcode , d_workdate
             FROM details 
             WHERE d_maincode = '$received_data->m_code' AND 
             d_action = 'Run' 
@@ -824,6 +824,7 @@ class Main_model extends CI_Model {
                     details.d_detailcode,
                     details.d_templatecode,
                     details.d_worktime,
+                    details.d_workdate,
                     details.d_action,
                     details.d_run_name,
                     details.d_run_min,
@@ -855,9 +856,15 @@ class Main_model extends CI_Model {
                     }else{
                         $imageRun = "";
                     }
+
+                    $workDate = "";
+                    if($rs->d_workdate != ""){
+                        $workDate = conDateFromDb($rs->d_workdate);
+                    }
     
                     $resultLineGroup = array(
                         "d_worktime" => $rs->d_worktime,
+                        "d_workdate" => $workDate,
                         "d_linenum_group" => $rs->d_linenum_group,
                         "detailcode" => $rs->d_detailcode,
                         "imageRun" => $imageRun,
@@ -1131,7 +1138,7 @@ class Main_model extends CI_Model {
 
     public function saveRunDetail()
     {
-        if($this->input->post("mdrd_chooseTime") != ""){
+        if($this->input->post("mdrd_chooseTime") != "" && $this->input->post("mdrd_chooseDate") != ""){
             // Check Group Linenum
             $groupLinenum = $this->checkGroupNumber($this->input->post("mdrd_m_code"));
 
@@ -1150,6 +1157,7 @@ class Main_model extends CI_Model {
                     "d_detailcode" => $detailcode ,
                     "d_templatecode" => $this->input->post("mdrd_d_templatecode")[$key],
                     "d_worktime" => $this->input->post("mdrd_chooseTime"),
+                    "d_workdate" => conDateFormat($this->input->post("mdrd_chooseDate")),
                     "d_action" => "Run",
                     "d_run_name" => $mdrd_d_run_names,
                     "d_run_min" => $this->input->post("mdrd_d_run_min")[$key],
@@ -1282,6 +1290,7 @@ class Main_model extends CI_Model {
         if($received_data->action == "loadRunGroupList"){
             $sql = $this->db->query("SELECT
             d_worktime,
+            d_workdate,
             d_detailcode,
             d_maincode
             FROM details
@@ -1323,6 +1332,7 @@ class Main_model extends CI_Model {
             details.d_detailcode,
             details.d_templatecode,
             details.d_worktime,
+            details.d_workdate,
             details.d_action,
             details.d_run_name,
             details.d_run_min,
@@ -1341,8 +1351,12 @@ class Main_model extends CI_Model {
 
             // Get worktime
             $worktime = '';
+            $workdate = '';
             if($sql->num_rows() != 0){
                 $worktime = $sql->row()->d_worktime;
+                if($sql->row()->d_workdate != ""){
+                    $workdate = conDateFromDb($sql->row()->d_workdate);
+                }
             }else{
                 $worktime = null;
             }
@@ -1388,7 +1402,8 @@ class Main_model extends CI_Model {
                 "memo" => $rsmemo,
                 "runImage" => $rsImage,
                 "runDetailForEdit" => $sql->result(),
-                "worktime" => $worktime
+                "worktime" => $worktime,
+                "workdate" => $workdate
             );
         }else{
             $output = array(
@@ -1453,7 +1468,8 @@ class Main_model extends CI_Model {
             foreach($d_autoid as $key => $d_autoids){
                 $arUpdateRun = array(
                     "d_run_value" => $this->input->post("mdrde_d_run_value")[$key],
-                    "d_worktime" => $this->input->post("mdrd_chooseTime_edit")
+                    "d_worktime" => $this->input->post("mdrd_chooseTime_edit"),
+                    "d_workdate" => conDateFormat($this->input->post("mdrd_chooseDate_edit"))
                 );
                 $this->db->where("d_autoid" , $d_autoids);
                 $this->db->update("details" , $arUpdateRun);

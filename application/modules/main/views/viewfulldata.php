@@ -10,9 +10,11 @@
 	<link rel="stylesheet" href="<?=base_url('assets/')?>timepicker/css/font-icons.css" type="text/css" />
 
 	<!-- Date & Time Picker CSS -->
-	<link rel="stylesheet" href="<?=base_url('assets/')?>timepicker/css/components/datepicker.css" type="text/css" />
+	<!-- <link rel="stylesheet" href="<?=base_url('assets/')?>timepicker/css/components/datepicker.css" type="text/css" /> -->
 	<link rel="stylesheet" href="<?=base_url('assets/')?>timepicker/css/components/timepicker.css" type="text/css" />
 	<link rel="stylesheet" href="<?=base_url('assets/')?>timepicker/css/components/daterangepicker.css" type="text/css" />
+
+
 
     <script src="<?=base_url('assets/js/custom/highcharts.js?v='.filemtime('./assets/js/custom/highcharts.js'))?>"></script>
     <script src="<?=base_url('assets/js/custom/series-label.js?v='.filemtime('./assets/js/custom/series-label.js'))?>"></script>
@@ -117,6 +119,14 @@
                                 </div>
 
                             </div>
+
+
+                            <div class="col-md-12 bottommargin-sm">
+                                <label for="">กรุณาเลือกวัน</label>
+                                <input id="mdrd_chooseDate" name="mdrd_chooseDate" class="form-control date-picker" placeholder="Select Date" type="text">
+                            </div>
+
+
                         </div>
                         
 
@@ -327,6 +337,12 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-md-12 mb-2">
+                                <label for="">แก้ไขวันเดินงาน</label>
+                                <input id="mdrd_chooseDate_edit" name="mdrd_chooseDate_edit" class="form-control date-picker" placeholder="Select Date" type="text">
+                            </div>
+
                             <div class="col-lg-12 bottommargin">
                                 <label>อัพโหลดรูปภาพ , เอกสารที่เกี่ยวข้อง</label><br>
                                 <input id="mdrde_f_name" name="mdrde_f_name[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-show-preview="true" accept="image/*">
@@ -1591,24 +1607,16 @@ $(document).ready(function(){
 
 
     $('#tabpage1').click(function(){
-    //   const id = $(this).attr("href").substr(1);
-    //   window.location.hash = id;
       localStorage.setItem('tab' , 'tabpage1');
     });
     $('#tabpage2').click(function(){
-    //   const id = $(this).attr("href").substr(1);
-    //   window.location.hash = id;
       localStorage.setItem('tab' , 'tabpage2');
       loadCheckMachinePage();
     });
     $('#tabpage3').click(function(){
-    //   const id = $(this).attr("href").substr(1);
-    //   window.location.hash = id;
       localStorage.setItem('tab' , 'tabpage3');
     });
     $('#tabpage4').click(function(){
-    //   const id = $(this).attr("href").substr(1);
-    //   window.location.hash = id;
       localStorage.setItem('tab' , 'tabpage4');
         let prodid = $('#m_product_number_v').val();
         let dataareaid = $('#m_dataareaid_v').val();
@@ -1616,7 +1624,6 @@ $(document).ready(function(){
         let formno = "<?php echo $mainformno; ?>";
       loaddatajobcard(prodid , dataareaid , status , formno);
     });
-
     $('#tabpage5').click(function(){
       localStorage.setItem('tab' , 'tabpage5');
         let prodid = $('#m_product_number_v').val();
@@ -2141,7 +2148,13 @@ $(document).ready(function(){
                 `;
                 let runGroupLists = res.data.runGroupList;
                     for(let i = 0; i < runGroupLists.length; i++){
-                        output +=`<option value="`+runGroupLists[i].d_detailcode+`">`+runGroupLists[i].d_worktime+`</option>`;
+                        let condate = "";
+                        if(runGroupLists[i].d_workdate != null){
+                            condate = moment(runGroupLists[i].d_workdate).format('DD/MM/yy');
+                        }else{
+                            condate = "";
+                        }
+                        output +=`<option value="`+runGroupLists[i].d_detailcode+`">`+runGroupLists[i].d_worktime+` `+condate+`</option>`;
                     }
                 output += `</select>`;
                 output +=`
@@ -2167,7 +2180,9 @@ $(document).ready(function(){
                 let output = '';
                 let runImages = res.data.runImage;
                 let worktime = res.data.worktime;
+                let workdate = res.data.workdate;
                 $('#mdrd_chooseTime_edit').val(worktime);
+                $('#mdrd_chooseDate_edit').val(workdate);
                 output +=`
                         <label><b>รูปภาพ , เอกสารที่เกี่ยวข้อง</b></label>
                         <div class="row form-group">
@@ -2507,6 +2522,7 @@ $(document).ready(function(){
                     <table id="tb_detail_main" class="table table-bordered table-striped">`;
             output +=`<tr>`;
                 output +=`<th class="tb_runscreenName">Run Screen</th>
+                <th class="tb_runscreenName">Date</th>
                 <th class="tb_image">Image , Document</th>
                 `;
                 let iconBeforeImage = '';
@@ -2532,6 +2548,7 @@ $(document).ready(function(){
 
             output +=`<tr>`;
             output +=`<td><b>S/POINT</b></td>
+            <td></td>
             <td>`+iconBeforeImage+`</td>
             `;
                     for(let i = 0; i < spointData.length; i++){
@@ -2580,7 +2597,7 @@ $(document).ready(function(){
                         <input type="radio" id="selectTime_`+runData[i].d_linenum_group+`" name="selectTime" class="areaD" data_linenum_group="`+runData[i].d_linenum_group+`"
                         >
                         </td>
-                        
+                        <td>`+runData[i].d_workdate+`</td>
                         <td>`+iconImageRun+`</td>
                         `;
                     for(let j = 0; j < runData[i].runByGroup.length; j++){
@@ -3361,10 +3378,6 @@ $(document).ready(function(){
             }
         }
     }
-
-
-
-
 
 
 

@@ -27,11 +27,13 @@
 	<link rel="stylesheet" href="<?=base_url('assets/')?>fileupload/bootstrap-icons.css" type="text/css" />
 
 	<link rel="stylesheet" href="<?=base_url()?>assets/ekko_lightbox/ekko-lightbox.css" type="text/css"/>
+	
 
 
     <script src="<?=base_url('assets/js/jquery.min.js?v='.filemtime('./assets/js/jquery.min.js'))?>"></script>
 	<script src="<?=base_url('assets/js/vue.js')?>"></script>
 	<script src="<?=base_url('assets/js/axios.min.js')?>"></script>
+	
 	
 
 	
@@ -111,7 +113,6 @@
 
 		
 	</style>
-
 </head>
 <?php
 	getModal("machine/modals/manage_runscreen_modal");
