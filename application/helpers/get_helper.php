@@ -266,5 +266,18 @@ function getdataForExportMasterList()
 }
 
 
+function getCheckMachine($maincodeno)
+{
+    if($maincodeno != ""){
+        $sql = gfn()->db->query("SELECT mck_m_code FROM machine_check WHERE mck_m_code = '$maincodeno' ");
+        if($sql->num_rows() != 0){
+            return 1 ;
+        }else{
+            return 0 ;
+        }
+    }
+}
+
+
 
 ?>

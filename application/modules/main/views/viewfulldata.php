@@ -561,6 +561,7 @@
 
                         <input hidden type="text" name="getMaincode" id="getMaincode" value="<?=getMaincode($mainformno)?>">
                         <input hidden type="text" name="getFormStatus" id="getFormStatus" value="<?=getviewfulldata(getMaincode($mainformno))->m_status?>">
+                        <input hidden type="text" name="getCheckMachine" id="getCheckMachine" value="<?=getCheckMachine(getMaincode($mainformno));?>">
 
                         <!-- Head zone -->
 						<div class="row headzone mt-3">
@@ -1372,23 +1373,34 @@ $(document).ready(function(){
     });
 
     $(document).on('click' , '.add-detail' , function(){
-        const data_m_code = $(this).attr('data_m_code');
-        $('#runDetail_modal').modal('show');
-        $('#mdrd_m_code').val(data_m_code);
-        loadSpointInMainData(data_m_code);
+        let resultMachineCheck = $('#getCheckMachine').val();
 
-        const productionNo = $('#m_product_number_v').val();
-        const itemNo = $('#m_item_number_v').val();
-        const machineName = $('#m_template_name_v').val();
-        const batchNo = $('#m_batch_number_v').val();
+        if(resultMachineCheck == 1){
+            const data_m_code = $(this).attr('data_m_code');
+            $('#runDetail_modal').modal('show');
+            $('#mdrd_m_code').val(data_m_code);
+            loadSpointInMainData(data_m_code);
 
-        let title = '';
-        title +=`
-        <span><b>Machine Name. : </b>`+machineName+`</span>&nbsp;&nbsp;<span><b>Batch Number : </b>`+batchNo+`</span><br>
-        <span><b>Production Number : </b>`+productionNo+`</span>&nbsp;&nbsp;<span><b>Item Number : </b>`+itemNo+`</span>
-        `;
+            const productionNo = $('#m_product_number_v').val();
+            const itemNo = $('#m_item_number_v').val();
+            const machineName = $('#m_template_name_v').val();
+            const batchNo = $('#m_batch_number_v').val();
 
-        $('#runDetailTitle').html(title);
+            let title = '';
+            title +=`
+            <span><b>Machine Name. : </b>`+machineName+`</span>&nbsp;&nbsp;<span><b>Batch Number : </b>`+batchNo+`</span><br>
+            <span><b>Production Number : </b>`+productionNo+`</span>&nbsp;&nbsp;<span><b>Item Number : </b>`+itemNo+`</span>
+            `;
+
+            $('#runDetailTitle').html(title);
+        }else{
+            swal({
+                title: 'กรุณาตรวจสอบเครื่องจักรให้เรียบร้อยก่อน',
+                type: 'warning',
+                showConfirmButton: false,
+                timer:2000
+            });
+        }
     });
 
     $(document).on('click' , '.runImageI' , function(){
