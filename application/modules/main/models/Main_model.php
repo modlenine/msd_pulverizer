@@ -349,7 +349,7 @@ class Main_model extends CI_Model {
 
             $output = '';
 
-            $sql = $this->db3->query("SELECT TOP 50
+            $sql = $this->db3->query("SELECT TOP 10
             prodtable.itemid,
             prodtable.dataareaid,
             prodtable.prodid,
@@ -382,7 +382,7 @@ class Main_model extends CI_Model {
                 if(substr($rs->slc_orgreference , 0 , 2) == "PD"){
                     $wipProdid = $this->checkPDWip($searchProdid , $dataareaid);
 
-                    $sql2 = $this->db3->query("SELECT TOP 50
+                    $sql2 = $this->db3->query("SELECT TOP 10
                     prodtable.itemid,
                     prodtable.dataareaid,
                     prodtable.prodid,
@@ -397,7 +397,7 @@ class Main_model extends CI_Model {
                     prodtable
                     LEFT JOIN inventdim ON inventdim.inventdimid = prodtable.inventdimid AND inventdim.dataareaid = prodtable.dataareaid
                     LEFT JOIN slc_packagespc ON slc_packagespc.packageid = prodtable.slc_packageid AND slc_packagespc.dataareaid = prodtable.dataareaid
-                        WHERE prodtable.dataareaid = '$dataareaid' AND prodtable.prodid = '$wipProdid'
+                        WHERE prodtable.dataareaid = '$dataareaid' AND prodtable.prodid LIKE '%$wipProdid%'
                         ");
 
                     foreach($sql2->result() as $rss){
@@ -498,7 +498,7 @@ class Main_model extends CI_Model {
     public function checkPDWip($prodid , $dataareaid)
     {
         $checkWip = "";
-        $sql = $this->db4->query("SELECT
+        $sqlwip = $this->db3->query("SELECT TOP 5
                 prodtable.itemid,
                 prodtable.dataareaid,
                 prodtable.prodid,
@@ -508,12 +508,12 @@ class Main_model extends CI_Model {
                 prodtable
                 WHERE prodtable.dataareaid = '$dataareaid' AND prodtable.prodid like '%$prodid%'
                 ");
-        if($sql->num_rows() != 0){
-            $checkWip = $sql->row()->slc_orgreference;
+        if($sqlwip->num_rows() != 0){
+            $checkWip = $sqlwip->row()->slc_orgreference;
             if(substr($checkWip , 0 , 2) == "PD"){
                 return $this->checkPDWip($checkWip , $dataareaid);
             }else{
-                return $sql->row()->prodid;
+                return $sqlwip->row()->prodid;
             }
         }  
     }
