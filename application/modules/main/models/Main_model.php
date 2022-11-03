@@ -265,7 +265,7 @@ class Main_model extends CI_Model {
             FROM
             template_master
             WHERE template_master.master_name LIKE '%$received_data->templatename%'
-            ORDER BY template_master.master_name ASC LIMIT 20
+            ORDER BY template_master.master_name ASC LIMIT 50
             ");
 
             $result = [];
@@ -309,7 +309,7 @@ class Main_model extends CI_Model {
             FROM
             template_master
             WHERE template_master.master_itemnumber LIKE '%$received_data->itemnumber%'
-            ORDER BY template_master.master_name ASC LIMIT 20
+            ORDER BY template_master.master_name ASC LIMIT 50
             ");
 
             $result = [];
@@ -349,7 +349,7 @@ class Main_model extends CI_Model {
 
             $output = '';
 
-            $sql = $this->db3->query("SELECT TOP 10
+            $sql = $this->db3->query("SELECT TOP 20
             prodtable.itemid,
             prodtable.dataareaid,
             prodtable.prodid,
@@ -382,7 +382,7 @@ class Main_model extends CI_Model {
                 if(substr($rs->slc_orgreference , 0 , 2) == "PD"){
                     $wipProdid = $this->checkPDWip($searchProdid , $dataareaid);
 
-                    $sql2 = $this->db3->query("SELECT TOP 10
+                    $sql2 = $this->db3->query("SELECT TOP 20
                     prodtable.itemid,
                     prodtable.dataareaid,
                     prodtable.prodid,
@@ -498,7 +498,7 @@ class Main_model extends CI_Model {
     public function checkPDWip($prodid , $dataareaid)
     {
         $checkWip = "";
-        $sqlwip = $this->db3->query("SELECT TOP 5
+        $sqlwip = $this->db3->query("SELECT TOP 20
                 prodtable.itemid,
                 prodtable.dataareaid,
                 prodtable.prodid,
