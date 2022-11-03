@@ -42,11 +42,17 @@
                             <div id="m_showpd"></div>
                         </div>
                         <div class="col-lg-6 form-group">
-                            <label for=""><b>เลือกเครื่องจักร </b><span class="textRequest">*</span></label>
+                            <label for=""><b>เลือก STD. </b><span class="textRequest">*</span></label>
                             <input type="text" name="m_template_name" id="m_template_name" class="form-control" @keyup="searchTemplate" required>
                             <div id="m_showTemplate"></div>
                             <input hidden type="text" name="m_template_code" id="m_template_code" class="form-control">
                         </div>
+
+                        <div class="col-lg-6 form-group">
+                            <label for=""><b>เลือกเครื่องจักร </b><span class="textRequest">*</span></label>
+                            <select name="m_machine" id="m_machine" class="form-control" required></select>
+                        </div>
+
                         <div class="col-lg-6 form-group">
                             <label for=""><b>Order (kg.) </b><span class="textRequest">*</span></label>
                             <input type="text" name="m_order" id="m_order" class="form-control" required>
@@ -290,51 +296,35 @@
                 $('#m_order').val(parseFloat(data_qtysched));
 
                 searchTemplate(data_itemid);
+                getMachine();
 
             });
 
 
-            // $(document).on('click' , '.searchBagLi' , function(){
-            //     const data_m_typeofbag = $(this).attr("data_m_typeofbag");
-            //     const data_m_typeofbagtxt = $(this).attr("data_m_typeofbagtxt");
 
-            //     $('#m_typeofbagtxt').val(data_m_typeofbagtxt);
-            //     $('#m_typeofbag').val(data_m_typeofbag);
-            //     $('#showBagCode').html('');
+            function getMachine()
+            {
+                axios.post(url+'main/getMachine' , {
+                    action:"getMachine"
+                }).then(res=>{
+                    console.log(res.data);
+                    if(res.data.status == "Select Data Success"){
+                        let machinelist = res.data.result;
 
-            // });
+                        let html = `
+                            <option value="">กรุณาเลือกเครื่องจักร</option>
+                        `;
+                        for(let i = 0; i < machinelist.length; i++){
+                            html += `
+                                <option value="`+machinelist[i].mach_name+`">`+machinelist[i].mach_name+`</option>
+                            `;
+                        }
 
+                        $('#m_machine').html(html);
+                    }
+                });
+            }
 
-
-            // function searchBag(bagCode , m_areaid)
-            // {
-            //     if(bagCode != ""){
-            //         axios.post(url+'main/searchBag' , {
-            //             action:"searchBag",
-            //             bagCode:bagCode,
-            //             m_areaid:m_areaid
-            //         }).then(res => {
-            //             // console.log(res.data);
-            //             if(res.data.status == "Select Data Success"){
-            //                 let resultOfBagData = res.data.resultBag;
-            //                 let outputHtml = `<ul class="list-group mt-2 searchBagUl">`;
-            //                 for(let i = 0; i < resultOfBagData.length; i++){
-            //                     outputHtml += `
-            //                     <li class="list-group-item list-group-item list-group-item-action searchBagLi"
-            //                         data_m_typeofbag="`+resultOfBagData[i].packageid+`"
-            //                         data_m_typeofbagtxt="`+resultOfBagData[i].packagetxt+`"
-            //                     >
-            //                         <span><b>`+resultOfBagData[i].packageid+`</b></span><br>
-            //                         <span>`+resultOfBagData[i].packagetxt+`</span>
-            //                     </li>
-            //                     `;
-            //                 }
-            //                 outputHtml += `</ul>`;
-            //                 $('#showBagCode').html(outputHtml);
-            //             }
-            //         });
-            //     }
-            // }
 
 
 

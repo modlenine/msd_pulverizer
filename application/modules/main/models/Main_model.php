@@ -533,7 +533,8 @@ class Main_model extends CI_Model {
             $this->input->post("m_item_number") != "" &&
             $this->input->post("m_typeofbag") != "" &&
             $this->input->post("m_batch_number") != "" &&
-            $this->input->post("m_typeofbag") != ""
+            $this->input->post("m_typeofbag") != "" &&
+            $this->input->post("m_machine") != ""
         ){
             $formno = getFormNo();
 
@@ -543,6 +544,7 @@ class Main_model extends CI_Model {
                 "m_areaid" => $this->input->post("m_areaid"),
                 "m_product_number" => $this->input->post("m_product_number"),
                 "m_template_name" => $this->input->post("m_template_name"),
+                "m_machine" => $this->input->post("m_machine"),
                 "m_order" => $this->input->post("m_order"),
                 "m_std_output" => $this->input->post("m_std_output"),
                 "m_maxamp" => $this->input->post("m_maxamp"),
@@ -2304,6 +2306,29 @@ class Main_model extends CI_Model {
                 "templateRemark" => null
             );
         }
+        echo json_encode($output);
+    }
+
+
+    public function getMachine()
+    {
+        $received_data = json_decode(file_get_contents("php://input"));
+        if($received_data->action == "getMachine"){
+            $sql = $this->db->query("SELECT mach_name FROM machine_information WHERE mach_status = 'active' ");
+
+            $output = array(
+                "msg" => "ดึงข้อมูลเครื่องจักรสำเร็จ",
+                "status" => "Select Data Success",
+                "result" => $sql->result()
+            );
+        }else{
+            $output = array(
+                "msg" => "ดึงข้อมูลเครื่องจักรไม่สำเร็จ",
+                "status" => "Select Data Not Success",
+                "result" => null
+            );
+        }
+
         echo json_encode($output);
     }
 

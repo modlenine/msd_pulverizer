@@ -76,6 +76,21 @@ function conNumToText($number)
     }
 }
 
+function conCompany($areaid)
+{
+    switch ($areaid){
+        case "sln":
+            return "Salee Colour Public Company Limited.";
+            break;
+        case "ca":
+            return "Composite Asia Co.,Ltd.";
+            break;
+        case "poly":
+            return "Poly Meritasia Co.,Ltd.";
+            break;
+    }
+}
+
 
 
 

@@ -582,8 +582,16 @@
                         </a>
                         <!-- Edit Button -->
                             <div class="col-md-4 form-group">
-                                <label for=""><b>Machine Name</b></label>
+                                <label for=""><b>Company</b></label>
+                                <input type="text" name="m_company_v" id="m_company_v" class="form-control" readonly value="<?=conCompany(getviewfulldata(getMaincode($mainformno))->m_areaid)?>">
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for=""><b>STD. Name</b></label>
                                 <input type="text" name="m_template_name_v" id="m_template_name_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_template_name?>">
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for=""><b>Machine Name</b></label>
+                                <input type="text" name="m_machine_v" id="m_machine_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_machine?>">
                             </div>
                             <div class="col-md-4 form-group">
                                 <label for=""><b>Production Number</b></label>
