@@ -144,7 +144,8 @@ class Webapi_model extends CI_Model {
 
                 $context = " CONCAT(m_product_number,' ', 
                             m_batch_number,' ', 
-                            m_item_number,' ', 
+                            m_item_number,' ',
+                            m_formno,' ',
                             m_machine) "; 
 
                 $condition = " $context LIKE '%" . implode("%' OR $context LIKE '%", $idArr) . "%' AND ";
