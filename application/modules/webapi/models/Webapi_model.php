@@ -8,6 +8,7 @@ class Webapi_model extends CI_Model {
     {
         parent::__construct();
         //Do your magic here
+        $this->db_prodplan = $this->load->database("mssql_prodplan" , true);
         date_default_timezone_set("Asia/Bangkok");
     }
 
@@ -18,7 +19,38 @@ class Webapi_model extends CI_Model {
         if($received_data->action == "getMachine_pulverizer"){
             $lastjobrun = [];
            
-            $sql = $this->db->query("SELECT mach_name , mach_desc FROM machine_information WHERE mach_status = 'active'");
+            $sql = $this->db_prodplan->query("SELECT 
+            a.wrkctrid as mach_name,
+            a.prodfactory,
+            a.enummatchinetype,
+            case
+                when a.enummatchinetype = 0 then 'NONE'
+                when a.enummatchinetype = 1 then 'MIXER'
+                when a.enummatchinetype = 2 then 'EXTRUDER'
+                when a.enummatchinetype = 3 then 'BUSS'
+                when a.enummatchinetype = 4 then 'FARREL'
+                when a.enummatchinetype = 5 then 'TE75'
+                when a.enummatchinetype = 6 then 'TE58'
+                when a.enummatchinetype = 7 then 'TE96'
+                when a.enummatchinetype = 8 then 'GRINDER'
+                when a.enummatchinetype = 9 then 'VIBRATOR'
+                when a.enummatchinetype = 10 then 'PACKING'
+                when a.enummatchinetype = 11 then 'OVEN'
+                when a.enummatchinetype = 12 then 'OUTSOURCE'
+                when a.enummatchinetype = 13 then 'RM PREPARE'
+            end as factory ,
+            b.name as mach_desc
+            from slc_wrkctrfactable a
+                left join wrkctrtable b on a.wrkctrid = b.wrkctrid
+            where 
+            (
+                b.recid IN (SELECT MAX(recid) as recid FROM wrkctrtable GROUP BY wrkctrid)
+            ) 
+            and a.prodfactory in (5)
+            and a.enummatchinetype not in (11,1)
+            and a.enummatchinetype not in (7 , 5)
+            group by a.wrkctrid , a.prodfactory , a.enummatchinetype , b.name
+            order by a.prodfactory asc");
 
             foreach($sql->result() as $rs){
                 if($this->getLastJobRun($rs->mach_name) != "null"){

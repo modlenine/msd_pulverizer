@@ -552,264 +552,264 @@
         <!-- Machine Check Modal -->
 
 		
-			<div class="row">
-				<div class="col-xl-12 mb-30">
-					<div class="card-box height-100-p pd-20">
-						<h3 style="text-align:center;">หน้าแสดงรายละเอียด</h3>
+        <div class="row">
+            <div class="col-xl-12 mb-30">
+                <div class="card-box height-100-p pd-20">
+                    <h3 style="text-align:center;">หน้าแสดงรายละเอียด</h3>
 
-                        <h5 style="text-align:center;margin-top:10px;">เอกสารเลขที่ : <?=$mainformno?></h5>
+                    <h5 style="text-align:center;margin-top:10px;">เอกสารเลขที่ : <?=$mainformno?></h5>
 
-                        <input hidden type="text" name="getMaincode" id="getMaincode" value="<?=getMaincode($mainformno)?>">
-                        <input hidden type="text" name="getFormStatus" id="getFormStatus" value="<?=getviewfulldata(getMaincode($mainformno))->m_status?>">
-                        <input hidden type="text" name="getCheckMachine" id="getCheckMachine" value="<?=getCheckMachine(getMaincode($mainformno));?>">
+                    <input hidden type="text" name="getMaincode" id="getMaincode" value="<?=getMaincode($mainformno)?>">
+                    <input hidden type="text" name="getFormStatus" id="getFormStatus" value="<?=getviewfulldata(getMaincode($mainformno))->m_status?>">
+                    <input hidden type="text" name="getCheckMachine" id="getCheckMachine" value="<?=getCheckMachine(getMaincode($mainformno));?>">
 
-                        <!-- Head zone -->
-						<div class="row headzone mt-3">
+                    <!-- Head zone -->
+                    <div class="row headzone mt-3">
 
-                        <!-- Edit Button -->
-                        <a href="javascript:void(0)" class="editHeadDataA"
-                            data_m_code="<?=getMaincode($mainformno)?>"
-                            data_m_formno="<?=$mainformno?>"
-                            data_m_order="<?=getviewfulldata(getMaincode($mainformno))->m_order?>"
-                            data_m_typeofbag="<?=getviewfulldata(getMaincode($mainformno))->m_typeofbag?>"
-                            data_m_typeofbagtxt="<?=getviewfulldata(getMaincode($mainformno))->m_typeofbagtxt?>"
-                            data_m_output="<?=getviewfulldata(getMaincode($mainformno))->m_std_output?>"
-                            data_m_bladetype="<?=getviewfulldata(getMaincode($mainformno))->m_bladeType?>"
-                            data_m_screenMesh="<?=getviewfulldata(getMaincode($mainformno))->m_screenMesh?>"
-                            data_m_gap="<?=getviewfulldata(getMaincode($mainformno))->m_gap?>"
-                        >
-                            <i class="fa fa-edit mr-2 editHeadData" aria-hidden="true"></i>
-                        </a>
-                        <!-- Edit Button -->
-                            <div class="col-md-4 form-group">
-                                <label for=""><b>Company</b></label>
-                                <input type="text" name="m_company_v" id="m_company_v" class="form-control" readonly value="<?=conCompany(getviewfulldata(getMaincode($mainformno))->m_areaid)?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label for=""><b>STD. Name</b></label>
-                                <input type="text" name="m_template_name_v" id="m_template_name_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_template_name?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label for=""><b>Machine Name</b></label>
-                                <input type="text" name="m_machine_v" id="m_machine_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_machine?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label for=""><b>Production Number</b></label>
-                                <input type="text" name="m_product_number_v" id="m_product_number_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_product_number?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label for=""><b>Item Number</b></label>
-                                <input type="text" name="m_item_number_v" id="m_item_number_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_item_number?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label for=""><b>Batch Number</b></label>
-                                <input type="text" name="m_batch_number_v" id="m_batch_number_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_batch_number?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label for=""><b>Order (kg.)</b></label>
-                                <input type="text" name="m_order_v" id="m_order_v" class="form-control" readonly value="<?=valueFormat(getviewfulldata(getMaincode($mainformno))->m_order)?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label for=""><b>Output (kg./hr)</b></label>
-                                <input type="text" name="m_std_output_v" id="m_std_output_v" class="form-control" readonly value="<?=valueFormat(getviewfulldata(getMaincode($mainformno))->m_std_output)?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label for=""><b>Max Amp. (%)</b></label>
-                                <input type="text" name="m_maxamp_v" id="m_maxamp_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_maxamp?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label for=""><b>Type of bag</b></label>
-                                <input type="text" name="m_typeofbag_v" id="m_typeofbag_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_typeofbag?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label for=""><b>Bag text</b></label>
-                                <input type="text" name="m_typeofbag_v" id="m_typeofbag_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_typeofbagtxt?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label for=""><b>Blade Type</b></label>
-                                <input type="text" name="m_bladeType_v" id="m_bladeType_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_bladeType?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label for=""><b>Screen (Mesh)</b></label>
-                                <input type="text" name="m_screenMesh_v" id="m_screenMesh_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_screenMesh?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label for=""><b>Gap</b></label>
-                                <input type="text" name="m_gap_v" id="m_gap_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_gap?>">
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label for=""><b>Date</b></label>
-                                <input type="text" name="m_datetime_v" id="m_datetime_v" class="form-control" readonly value="<?=conDateFromDb(getviewfulldata(getMaincode($mainformno))->m_datetime)?>">
-                            </div>
-
-                            
+                    <!-- Edit Button -->
+                    <a href="javascript:void(0)" class="editHeadDataA"
+                        data_m_code="<?=getMaincode($mainformno)?>"
+                        data_m_formno="<?=$mainformno?>"
+                        data_m_order="<?=getviewfulldata(getMaincode($mainformno))->m_order?>"
+                        data_m_typeofbag="<?=getviewfulldata(getMaincode($mainformno))->m_typeofbag?>"
+                        data_m_typeofbagtxt="<?=getviewfulldata(getMaincode($mainformno))->m_typeofbagtxt?>"
+                        data_m_output="<?=getviewfulldata(getMaincode($mainformno))->m_std_output?>"
+                        data_m_bladetype="<?=getviewfulldata(getMaincode($mainformno))->m_bladeType?>"
+                        data_m_screenMesh="<?=getviewfulldata(getMaincode($mainformno))->m_screenMesh?>"
+                        data_m_gap="<?=getviewfulldata(getMaincode($mainformno))->m_gap?>"
+                    >
+                        <i class="fa fa-edit mr-2 editHeadData" aria-hidden="true"></i>
+                    </a>
+                    <!-- Edit Button -->
+                        <div class="col-md-4 form-group">
+                            <label for=""><b>Company</b></label>
+                            <input type="text" name="m_company_v" id="m_company_v" class="form-control" readonly value="<?=conCompany(getviewfulldata(getMaincode($mainformno))->m_areaid)?>">
                         </div>
-                        <input hidden type="text" name="m_dataareaid_v" id="m_dataareaid_v" value="<?=getviewfulldata(getMaincode($mainformno))->m_dataareaid?>">
-                        <!-- Head zone -->
+                        <div class="col-md-4 form-group">
+                            <label for=""><b>STD. Name</b></label>
+                            <input type="text" name="m_template_name_v" id="m_template_name_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_template_name?>">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for=""><b>Machine Name</b></label>
+                            <input type="text" name="m_machine_v" id="m_machine_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_machine?>">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for=""><b>Production Number</b></label>
+                            <input type="text" name="m_product_number_v" id="m_product_number_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_product_number?>">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for=""><b>Item Number</b></label>
+                            <input type="text" name="m_item_number_v" id="m_item_number_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_item_number?>">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for=""><b>Batch Number</b></label>
+                            <input type="text" name="m_batch_number_v" id="m_batch_number_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_batch_number?>">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for=""><b>Order (kg.)</b></label>
+                            <input type="text" name="m_order_v" id="m_order_v" class="form-control" readonly value="<?=valueFormat(getviewfulldata(getMaincode($mainformno))->m_order)?>">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for=""><b>Output (kg./hr)</b></label>
+                            <input type="text" name="m_std_output_v" id="m_std_output_v" class="form-control" readonly value="<?=valueFormat(getviewfulldata(getMaincode($mainformno))->m_std_output)?>">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for=""><b>Max Amp. (%)</b></label>
+                            <input type="text" name="m_maxamp_v" id="m_maxamp_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_maxamp?>">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for=""><b>Type of bag</b></label>
+                            <input type="text" name="m_typeofbag_v" id="m_typeofbag_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_typeofbag?>">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for=""><b>Bag text</b></label>
+                            <input type="text" name="m_typeofbag_v" id="m_typeofbag_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_typeofbagtxt?>">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for=""><b>Blade Type</b></label>
+                            <input type="text" name="m_bladeType_v" id="m_bladeType_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_bladeType?>">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for=""><b>Screen (Mesh)</b></label>
+                            <input type="text" name="m_screenMesh_v" id="m_screenMesh_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_screenMesh?>">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for=""><b>Gap</b></label>
+                            <input type="text" name="m_gap_v" id="m_gap_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_gap?>">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for=""><b>Date</b></label>
+                            <input type="text" name="m_datetime_v" id="m_datetime_v" class="form-control" readonly value="<?=conDateFromDb(getviewfulldata(getMaincode($mainformno))->m_datetime)?>">
+                        </div>
 
                         
+                    </div>
+                    <input hidden type="text" name="m_dataareaid_v" id="m_dataareaid_v" value="<?=getviewfulldata(getMaincode($mainformno))->m_dataareaid?>">
+                    <!-- Head zone -->
 
-							
-							<div class="tab mt-5">
-								<ul class="nav nav-tabs" role="tablist">
-									<li class="nav-item">
-										<a id="tabpage1" class="nav-link text-gray" data-toggle="tab" href="#page1" role="tab" aria-selected="true"><b>รายละเอียดเครื่องจักร</b></a>
-									</li>
-                                    <li class="nav-item">
-										<a id="tabpage2" class="nav-link text-gray" data-toggle="tab" href="#page2" role="tab" aria-selected="true"><b>ตรวจสอบเครื่องจักร</b></a>
-									</li>
-									<li class="nav-item">
-										<a id="tabpage3" class="nav-link text-gray" data-toggle="tab" href="#page3" role="tab" aria-selected="false"><b>Qc Sampling</b></a>
-									</li>
-                                    <li class="nav-item">
-										<a id="tabpage4" class="nav-link text-gray" data-toggle="tab" href="#page4" role="tab" aria-selected="false"><b>Job Card</b></a>
-									</li>
-                                    <li class="nav-item">
-										<a id="tabpage5" class="nav-link text-gray" data-toggle="tab" href="#page5" role="tab" aria-selected="false"><b>Packing List</b></a>
-									</li>
-								</ul>
-								<div class="tab-content">
+                    
 
-									<div class="tab-pane fade" id="page1" role="tabpanel">
-										<div class="pd-20">
+                        
+                        <div class="tab mt-5">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a id="tabpage1" class="nav-link text-gray" data-toggle="tab" href="#page1" role="tab" aria-selected="true"><b>รายละเอียดเครื่องจักร</b></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a id="tabpage2" class="nav-link text-gray" data-toggle="tab" href="#page2" role="tab" aria-selected="true"><b>ตรวจสอบเครื่องจักร</b></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a id="tabpage3" class="nav-link text-gray" data-toggle="tab" href="#page3" role="tab" aria-selected="false"><b>Qc Sampling</b></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a id="tabpage4" class="nav-link text-gray" data-toggle="tab" href="#page4" role="tab" aria-selected="false"><b>Job Card</b></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a id="tabpage5" class="nav-link text-gray" data-toggle="tab" href="#page5" role="tab" aria-selected="false"><b>Packing List</b></a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
 
-                                            <div id="forPd_v">
-                                                <!-- start button zone -->
-                                                <div class="row startButtonZone mt-3 text-center" style="display:none;">
-                                                    <div class="col-md-12 form-group">
-                                                        <button @click="saveStart" type="button" id="btn-start" class="btn btn-primary btn-start"
-                                                            data_m_code="<?=getMaincode($mainformno)?>"
-                                                        ><i class="fa fa-play mr-2" aria-hidden="true"></i>Start</button>
-                                                    </div>
-                                                </div>
-                                                <!-- start button zone -->
+                                <div class="tab-pane fade" id="page1" role="tabpanel">
+                                    <div class="pd-20">
 
-                                                <!-- stop button zone -->
-                                                <div class="row stopButtonZone mt-3 text-center" style="display:none;">
-                                                    <div class="col-md-12 form-group">
-                                                        <button @click="saveStop" type="button" id="btn-stop" class="btn btn-danger btn-stop"
-                                                            data_m_code="<?=getMaincode($mainformno)?>"
-                                                        ><i class="fa fa-stop mr-2" aria-hidden="true"></i>Stop</button>
-                                                    </div>
-                                                </div>
-                                                <!-- stop button zone -->
-
-                                                <!-- Spoint Zone -->
-                                                <div class="row spointzone mt-3 text-center" style="display:none;">
-                                                    <div class="col-md-12 form-group">
-                                                        <button type="button" class="btn btn-primary" id="btn-openSetPoint"
-                                                            data_m_product_number="<?=getviewfulldata(getMaincode($mainformno))->m_product_number?>"
-                                                            data_m_batch_number="<?=getviewfulldata(getMaincode($mainformno))->m_batch_number?>"
-                                                            data_m_template_name="<?=getviewfulldata(getMaincode($mainformno))->m_template_name?>"
-                                                            data_m_template_code="<?=getviewfulldata(getMaincode($mainformno))->m_template_code?>"
-                                                            data_m_code="<?=getMaincode($mainformno)?>"
-                                                        ><i class="fi-save mr-2"></i>บันทึก S/POINT</button>
-                                                    </div>
-                                                </div>
-                                                <!-- Spoint Zone -->
-
-                                                <!-- cancel button zone -->
-                                                <div class="row cancelButtonZone mt-3 text-center" style="display:none;">
-                                                    <div class="col-md-12 form-group">
-                                                        <button @click="saveCancel" type="button" id="btn-cancel" class="btn btn-danger btn-cancel"
-                                                            data_m_code="<?=getMaincode($mainformno)?>"
-                                                        >Cancel</button>
-                                                    </div>
-                                                </div>
-                                                <!-- cancel button zone -->
-                                            </div>
-
-                                            <div id="line_forPd_v" class="dropdown-divider"></div>
-
-
-                                            <div id="speacial_section" class="row align-items-center mt-3" style="display:none;">
-                                                <div class="col-md-12 text-center">
-                                                    <h4>ข้อแนะนำพิเศษ</h4>
+                                        <div id="forPd_v">
+                                            <!-- start button zone -->
+                                            <div class="row startButtonZone mt-3 text-center" style="display:none;">
+                                                <div class="col-md-12 form-group">
+                                                    <button @click="saveStart" type="button" id="btn-start" class="btn btn-primary btn-start"
+                                                        data_m_code="<?=getMaincode($mainformno)?>"
+                                                    ><i class="fa fa-play mr-2" aria-hidden="true"></i>Start</button>
                                                 </div>
                                             </div>
+                                            <!-- start button zone -->
 
-                                            <div id="otherImage_view_section" class="row form-group" style="display:none;">
-                                                <div class="col-md-12">
-                                                    <label for=""><b>รูปภาพอื่นๆ</b></label>
-                                                    <div id="show_otherImage_viewpage"></div>
+                                            <!-- stop button zone -->
+                                            <div class="row stopButtonZone mt-3 text-center" style="display:none;">
+                                                <div class="col-md-12 form-group">
+                                                    <button @click="saveStop" type="button" id="btn-stop" class="btn btn-danger btn-stop"
+                                                        data_m_code="<?=getMaincode($mainformno)?>"
+                                                    ><i class="fa fa-stop mr-2" aria-hidden="true"></i>Stop</button>
                                                 </div>
                                             </div>
+                                            <!-- stop button zone -->
 
-                                            <div id="templateRemark_view_section" class="row form-group" style="display:none;">
-                                                <div class="col-md-12">
-                                                    <label for=""><b>หมายเหตุ</b></label>
-                                                    <textarea name="show_templateRemark" id="show_templateRemark" cols="30" rows="10" class="form-control" style="height:100px;" readonly></textarea>
+                                            <!-- Spoint Zone -->
+                                            <div class="row spointzone mt-3 text-center" style="display:none;">
+                                                <div class="col-md-12 form-group">
+                                                    <button type="button" class="btn btn-primary" id="btn-openSetPoint"
+                                                        data_m_product_number="<?=getviewfulldata(getMaincode($mainformno))->m_product_number?>"
+                                                        data_m_batch_number="<?=getviewfulldata(getMaincode($mainformno))->m_batch_number?>"
+                                                        data_m_template_name="<?=getviewfulldata(getMaincode($mainformno))->m_template_name?>"
+                                                        data_m_template_code="<?=getviewfulldata(getMaincode($mainformno))->m_template_code?>"
+                                                        data_m_code="<?=getMaincode($mainformno)?>"
+                                                    ><i class="fi-save mr-2"></i>บันทึก S/POINT</button>
                                                 </div>
                                             </div>
+                                            <!-- Spoint Zone -->
 
-                                            <!-- Show Detail Zone -->
-                                            <div id="show_detail"></div>
-										</div>
-									</div>
-
-									<div class="tab-pane fade" id="page2" role="tabpanel">
-										<div class="pd-20">
-                                            <div id="showMachineCheck"></div>
-										</div>
-									</div>
-
-                                    <div class="tab-pane fade" id="page3" role="tabpanel">
-										<div class="pd-20">
-                                            <div class="row">
-                                                <div class="col-lg-1"></div>
-                                                <div id="showQcSampling" class="col-lg-10" style="width:100%"></div>
-                                                <div class="col-lg-1"></div>
+                                            <!-- cancel button zone -->
+                                            <div class="row cancelButtonZone mt-3 text-center" style="display:none;">
+                                                <div class="col-md-12 form-group">
+                                                    <button @click="saveCancel" type="button" id="btn-cancel" class="btn btn-danger btn-cancel"
+                                                        data_m_code="<?=getMaincode($mainformno)?>"
+                                                    >Cancel</button>
+                                                </div>
                                             </div>
+                                            <!-- cancel button zone -->
+                                        </div>
 
-                                            <div id="showCheckGraph" class="row mt-5"></div>
+                                        <div id="line_forPd_v" class="dropdown-divider"></div>
 
-                                        <!-- <div class="row mt-4">
+
+                                        <div id="speacial_section" class="row align-items-center mt-3" style="display:none;">
+                                            <div class="col-md-12 text-center">
+                                                <h4>ข้อแนะนำพิเศษ</h4>
+                                            </div>
+                                        </div>
+
+                                        <div id="otherImage_view_section" class="row form-group" style="display:none;">
+                                            <div class="col-md-12">
+                                                <label for=""><b>รูปภาพอื่นๆ</b></label>
+                                                <div id="show_otherImage_viewpage"></div>
+                                            </div>
+                                        </div>
+
+                                        <div id="templateRemark_view_section" class="row form-group" style="display:none;">
+                                            <div class="col-md-12">
+                                                <label for=""><b>หมายเหตุ</b></label>
+                                                <textarea name="show_templateRemark" id="show_templateRemark" cols="30" rows="10" class="form-control" style="height:100px;" readonly></textarea>
+                                            </div>
+                                        </div>
+
+                                        <!-- Show Detail Zone -->
+                                        <div id="show_detail"></div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="page2" role="tabpanel">
+                                    <div class="pd-20">
+                                        <div id="showMachineCheck"></div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="page3" role="tabpanel">
+                                    <div class="pd-20">
+                                        <div class="row">
+                                            <div class="col-lg-1"></div>
+                                            <div id="showQcSampling" class="col-lg-10" style="width:100%"></div>
+                                            <div class="col-lg-1"></div>
+                                        </div>
+
+                                        <div id="showCheckGraph" class="row mt-5"></div>
+
+                                    <!-- <div class="row mt-4">
+                                        <div class="col-lg-12">
+                                            <div id="showGraph"></div>
+                                        </div>
+                                    </div> -->
+
+                                        <div class="row mt-4">
                                             <div class="col-lg-12">
-                                                <div id="showGraph"></div>
+                                                <div id="showGraphMain"></div>
                                             </div>
-                                        </div> -->
-
-                                            <div class="row mt-4">
-                                                <div class="col-lg-12">
-                                                    <div id="showGraphMain"></div>
-                                                </div>
-                                            </div>
-										</div>
-									</div>
-
-                                    <div class="tab-pane fade" id="page4" role="tabpanel">
-										<div class="pd-20">
-                                            <div id="showJobcard" class="row"></div>
                                         </div>
-									</div>
+                                    </div>
+                                </div>
 
-                                    <div class="tab-pane fade" id="page5" role="tabpanel">
-										<div class="pd-20">
-                                            <div id="showPackingList" class="row"></div>
-                                        </div>
-									</div>
+                                <div class="tab-pane fade" id="page4" role="tabpanel">
+                                    <div class="pd-20">
+                                        <div id="showJobcard" class="row"></div>
+                                    </div>
+                                </div>
 
-								</div>
-							</div>
+                                <div class="tab-pane fade" id="page5" role="tabpanel">
+                                    <div class="pd-20">
+                                        <div id="showPackingList" class="row"></div>
+                                    </div>
+                                </div>
 
-                        <div class="row form-group text-center">
-                            <div class="col-md-4">
-                                <span><b>Start By : </b><?=getviewfulldata(getMaincode($mainformno))->m_user_start?></span><br>
-                                <span><b>Start Date : </b><?=conDateTimeFromDb(getviewfulldata(getMaincode($mainformno))->m_datetime_start)?></span>
-                            </div>
-                            <div class="col-md-4">
-                                <span><b>Modify By : </b><?=getviewfulldata(getMaincode($mainformno))->m_user_modify?></span><br>
-                                <span><b>Modify Date : </b><?=conDateTimeFromDb(getviewfulldata(getMaincode($mainformno))->m_datetime_modify)?></span>
-                            </div>
-                            <div class="col-md-4">
-                                <span><b>Stop By : </b><?=getviewfulldata(getMaincode($mainformno))->m_user_stop?></span><br>
-                                <span><b>End Date : </b><?=conDateTimeFromDb(getviewfulldata(getMaincode($mainformno))->m_datetime_stop)?></span>
                             </div>
                         </div>
 
-					</div>
-				</div>
-			</div>
+                    <div class="row form-group text-center">
+                        <div class="col-md-4">
+                            <span><b>Start By : </b><?=getviewfulldata(getMaincode($mainformno))->m_user_start?></span><br>
+                            <span><b>Start Date : </b><?=conDateTimeFromDb(getviewfulldata(getMaincode($mainformno))->m_datetime_start)?></span>
+                        </div>
+                        <div class="col-md-4">
+                            <span><b>Modify By : </b><?=getviewfulldata(getMaincode($mainformno))->m_user_modify?></span><br>
+                            <span><b>Modify Date : </b><?=conDateTimeFromDb(getviewfulldata(getMaincode($mainformno))->m_datetime_modify)?></span>
+                        </div>
+                        <div class="col-md-4">
+                            <span><b>Stop By : </b><?=getviewfulldata(getMaincode($mainformno))->m_user_stop?></span><br>
+                            <span><b>End Date : </b><?=conDateTimeFromDb(getviewfulldata(getMaincode($mainformno))->m_datetime_stop)?></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
 		</div>
 	</div>
