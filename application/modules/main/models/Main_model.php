@@ -1939,7 +1939,8 @@ class Main_model extends CI_Model {
                 "m_std_output" => $received_data->m_std_output,
                 "m_bladeType" => $received_data->m_bladeType,
                 "m_screenMesh" => $received_data->m_screenMesh,
-                "m_gap" => $received_data->m_gap
+                "m_gap" => $received_data->m_gap,
+                "m_machine" => $received_data->m_machine
             );
             $this->db->where("m_code" , $received_data->m_code);
             $this->db->update("main" , $arUpdateHead);
