@@ -100,7 +100,7 @@ class Main_model extends CI_Model {
                 }
             ),
             array('db' => 'm_memo', 'dt' => 12,)
-            );
+        );
 
         // SQL server connection information
         $sql_details = array(
@@ -157,7 +157,7 @@ class Main_model extends CI_Model {
                 'formatter' => function ($d, $row) {
                     $output = '';
                     $output .= '
-                <a id="l_viewmain" class="l_viewmain" href="javascript:void(0)"
+                <a id="l_viewmain" class="l_viewmain" href="'.base_url('viewfulldata.html/').$d.'"
                     data_mainformno="'.$d.'"
                 ><b>' . $d . '</b></a>
                 ';
@@ -168,11 +168,31 @@ class Main_model extends CI_Model {
             array('db' => 'm_item_number', 'dt' => 2),
             array('db' => 'm_product_number', 'dt' => 3),
             array('db' => 'm_batch_number', 'dt' => 4),
-            array('db' => 'm_order', 'dt' => 5),
-            array('db' => 'm_std_output', 'dt' => 6),
-            array('db' => 'm_bladeType', 'dt' => 7),
-            array('db' => 'm_screenMesh', 'dt' => 8),
-            array('db' => 'm_gap', 'dt' => 9),
+            array('db' => 'm_order', 'dt' => 5,
+                'formatter' => function($d , $row){
+                    return valueFormat($d);
+                }
+            ),
+            array('db' => 'm_std_output', 'dt' => 6,
+                'formatter' => function($d , $row){
+                    return valueFormat($d);
+                }
+            ),
+            array('db' => 'm_bladeType', 'dt' => 7,
+                // 'formatter' => function($d , $row){
+                //     return valueFormat($d);
+                // }
+            ),
+            array('db' => 'm_screenMesh', 'dt' => 8,
+                // 'formatter' => function($d , $row){
+                //     return valueFormat($d);
+                // }
+            ),
+            array('db' => 'm_gap', 'dt' => 9,
+                // 'formatter' => function($d , $row){
+                //     return valueFormat($d);
+                // }
+            ),
             array(
                 'db' => 'm_datetime', 'dt' => 10,
                 'formatter' => function($d , $row){
@@ -207,8 +227,7 @@ class Main_model extends CI_Model {
                     return $output;
                 }
             ),
-            array(
-                'db' => 'm_memo', 'dt' => 12,)
+            array('db' => 'm_memo', 'dt' => 12,)
         );
 
         // SQL server connection information
