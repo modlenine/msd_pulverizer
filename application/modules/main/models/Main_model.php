@@ -100,7 +100,7 @@ class Main_model extends CI_Model {
                 }
             ),
             array('db' => 'm_memo', 'dt' => 12,)
-        );
+            );
 
         // SQL server connection information
         $sql_details = array(

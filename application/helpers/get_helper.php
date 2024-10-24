@@ -26,7 +26,12 @@ function gfn()
 
 function getDb()
 {
-    $sql = gfn()->db->query("SELECT * FROM db WHERE db_autoid = 1 ");
+
+    if($_SERVER['HTTP_HOST'] == "localhost"){
+        $sql = gfn()->db->query("SELECT * FROM db WHERE db_autoid = 2 ");
+    }else{
+        $sql = gfn()->db->query("SELECT * FROM db WHERE db_autoid = 1 ");
+    }
     return $sql->row();
 }
 

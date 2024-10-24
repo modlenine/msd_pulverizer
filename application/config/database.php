@@ -1,13 +1,20 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+if($_SERVER['HTTP_HOST'] == "localhost"){
+	$mysqlServer = "192.168.20.22";
+	$sqlServer = "192.168.10.60";
+}else{
+	$mysqlServer = "localhost";
+	$sqlServer = "192.168.10.54";
+}
 
 $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => $mysqlServer,
 	'username' => 'ant',
 	'password' => 'Ant1234',
 	'database' => 'msd_pulverizer',
@@ -31,7 +38,7 @@ $db['default'] = array(
 
 $db['saleecolour'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => $mysqlServer,
 	'username' => 'ant',
 	'password' => 'Ant1234',
 	'database' => 'saleecolour',
@@ -55,7 +62,7 @@ $db['saleecolour'] = array(
 
 $db['prodplan'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => $mysqlServer,
 	'username' => 'ant',
 	'password' => 'Ant1234',
 	'database' => 'prodplan',

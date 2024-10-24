@@ -289,12 +289,15 @@
 			const ecode = "<?php echo getUser()->ecode; ?>";
 			const adminEcode = ['M1809' , 'M1413' , 'M0506' , 'D2022' , 'M2067'];
 
+			//M0126 = pansak , M0040 = sompong k 
 			if(ecode == "M1809" ||
 			ecode == "M1413" ||
 			ecode == "M0506" ||
 			ecode == "D2022" ||
 			ecode == "M2067" ||
-			ecode == "M0282"){
+			ecode == "M0282" ||
+			ecode == "M0126" ||
+			ecode == "M0040"){
 				$('#settingMenuLi').css('display' , '');
 			}else{
 				$('#settingMenuLi').css('display' , 'none');
