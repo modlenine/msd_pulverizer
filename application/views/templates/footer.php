@@ -27,6 +27,16 @@
 	<script src="<?=base_url('assets/')?>timepicker/js/components/daterangepicker.js"></script>
 
 
+	<!-- Data Table Button -->
+	<script src="<?= base_url('assets/js/datatables/dataTables.buttons.min.js') ?>"></script>
+    <script src="<?= base_url('assets/js/datatables/buttons.flash.min.js') ?>"></script>
+    <script src="<?= base_url('assets/js/datatables/buttons.html5.min.js') ?>"></script>
+    <script src="<?= base_url('assets/js/datatables/buttons.print.min.js') ?>"></script>
+    <script src="<?= base_url('assets/js/datatables/jszip.min.js') ?>"></script>
+    <script src="<?= base_url('assets/js/datatables/pdfmake.min.js') ?>"></script>
+    <script src="<?= base_url('assets/js/datatables/vfs_fonts.js') ?>"></script>
+
+
 	
 	<!-- Date & Time Picker JS -->
 	<script src="<?=base_url()?>assets/dist/zebra_datepicker.min.js"></script>

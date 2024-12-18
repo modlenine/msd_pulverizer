@@ -940,7 +940,9 @@ textarea.form-control{
 	display:none !important;
 }
 
-
+.exportBtn{
+	float: right !important;
+}
 
 /* Other Image */
 .divOtherImage{

@@ -82,6 +82,7 @@
 		localStorage.removeItem('tab');
 
 		let url = "<?php echo base_url(); ?>";
+		let datetimeNow = "<?php echo date("d-m-Y H:i:s"); ?>";
 
 		$('#btn-addMachineData').click(function(){
 			$('#addNewData_modal').modal('show');
@@ -206,7 +207,38 @@
 								"ajax": {
 									"url":"<?php echo base_url('main/loadMainData') ?>",
 								},
-								order: [
+								"lengthMenu": [[10, 25, 50, 100, 300, 500, -1], [10, 25, 50, 100, 300, 500, "All"]],
+								"dom": "<'row'<'col-sm-2 btn-block'B><'col-sm-3'l>>" + // เพิ่ม lengthMenu (l) และปุ่ม (B)
+								"<'row'<'col-sm-12'f>>" +             // แสดง search box (f)
+								"<'row'<'col-sm-12'tr>>" +            // แสดง table (t)
+								"<'row'<'col-sm-5'i><'col-sm-7'p>>", // แสดงข้อมูลจำนวนแถว (i) และ pagination (p)
+								"buttons": [
+									// {
+									// 	extend: 'copyHtml5',
+									// 	title: 'ใบขอเบิกจ่าย Normal',
+									// },
+									{
+										extend: 'excelHtml5',
+										autoFilter: true,
+										title: 'รายการ ข้อมูลเครื่องบด-'+datetimeNow,
+										className: 'btn btn-success exportBtn btn-block', // เพิ่มคลาส Bootstrap
+										exportOptions: {
+											modifier: {
+												search: 'applied' // Export เฉพาะข้อมูลที่กรองแล้ว
+											}
+										},
+										customize: function (xlsx) {
+											var sheet = xlsx.xl.worksheets['sheet1.xml'];
+											$('row c[r]', sheet).each(function () {
+												var cellValue = $(this).text();
+												if (cellValue == "ไม่ต้องการ") {
+													$(this).closest('row').remove();
+												}
+											});
+										}
+									}
+								],
+									order: [
 									[0, 'desc']
 								],
 								columnDefs: [{
@@ -294,6 +326,37 @@
 								"ajax": {
 									"url":"<?php echo base_url('main/loadMainDataByDate/') ?>"+date_start+"/"+date_end,
 								},
+								"lengthMenu": [[10, 25, 50, 100, 300, 500, -1], [10, 25, 50, 100, 300, 500, "All"]],
+								"dom": "<'row'<'col-sm-2 btn-block'B><'col-sm-3'l>>" + // เพิ่ม lengthMenu (l) และปุ่ม (B)
+								"<'row'<'col-sm-12'f>>" +             // แสดง search box (f)
+								"<'row'<'col-sm-12'tr>>" +            // แสดง table (t)
+								"<'row'<'col-sm-5'i><'col-sm-7'p>>", // แสดงข้อมูลจำนวนแถว (i) และ pagination (p)
+								"buttons": [
+									// {
+									// 	extend: 'copyHtml5',
+									// 	title: 'ใบขอเบิกจ่าย Normal',
+									// },
+									{
+										extend: 'excelHtml5',
+										autoFilter: true,
+										title: 'รายการ ข้อมูลเครื่องบด-'+datetimeNow,
+										className: 'btn btn-success exportBtn btn-block', // เพิ่มคลาส Bootstrap
+										exportOptions: {
+											modifier: {
+												search: 'applied' // Export เฉพาะข้อมูลที่กรองแล้ว
+											}
+										},
+										customize: function (xlsx) {
+											var sheet = xlsx.xl.worksheets['sheet1.xml'];
+											$('row c[r]', sheet).each(function () {
+												var cellValue = $(this).text();
+												if (cellValue == "ไม่ต้องการ") {
+													$(this).closest('row').remove();
+												}
+											});
+										}
+									}
+								],
 								order: [
 									[0, 'desc']
 								],
