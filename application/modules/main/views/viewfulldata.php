@@ -2637,7 +2637,7 @@ $(document).ready(function(){
                         iconImageRun = '';
                     }
 
-                    let memoCount = runData[i].memo.length;
+                    let memoCount = runData[i].memo ? runData[i].memo.length : 0;
                     let resultMemocut = '';
 
                     if(memoCount > 60){
