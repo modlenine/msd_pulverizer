@@ -89,6 +89,9 @@
 			ecode == "M0282" ||
 			ecode == "M0126" ||
 			ecode == "M1451" ||
+			ecode == "M0085" ||
+			ecode == "M1832" ||
+			ecode == "M1551" ||
 			ecode == "M0040"){
             let runScreenMain = [];
             let runScreenSelected = [];
