@@ -398,11 +398,11 @@
                                 <input type="text" name="ehmd_bladetype" id="ehmd_bladetype" class="form-control">
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for=""><b>Screen (Mesh)</b></label>
+                                <label for=""><b>Screen (Micron)</b></label>
                                 <input type="text" name="ehmd_screenMesh" id="ehmd_screenMesh" class="form-control">
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for=""><b>Gap</b></label>
+                                <label for=""><b>Gap (mm.)</b></label>
                                 <input type="text" name="ehmd_gap" id="ehmd_gap" class="form-control">
                             </div>
                             <div class="col-lg-6 form-group">
@@ -628,11 +628,11 @@
                                 <input type="text" name="m_bladeType_v" id="m_bladeType_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_bladeType?>">
                             </div>
                             <div class="col-md-4 form-group">
-                                <label for=""><b>Screen (Mesh)</b></label>
+                                <label for=""><b>Screen (Micron)</b></label>
                                 <input type="text" name="m_screenMesh_v" id="m_screenMesh_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_screenMesh?>">
                             </div>
                             <div class="col-md-4 form-group">
-                                <label for=""><b>Gap</b></label>
+                                <label for=""><b>Gap (mm.)</b></label>
                                 <input type="text" name="m_gap_v" id="m_gap_v" class="form-control" readonly value="<?=getviewfulldata(getMaincode($mainformno))->m_gap?>">
                             </div>
                             <div class="col-md-4 form-group">

@@ -90,11 +90,11 @@
                             <input type="text" name="m_bladeType" id="m_bladeType" class="form-control" required>
                         </div>
                         <div class="col-lg-6 form-group">
-                            <label for=""><b>Screen (Mesh)</b></label>
+                            <label for=""><b>Screen (Micron)</b></label>
                             <input type="text" name="m_screenMesh" id="m_screenMesh" class="form-control" >
                         </div>
                         <div class="col-lg-6 form-group">
-                            <label for=""><b>Gap</b> <span class="textRequest">*</span></label>
+                            <label for=""><b>Gap (mm.)</b> <span class="textRequest">*</span></label>
                             <input type="text" name="m_gap" id="m_gap" class="form-control" required>
                         </div>
                         <div class="col-lg-6 form-group">
